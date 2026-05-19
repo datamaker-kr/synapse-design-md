@@ -22,6 +22,18 @@
     "body-md": "sm",
     "label-sm": "xs"
   },
+  "$sizes-comment": "Derived from frequency analysis of arbitrary tailwind values in synapse-workspace (see evidence/eval-*.json). Values appearing >=4 times across components+pages were promoted to semantic slots. Edit names freely; sync-from-source.mjs emits these verbatim under `sizes:`.",
+  "sizes": {
+    "actionMin": "6.125rem",
+    "controlHeight": "32px",
+    "modalBody": "45rem",
+    "modalHeight": "40rem",
+    "modalMaxHeight": "50rem",
+    "dialogWide": "37.5rem",
+    "formColumn": "13.75rem",
+    "pageColumn": "21.375rem",
+    "guideOffset": "7.5rem"
+  },
   "fontFamily": "\"Pretendard Variable\", ui-sans-serif, system-ui, sans-serif",
   "components": {
     "button-primary": {

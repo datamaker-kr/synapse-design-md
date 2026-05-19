@@ -132,6 +132,13 @@ function buildFrontmatter({ theme, aliases }) {
   for (const [key, value] of Object.entries({ sm: "4px", md: "6px", lg: "8px" })) {
     lines.push(`  ${key}: ${value}`);
   }
+  if (aliases.sizes) {
+    lines.push("");
+    lines.push("sizes:");
+    for (const [key, value] of Object.entries(aliases.sizes)) {
+      lines.push(`  ${key}: ${quoteIfNeeded(value)}`);
+    }
+  }
   lines.push("");
   lines.push("components:");
   for (const [name, props] of Object.entries(components)) {

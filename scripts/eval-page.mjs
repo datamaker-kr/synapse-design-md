@@ -5,7 +5,10 @@ import { fromRoot } from "./paths.mjs";
 export async function evalPage(options = {}) {
   const thresholds = JSON.parse(await fs.readFile(fromRoot("eval", "thresholds.json"), "utf8"));
   const target = options.target || "(not provided)";
-  const staticScan = options.target ? await scanTarget(path.resolve(process.cwd(), options.target)) : null;
+  const sizeTokenValues = await loadSizeTokens();
+  const staticScan = options.target
+    ? await scanTarget(path.resolve(process.cwd(), options.target), { sizeTokenValues })
+    : null;
 
   const report = {
     target,
@@ -35,7 +38,7 @@ export async function evalPage(options = {}) {
   console.log(JSON.stringify(report, null, 2));
 }
 
-async function scanTarget(target) {
+async function scanTarget(target, { sizeTokenValues } = {}) {
   const files = await collectFiles(target);
   const findings = [];
 
@@ -63,10 +66,74 @@ async function scanTarget(target) {
     });
   }
 
+  if (sizeTokenValues) {
+    for (const f of findings) {
+      if (f.type !== "tailwind-arbitrary-value") continue;
+      const inner = f.match.match(/\[(.+)\]$/)?.[1];
+      if (inner && sizeTokenValues.has(inner)) f.tokenBacked = true;
+    }
+  }
+
   return {
     filesScanned: files.length,
     findingCount: findings.length,
+    summary: summarize(findings),
     findings: findings.slice(0, 100)
+  };
+}
+
+async function loadSizeTokens() {
+  try {
+    const aliases = JSON.parse(await fs.readFile(fromRoot("scripts", "semantic-aliases.json"), "utf8"));
+    return new Set(Object.values(aliases.sizes || {}));
+  } catch {
+    return new Set();
+  }
+}
+
+function summarize(findings) {
+  const byType = {};
+  const byTailwindPrefix = {};
+  const byFile = new Map();
+  const matchCounts = new Map();
+  let tokenBackedCount = 0;
+
+  for (const f of findings) {
+    byType[f.type] = (byType[f.type] || 0) + 1;
+    byFile.set(f.file, (byFile.get(f.file) || 0) + 1);
+    if (f.tokenBacked) tokenBackedCount += 1;
+
+    if (f.type === "tailwind-arbitrary-value") {
+      const prefix = f.match.match(/^([a-z-]+)-\[/)?.[1] || "unknown";
+      byTailwindPrefix[prefix] = (byTailwindPrefix[prefix] || 0) + 1;
+
+      const key = `${prefix}\t${f.match}`;
+      matchCounts.set(key, (matchCounts.get(key) || 0) + 1);
+    }
+  }
+
+  const topFiles = [...byFile.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 10)
+    .map(([file, count]) => ({ file, count }));
+
+  const topMatchesByPrefix = {};
+  for (const [key, count] of matchCounts.entries()) {
+    if (count < 2) continue;
+    const [prefix, match] = key.split("\t");
+    (topMatchesByPrefix[prefix] ??= []).push({ match, count });
+  }
+  for (const prefix of Object.keys(topMatchesByPrefix)) {
+    topMatchesByPrefix[prefix].sort((a, b) => b.count - a.count);
+  }
+
+  return {
+    byType,
+    byTailwindPrefix,
+    tokenBackedCount,
+    unbackedCount: findings.length - tokenBackedCount,
+    topFiles,
+    topMatchesByPrefix
   };
 }
 

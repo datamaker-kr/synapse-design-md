@@ -1,0 +1,931 @@
+{
+  "target": "../synapse-workspace/pages",
+  "status": "static-scan-complete-manual-render-evidence-required",
+  "thresholds": {
+    "overall": {
+      "pass": 85,
+      "warn": 75
+    },
+    "categories": {
+      "color": 90,
+      "typography": 85,
+      "spacing": 80,
+      "components": 85,
+      "interactionStates": 80,
+      "responsive": 85,
+      "accessibility": 90,
+      "productTone": 80
+    }
+  },
+  "staticScan": {
+    "filesScanned": 118,
+    "findingCount": 244,
+    "summary": {
+      "byType": {
+        "tailwind-arbitrary-value": 244
+      },
+      "byTailwindPrefix": {
+        "min-w": 69,
+        "w": 118,
+        "max-w": 20,
+        "h": 22,
+        "mr": 6,
+        "ml": 5,
+        "py": 2,
+        "min-h": 2
+      },
+      "tokenBackedCount": 65,
+      "unbackedCount": 179,
+      "topFiles": [
+        {
+          "file": "../synapse-workspace/pages/projects/[project_id]/dataset/exports/create.vue",
+          "count": 21
+        },
+        {
+          "file": "../synapse-workspace/pages/infra/agents/[agent_id]/[view_type].vue",
+          "count": 16
+        },
+        {
+          "file": "../synapse-workspace/pages/projects/[project_id]/task-manage/[task_data]/create.vue",
+          "count": 10
+        },
+        {
+          "file": "../synapse-workspace/pages/projects/[project_id]/workforce/assignments/index.vue",
+          "count": 9
+        },
+        {
+          "file": "../synapse-workspace/pages/projects/[project_id]/workforce/guides/index.vue",
+          "count": 9
+        },
+        {
+          "file": "../synapse-workspace/pages/projects/[project_id]/task-manage/tasks.vue",
+          "count": 8
+        },
+        {
+          "file": "../synapse-workspace/pages/projects/[project_id]/task-manage/task-data/[task_id]/index.vue",
+          "count": 7
+        },
+        {
+          "file": "../synapse-workspace/pages/projects/[project_id]/workforce/workshops/[workshop_id]/assignments/[category].vue",
+          "count": 7
+        },
+        {
+          "file": "../synapse-workspace/pages/ml/experiments/[experiment_id]/learnings/index.vue",
+          "count": 6
+        },
+        {
+          "file": "../synapse-workspace/pages/plugins/[plugin_code].client.vue",
+          "count": 6
+        }
+      ],
+      "topMatchesByPrefix": {
+        "min-w": [
+          {
+            "match": "min-w-[45rem]",
+            "count": 12
+          },
+          {
+            "match": "min-w-[10rem]",
+            "count": 11
+          },
+          {
+            "match": "min-w-[8rem]",
+            "count": 7
+          },
+          {
+            "match": "min-w-[9rem]",
+            "count": 5
+          },
+          {
+            "match": "min-w-[37.5rem]",
+            "count": 5
+          },
+          {
+            "match": "min-w-[75rem]",
+            "count": 4
+          },
+          {
+            "match": "min-w-[10.25rem]",
+            "count": 4
+          },
+          {
+            "match": "min-w-[6.125rem]",
+            "count": 4
+          },
+          {
+            "match": "min-w-[20rem]",
+            "count": 3
+          },
+          {
+            "match": "min-w-[25rem]",
+            "count": 2
+          },
+          {
+            "match": "min-w-[4.5rem]",
+            "count": 2
+          },
+          {
+            "match": "min-w-[11.25rem]",
+            "count": 2
+          },
+          {
+            "match": "min-w-[80rem]",
+            "count": 2
+          }
+        ],
+        "w": [
+          {
+            "match": "w-[15rem]",
+            "count": 17
+          },
+          {
+            "match": "w-[9rem]",
+            "count": 17
+          },
+          {
+            "match": "w-[16rem]",
+            "count": 15
+          },
+          {
+            "match": "w-[4rem]",
+            "count": 10
+          },
+          {
+            "match": "w-[6rem]",
+            "count": 9
+          },
+          {
+            "match": "w-[10rem]",
+            "count": 6
+          },
+          {
+            "match": "w-[13.75rem]",
+            "count": 5
+          },
+          {
+            "match": "w-[21.375rem]",
+            "count": 4
+          },
+          {
+            "match": "w-[45rem]",
+            "count": 4
+          },
+          {
+            "match": "w-[30rem]",
+            "count": 4
+          },
+          {
+            "match": "w-[11rem]",
+            "count": 4
+          },
+          {
+            "match": "w-[0.125rem]",
+            "count": 3
+          },
+          {
+            "match": "w-[15.25rem]",
+            "count": 3
+          },
+          {
+            "match": "w-[18rem]",
+            "count": 2
+          },
+          {
+            "match": "w-[5.125rem]",
+            "count": 2
+          },
+          {
+            "match": "w-[12rem]",
+            "count": 2
+          },
+          {
+            "match": "w-[28rem]",
+            "count": 2
+          },
+          {
+            "match": "w-[5.5rem]",
+            "count": 2
+          }
+        ],
+        "max-w": [
+          {
+            "match": "max-w-[45rem]",
+            "count": 9
+          },
+          {
+            "match": "max-w-[56rem]",
+            "count": 4
+          },
+          {
+            "match": "max-w-[13.75rem]",
+            "count": 3
+          },
+          {
+            "match": "max-w-[90rem]",
+            "count": 2
+          }
+        ],
+        "h": [
+          {
+            "match": "h-[32px]",
+            "count": 6
+          },
+          {
+            "match": "h-[40rem]",
+            "count": 3
+          },
+          {
+            "match": "h-[6.25rem]",
+            "count": 3
+          },
+          {
+            "match": "h-[0.75rem]",
+            "count": 3
+          },
+          {
+            "match": "h-[calc(100vh-12rem)]",
+            "count": 2
+          }
+        ],
+        "mr": [
+          {
+            "match": "mr-[7.5rem]",
+            "count": 6
+          }
+        ],
+        "ml": [
+          {
+            "match": "ml-[7.5rem]",
+            "count": 4
+          }
+        ],
+        "py": [
+          {
+            "match": "py-[1.375rem]",
+            "count": 2
+          }
+        ]
+      }
+    },
+    "findings": [
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/account/deactivate.vue",
+        "line": 6,
+        "match": "min-w-[25rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/account/deactivate.vue",
+        "line": 31,
+        "match": "w-[44.25rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/account/deactivate.vue",
+        "line": 49,
+        "match": "w-[21.375rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/account/default-setting.vue",
+        "line": 2,
+        "match": "w-[21.375rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/account/login-as-another-user.client.vue",
+        "line": 13,
+        "match": "w-[18rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/account/manage.vue",
+        "line": 2,
+        "match": "w-[21.375rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/account/profile.vue",
+        "line": 18,
+        "match": "min-w-[25rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/account/verification.vue",
+        "line": 3,
+        "match": "w-[21.375rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/catalog/collections/[collection_id]/data-units.vue",
+        "line": 15,
+        "match": "w-[15rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/catalog/collections/[collection_id]/data-units.vue",
+        "line": 16,
+        "match": "max-w-[56rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/catalog/collections/[collection_id]/data-units.vue",
+        "line": 17,
+        "match": "w-[15rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/catalog/collections/[collection_id]/data-units.vue",
+        "line": 18,
+        "match": "w-[4rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/catalog/collections/[collection_id]/imports/[import_id].vue",
+        "line": 5,
+        "match": "h-[calc(100vh-12rem)]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/catalog/collections/[collection_id]/imports/[import_id].vue",
+        "line": 5,
+        "match": "min-w-[20rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/catalog/collections/[collection_id]/imports/[import_id].vue",
+        "line": 146,
+        "match": "w-[16rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/catalog/collections/[collection_id]/imports/create.vue",
+        "line": 7,
+        "match": "min-w-[8rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/catalog/collections/[collection_id]/imports/create.vue",
+        "line": 26,
+        "match": "min-w-[45rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/catalog/collections/[collection_id]/imports/index.vue",
+        "line": 85,
+        "match": "w-[16rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/catalog/collections/[collection_id]/imports/index.vue",
+        "line": 116,
+        "match": "w-[16rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/catalog/collections/[collection_id]/settings/danger.vue",
+        "line": 2,
+        "match": "max-w-[45rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/catalog/collections/[collection_id]/settings/danger.vue",
+        "line": 8,
+        "match": "w-[45rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/catalog/collections/[collection_id]/settings/danger.vue",
+        "line": 17,
+        "match": "w-[13.75rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/catalog/collections/[collection_id]/settings/danger.vue",
+        "line": 21,
+        "match": "w-[45rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/catalog/collections/[collection_id]/settings/danger.vue",
+        "line": 29,
+        "match": "w-[13.75rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/catalog/collections/[collection_id]/settings/default.vue",
+        "line": 10,
+        "match": "max-w-[45rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/catalog/collections/[collection_id]/settings/members/index.vue",
+        "line": 24,
+        "match": "w-[15rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/catalog/collections/[collection_id]/settings/members/index.vue",
+        "line": 25,
+        "match": "max-w-[56rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/catalog/collections/[collection_id]/settings/members/index.vue",
+        "line": 26,
+        "match": "w-[15rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/catalog/collections/[collection_id]/settings/members/index.vue",
+        "line": 27,
+        "match": "w-[4rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/catalog/collections/create-collection.vue",
+        "line": 7,
+        "match": "min-w-[8rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/catalog/collections/create-collection.vue",
+        "line": 35,
+        "match": "max-w-[90rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/catalog/collections/create-collection.vue",
+        "line": 35,
+        "match": "min-w-[75rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/catalog/collections/create-collection.vue",
+        "line": 39,
+        "match": "min-w-[75rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/catalog/collections/create-collection.vue",
+        "line": 39,
+        "match": "max-w-[90rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/catalog/collections/index.vue",
+        "line": 95,
+        "match": "mr-[7.5rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/catalog/collections/index.vue",
+        "line": 98,
+        "match": "ml-[7.5rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/catalog/collections/index.vue",
+        "line": 107,
+        "match": "h-[40rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/data-lab/[role]/[project_id]/workshop/[workshop_id]/assignments/discarded-tasks/index.vue",
+        "line": 63,
+        "match": "w-[16rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/data-lab/[role]/[project_id]/workshop/[workshop_id]/assignments/tasks/index.vue",
+        "line": 9,
+        "match": "h-[6.5rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/data-lab/[role]/[project_id]/workshop/[workshop_id]/assignments/tasks/index.vue",
+        "line": 9,
+        "match": "min-w-[75rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/data-lab/[role]/[project_id]/workshop/[workshop_id]/assignments/tasks/index.vue",
+        "line": 27,
+        "match": "w-[30rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/data-lab/[role]/[project_id]/workshop/[workshop_id]/assignments/tasks/index.vue",
+        "line": 478,
+        "match": "w-[16rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/data-lab/[role]/[project_id]/workshop/[workshop_id]/statistics/task/[assignments].client.vue",
+        "line": 14,
+        "match": "w-[30rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/data-lab/[role]/index.vue",
+        "line": 38,
+        "match": "w-[16rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/data-lab/[role]/index.vue",
+        "line": 51,
+        "match": "w-[16rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/infra/agents/[agent_id]/[view_type].vue",
+        "line": 50,
+        "match": "py-[1.375rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/infra/agents/[agent_id]/[view_type].vue",
+        "line": 70,
+        "match": "h-[32px]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/infra/agents/[agent_id]/[view_type].vue",
+        "line": 88,
+        "match": "h-[32px]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/infra/agents/[agent_id]/[view_type].vue",
+        "line": 112,
+        "match": "h-[32px]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/infra/agents/[agent_id]/[view_type].vue",
+        "line": 132,
+        "match": "h-[32px]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/infra/agents/[agent_id]/[view_type].vue",
+        "line": 167,
+        "match": "h-[32px]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/infra/agents/[agent_id]/[view_type].vue",
+        "line": 200,
+        "match": "h-[32px]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/infra/agents/[agent_id]/[view_type].vue",
+        "line": 249,
+        "match": "h-[6.25rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/infra/agents/[agent_id]/[view_type].vue",
+        "line": 254,
+        "match": "w-[5.125rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/infra/agents/[agent_id]/[view_type].vue",
+        "line": 258,
+        "match": "w-[5.125rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/infra/agents/[agent_id]/[view_type].vue",
+        "line": 266,
+        "match": "h-[6.25rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/infra/agents/[agent_id]/[view_type].vue",
+        "line": 282,
+        "match": "h-[6.25rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/infra/agents/[agent_id]/[view_type].vue",
+        "line": 311,
+        "match": "min-h-[10rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/infra/agents/[agent_id]/[view_type].vue",
+        "line": 364,
+        "match": "h-[3.75rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/infra/agents/[agent_id]/[view_type].vue",
+        "line": 364,
+        "match": "py-[1.375rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/infra/agents/[agent_id]/[view_type].vue",
+        "line": 402,
+        "match": "w-[3rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/infra/agents/index.vue",
+        "line": 78,
+        "match": "mr-[7.5rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/infra/agents/index.vue",
+        "line": 81,
+        "match": "ml-[7.5rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/infra/storages.vue",
+        "line": 12,
+        "match": "w-[15rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/infra/storages.vue",
+        "line": 14,
+        "match": "w-[15rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/infra/storages.vue",
+        "line": 37,
+        "match": "mr-[7.5rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/ml/experiments/[experiment_id]/learning-create.vue",
+        "line": 10,
+        "match": "min-w-[8rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/ml/experiments/[experiment_id]/learning-create.vue",
+        "line": 14,
+        "match": "min-w-[5.125rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/ml/experiments/[experiment_id]/learning-create.vue",
+        "line": 26,
+        "match": "min-w-[45rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/ml/experiments/[experiment_id]/learning-create.vue",
+        "line": 73,
+        "match": "min-w-[45rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/ml/experiments/[experiment_id]/learnings/index.vue",
+        "line": 21,
+        "match": "min-w-[6rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/ml/experiments/[experiment_id]/learnings/index.vue",
+        "line": 49,
+        "match": "min-w-[9rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/ml/experiments/[experiment_id]/learnings/index.vue",
+        "line": 66,
+        "match": "min-w-[18.75rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/ml/experiments/[experiment_id]/learnings/index.vue",
+        "line": 87,
+        "match": "min-w-[10rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/ml/experiments/[experiment_id]/learnings/index.vue",
+        "line": 99,
+        "match": "min-w-[10rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/ml/experiments/[experiment_id]/learnings/index.vue",
+        "line": 187,
+        "match": "max-w-[13.75rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/ml/experiments/[experiment_id]/settings/danger.vue",
+        "line": 2,
+        "match": "max-w-[45rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/ml/experiments/[experiment_id]/settings/danger.vue",
+        "line": 4,
+        "match": "w-[45rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/ml/experiments/[experiment_id]/settings/danger.vue",
+        "line": 13,
+        "match": "w-[13.75rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/ml/experiments/[experiment_id]/settings/danger.vue",
+        "line": 17,
+        "match": "w-[45rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/ml/experiments/[experiment_id]/settings/danger.vue",
+        "line": 24,
+        "match": "w-[13.75rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/ml/experiments/[experiment_id]/settings/default.vue",
+        "line": 9,
+        "match": "min-w-[45rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/ml/experiments/[experiment_id]/settings/members.vue",
+        "line": 23,
+        "match": "w-[15rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/ml/experiments/[experiment_id]/settings/members.vue",
+        "line": 24,
+        "match": "max-w-[56rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/ml/experiments/[experiment_id]/settings/members.vue",
+        "line": 25,
+        "match": "w-[15rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/ml/experiments/[experiment_id]/settings/members.vue",
+        "line": 26,
+        "match": "w-[4rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/ml/experiments/[experiment_id]/settings/members.vue",
+        "line": 36,
+        "match": "w-[15rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/ml/experiments/create.vue",
+        "line": 7,
+        "match": "min-w-[8rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/ml/experiments/create.vue",
+        "line": 23,
+        "match": "min-w-[45rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/ml/experiments/create.vue",
+        "line": 149,
+        "match": "min-w-[45rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/ml/experiments/index.vue",
+        "line": 66,
+        "match": "h-[40rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/ml/experiments/index.vue",
+        "line": 86,
+        "match": "mr-[7.5rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/ml/experiments/index.vue",
+        "line": 89,
+        "match": "ml-[7.5rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/ml/models/[model_id]/index.vue",
+        "line": 19,
+        "match": "min-w-[45rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/ml/models/[model_id]/modify.vue",
+        "line": 11,
+        "match": "min-w-[45rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/ml/models/index.vue",
+        "line": 14,
+        "match": "w-[18rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/ml/models/index.vue",
+        "line": 17,
+        "match": "w-[12rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/ml/models/index.vue",
+        "line": 155,
+        "match": "w-[13.75rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/plugins/[plugin_code]/playground.client.vue",
+        "line": 46,
+        "match": "min-w-[440px]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/pages/plugins/[plugin_code]/playground.client.vue",
+        "line": 84,
+        "match": "min-h-[196px]"
+      }
+    ]
+  },
+  "requiredEvidence": [
+    "DESIGN.md lint output",
+    "static token/code scan output",
+    "desktop screenshot",
+    "mobile screenshot",
+    "accessibility or contrast evidence",
+    "notes for deliberate deviations"
+  ],
+  "scoreCategories": [
+    "color",
+    "typography",
+    "spacing",
+    "components",
+    "interactionStates",
+    "responsive",
+    "accessibility",
+    "productTone"
+  ]
+}

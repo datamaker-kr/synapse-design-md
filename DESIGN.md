@@ -60,6 +60,17 @@ rounded:
   md: 6px
   lg: 8px
 
+sizes:
+  actionMin: 6.125rem
+  controlHeight: 32px
+  modalBody: 45rem
+  modalHeight: 40rem
+  modalMaxHeight: 50rem
+  dialogWide: 37.5rem
+  formColumn: 13.75rem
+  pageColumn: 21.375rem
+  guideOffset: 7.5rem
+
 components:
   button-primary:
     backgroundColor: "{colors.accent}"
@@ -120,6 +131,12 @@ Prefer borders, subtle background changes, and tonal separation over heavy shado
 ## Shapes
 
 Use small to medium radius values. Cards and panels should remain at 8px radius or less unless a captured Synapse source page proves a larger shape.
+
+## Sizes
+
+The `sizes` tokens cover recurring fixed widths and heights — modal bodies, action button minimums, control heights, and form/page columns. Reach for these before introducing a new `w-[…]`, `h-[…]`, or `min-w-[…]` arbitrary value. New entries should appear in at least four call sites before being promoted from arbitrary to semantic.
+
+Avoid expressing Tailwind default scale values via arbitrary syntax (use `w-60` over `w-[15rem]`). Arbitrary syntax is reserved for genuine custom values that warrant a `sizes` token.
 
 ## Components
 

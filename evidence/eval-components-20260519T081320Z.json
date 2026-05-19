@@ -1,0 +1,946 @@
+{
+  "target": "../synapse-workspace/components",
+  "status": "static-scan-complete-manual-render-evidence-required",
+  "thresholds": {
+    "overall": {
+      "pass": 85,
+      "warn": 75
+    },
+    "categories": {
+      "color": 90,
+      "typography": 85,
+      "spacing": 80,
+      "components": 85,
+      "interactionStates": 80,
+      "responsive": 85,
+      "accessibility": 90,
+      "productTone": 80
+    }
+  },
+  "staticScan": {
+    "filesScanned": 672,
+    "findingCount": 318,
+    "summary": {
+      "byType": {
+        "tailwind-arbitrary-value": 311,
+        "raw-hex-color": 7
+      },
+      "byTailwindPrefix": {
+        "min-w": 131,
+        "min-h": 15,
+        "h": 60,
+        "max-w": 21,
+        "max-h": 15,
+        "w": 61,
+        "py": 4,
+        "px": 1,
+        "p": 1,
+        "bg": 1,
+        "border": 1
+      },
+      "tokenBackedCount": 126,
+      "unbackedCount": 192,
+      "topFiles": [
+        {
+          "file": "../synapse-workspace/components/project/assigned-task-list-modal/AssignedTaskListModal.client.vue",
+          "count": 13
+        },
+        {
+          "file": "../synapse-workspace/components/infra/agent-card/AgentCard.vue",
+          "count": 7
+        },
+        {
+          "file": "../synapse-workspace/components/project/project-labeling-setting-conent/ProjectLabelingSettingContent.vue",
+          "count": 7
+        },
+        {
+          "file": "../synapse-workspace/components/machine-learning/experiment-card/ExperimentCard.vue",
+          "count": 6
+        },
+        {
+          "file": "../synapse-workspace/components/project/project-collection-select-content/ProjectCollectionSelectContent.vue",
+          "count": 6
+        },
+        {
+          "file": "../synapse-workspace/components/shared/sidebar/Sidebar.vue",
+          "count": 6
+        },
+        {
+          "file": "../synapse-workspace/components/project/guide-line-modal/GuideLineModal.client.vue",
+          "count": 5
+        },
+        {
+          "file": "../synapse-workspace/components/project/task-add-modal/TaskAddModal.client.vue",
+          "count": 5
+        },
+        {
+          "file": "../synapse-workspace/components/ui/data-list/slide-viewer/SlideLoadingState.vue",
+          "count": 5
+        },
+        {
+          "file": "../synapse-workspace/components/catalog/file-browser/FileBrowserBody.vue",
+          "count": 4
+        }
+      ],
+      "topMatchesByPrefix": {
+        "min-w": [
+          {
+            "match": "min-w-[6.125rem]",
+            "count": 109
+          },
+          {
+            "match": "min-w-[98px]",
+            "count": 6
+          },
+          {
+            "match": "min-w-[1200px]",
+            "count": 2
+          },
+          {
+            "match": "min-w-[18.5rem]",
+            "count": 2
+          },
+          {
+            "match": "min-w-[6.25rem]",
+            "count": 2
+          },
+          {
+            "match": "min-w-[80rem]",
+            "count": 2
+          }
+        ],
+        "h": [
+          {
+            "match": "h-[12rem]",
+            "count": 6
+          },
+          {
+            "match": "h-[32px]",
+            "count": 5
+          },
+          {
+            "match": "h-[42.375rem]",
+            "count": 3
+          },
+          {
+            "match": "h-[36rem]",
+            "count": 3
+          },
+          {
+            "match": "h-[14.75rem]",
+            "count": 2
+          },
+          {
+            "match": "h-[52px]",
+            "count": 2
+          },
+          {
+            "match": "h-[40rem]",
+            "count": 2
+          },
+          {
+            "match": "h-[21.5rem]",
+            "count": 2
+          },
+          {
+            "match": "h-[1px]",
+            "count": 2
+          },
+          {
+            "match": "h-[2.5rem]",
+            "count": 2
+          },
+          {
+            "match": "h-[3.125rem]",
+            "count": 2
+          },
+          {
+            "match": "h-[39.5rem]",
+            "count": 2
+          },
+          {
+            "match": "h-[7.75rem]",
+            "count": 2
+          }
+        ],
+        "min-h": [
+          {
+            "match": "min-h-[52px]",
+            "count": 2
+          },
+          {
+            "match": "min-h-[14.5rem]",
+            "count": 2
+          },
+          {
+            "match": "min-h-[36rem]",
+            "count": 2
+          },
+          {
+            "match": "min-h-[3.125rem]",
+            "count": 2
+          }
+        ],
+        "max-w": [
+          {
+            "match": "max-w-[calc(100%-2rem)]",
+            "count": 3
+          },
+          {
+            "match": "max-w-[45rem]",
+            "count": 3
+          },
+          {
+            "match": "max-w-[120px]",
+            "count": 2
+          },
+          {
+            "match": "max-w-[32.25rem]",
+            "count": 2
+          }
+        ],
+        "w": [
+          {
+            "match": "w-[15rem]",
+            "count": 9
+          },
+          {
+            "match": "w-[9rem]",
+            "count": 4
+          },
+          {
+            "match": "w-[13rem]",
+            "count": 3
+          },
+          {
+            "match": "w-[12rem]",
+            "count": 3
+          },
+          {
+            "match": "w-[5.125rem]",
+            "count": 2
+          },
+          {
+            "match": "w-[1px]",
+            "count": 2
+          },
+          {
+            "match": "w-[4.75rem]",
+            "count": 2
+          },
+          {
+            "match": "w-[10.25rem]",
+            "count": 2
+          },
+          {
+            "match": "w-[8.5rem]",
+            "count": 2
+          },
+          {
+            "match": "w-[36rem]",
+            "count": 2
+          },
+          {
+            "match": "w-[27rem]",
+            "count": 2
+          },
+          {
+            "match": "w-[2.5rem]",
+            "count": 2
+          },
+          {
+            "match": "w-[calc(20rem-1px)]",
+            "count": 2
+          },
+          {
+            "match": "w-[calc(22.5rem-1px)]",
+            "count": 2
+          },
+          {
+            "match": "w-[7.75rem]",
+            "count": 2
+          }
+        ],
+        "py": [
+          {
+            "match": "py-[1.375rem]",
+            "count": 2
+          },
+          {
+            "match": "py-[2.375rem]",
+            "count": 2
+          }
+        ],
+        "max-h": [
+          {
+            "match": "max-h-[50rem]",
+            "count": 5
+          },
+          {
+            "match": "max-h-[280px]",
+            "count": 2
+          }
+        ]
+      }
+    },
+    "findings": [
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/account/account-deactivate-modal/AccountDeactivateModal.client.vue",
+        "line": 15,
+        "match": "min-w-[6.125rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/account/assigned-email-list/AssignedEmailList.vue",
+        "line": 33,
+        "match": "min-h-[2.75rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/account/email-add-modal/EmailAddModal.client.vue",
+        "line": 13,
+        "match": "min-w-[6.125rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/auth/policy-notice-modal/PolicyNoticeModal.client.vue",
+        "line": 14,
+        "match": "h-[14.75rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/auth/policy-notice-modal/PolicyNoticeModal.client.vue",
+        "line": 15,
+        "match": "h-[14.75rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/auth/policy-notice-modal/PolicyNoticeModal.client.vue",
+        "line": 20,
+        "match": "min-w-[6.125rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/catalog/collection-archive-modal/CollectionArchiveModal.client.vue",
+        "line": 19,
+        "match": "min-w-[6.125rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/catalog/collection-card/CollectionCard.vue",
+        "line": 43,
+        "match": "min-h-[52px]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/catalog/collection-card/CollectionCard.vue",
+        "line": 59,
+        "match": "max-w-[calc(100%-2rem)]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/catalog/collection-create-basic-content/CollectionCreateBasicContent.vue",
+        "line": 7,
+        "match": "max-w-[45rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/catalog/collection-create-data-structure-content/CollectionCreateDataStructureContent.vue",
+        "line": 3,
+        "match": "h-[35rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/catalog/collection-create-data-structure-content/CollectionCreateDataStructureContent.vue",
+        "line": 3,
+        "match": "h-[52.5rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/catalog/collection-create-modal/CollectionCreateModal.client.vue",
+        "line": 52,
+        "match": "min-w-[6.125rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/catalog/collection-create-modal/CollectionCreateModal.client.vue",
+        "line": 55,
+        "match": "min-w-[6.125rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/catalog/collection-remove-modal/CollectionRemoveModal.client.vue",
+        "line": 33,
+        "match": "min-w-[6.125rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/catalog/data-structure-help-modal/DataStructureModal.vue",
+        "line": 17,
+        "match": "max-h-[42rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/catalog/data-unit-remove-modal/DataUnitRemoveConfirm.client.vue",
+        "line": 25,
+        "match": "h-[10.875rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/catalog/data-unit-remove-modal/DataUnitRemoveConfirm.client.vue",
+        "line": 59,
+        "match": "min-w-[6.125rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/catalog/data-unit-remove-modal/DataUnitRemoveConfirm.client.vue",
+        "line": 63,
+        "match": "min-w-[6.125rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/catalog/data-unit-remove-modal/DataUnitRemoveModal.client.vue",
+        "line": 28,
+        "match": "min-w-[6.125rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/catalog/data-unit-remove-modal/DataUnitRemoveModal.client.vue",
+        "line": 36,
+        "match": "min-w-[6.125rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/catalog/file-browser/FileBrowserBody.vue",
+        "line": 3,
+        "match": "min-h-[400px]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/catalog/file-browser/FileBrowserBody.vue",
+        "line": 3,
+        "match": "min-w-[1200px]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/catalog/file-browser/FileBrowserBody.vue",
+        "line": 3,
+        "match": "max-w-[1400px]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/catalog/file-browser/FileBrowserBody.vue",
+        "line": 11,
+        "match": "max-h-[450px]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/catalog/file-browser/FileBrowserGridItem.vue",
+        "line": 13,
+        "match": "max-w-[120px]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/catalog/file-browser/FileBrowserGridItem.vue",
+        "line": 29,
+        "match": "h-[88px]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/catalog/file-browser/FileBrowserGridItem.vue",
+        "line": 29,
+        "match": "w-[116px]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/catalog/file-browser/FileBrowserGridItem.vue",
+        "line": 32,
+        "match": "max-w-[120px]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/catalog/file-browser/FileBrowserGridView.vue",
+        "line": 10,
+        "match": "w-[calc((100%_-_8rem)_/_9)]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/catalog/file-browser/FileBrowserListBody.vue",
+        "line": 6,
+        "match": "min-h-[64px]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/catalog/file-browser/FileBrowserListBody.vue",
+        "line": 18,
+        "match": "max-w-[700px]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/catalog/import-create-basic-form/ImportCreateBasicForm.client.vue",
+        "line": 5,
+        "match": "min-w-[45rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/catalog/import-create-modal/ImportCreateModal.client.vue",
+        "line": 42,
+        "match": "min-w-[6.125rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/catalog/import-create-modal/ImportCreateModal.client.vue",
+        "line": 48,
+        "match": "min-w-[6.125rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/catalog/plugin-card/PluginCard.vue",
+        "line": 3,
+        "match": "min-h-[14.5rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/infra/agent-card/AgentCard.vue",
+        "line": 5,
+        "match": "min-w-[23rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/infra/agent-card/AgentCard.vue",
+        "line": 5,
+        "match": "min-w-[17rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/infra/agent-card/AgentCard.vue",
+        "line": 39,
+        "match": "h-[32px]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/infra/agent-card/AgentCard.vue",
+        "line": 55,
+        "match": "h-[32px]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/infra/agent-card/AgentCard.vue",
+        "line": 69,
+        "match": "h-[32px]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/infra/agent-card/AgentCard.vue",
+        "line": 75,
+        "match": "h-[32px]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/infra/agent-card/AgentCard.vue",
+        "line": 91,
+        "match": "h-[32px]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/machine-learning/agent-connection-modal/AgentConnectionModal.client.vue",
+        "line": 19,
+        "match": "min-w-[6.125rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/machine-learning/agent-connection-modal/AgentConnectionModal.client.vue",
+        "line": 24,
+        "match": "min-w-[6.125rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/machine-learning/agent-detail-modal/AgentDetailModal.client.vue",
+        "line": 66,
+        "match": "w-[5.125rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/machine-learning/agent-detail-modal/AgentDetailModal.client.vue",
+        "line": 70,
+        "match": "w-[5.125rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/machine-learning/agent-detail-modal/AgentDetailModal.client.vue",
+        "line": 138,
+        "match": "py-[1.375rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/machine-learning/dataset-composition-ratio-card/DatasetCompositionRatioCard.vue",
+        "line": 19,
+        "match": "h-[44px]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/machine-learning/dataset-composition-ratio-card/DatasetCompositionRatioCard.vue",
+        "line": 19,
+        "match": "w-[1px]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/machine-learning/dataset-composition-ratio-card/DatasetCompositionRatioCard.vue",
+        "line": 29,
+        "match": "h-[280px]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/machine-learning/dataset-content/DatasetContent.vue",
+        "line": 81,
+        "match": "min-w-[6.125rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/machine-learning/dataset-content/DatasetContent.vue",
+        "line": 84,
+        "match": "min-w-[6.125rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/machine-learning/experiment-archive-modal/ExperimentArchiveModal.vue",
+        "line": 11,
+        "match": "min-w-[6.125rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/machine-learning/experiment-card/ExperimentCard.vue",
+        "line": 13,
+        "match": "h-[24px]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/machine-learning/experiment-card/ExperimentCard.vue",
+        "line": 26,
+        "match": "h-[152px]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/machine-learning/experiment-card/ExperimentCard.vue",
+        "line": 27,
+        "match": "h-[56px]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/machine-learning/experiment-card/ExperimentCard.vue",
+        "line": 32,
+        "match": "h-[60px]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/machine-learning/experiment-card/ExperimentCard.vue",
+        "line": 39,
+        "match": "h-[52px]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/machine-learning/experiment-card/ExperimentCard.vue",
+        "line": 53,
+        "match": "max-w-[calc(100%-2rem)]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/machine-learning/experiment-remove-modal/ExperimentRemoveModal.vue",
+        "line": 11,
+        "match": "min-w-[6.125rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/machine-learning/learning-best-result-content/LearningBestResultContent.vue",
+        "line": 35,
+        "match": "h-[12rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/machine-learning/learning-best-result-content/LearningBestResultContent.vue",
+        "line": 54,
+        "match": "h-[12rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/machine-learning/learning-best-result-content/LearningBestResultContent.vue",
+        "line": 78,
+        "match": "max-h-[50rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/machine-learning/learning-best-result-content/LearningBestResultContent.vue",
+        "line": 90,
+        "match": "h-[40rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/machine-learning/learning-neural-card/LearningNeuralCard.vue",
+        "line": 3,
+        "match": "min-h-[14.5rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/machine-learning/learning-overview-content/LearningOverviewContent.vue",
+        "line": 88,
+        "match": "h-[12rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/machine-learning/learning-overview-content/LearningOverviewContent.vue",
+        "line": 98,
+        "match": "h-[12rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/machine-learning/learning-overview-content/LearningOverviewContent.vue",
+        "line": 117,
+        "match": "max-h-[50rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/machine-learning/learning-result-dashboard/LearningResultConsoleLog.vue",
+        "line": 4,
+        "match": "h-[51rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/machine-learning/learning-summary-card/LearningSummaryCard.vue",
+        "line": 2,
+        "match": "h-[27.5rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/machine-learning/learning-trial-item-modal/LearningTrialItemModal.client.vue",
+        "line": 66,
+        "match": "h-[12rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/machine-learning/learning-trial-item-modal/LearningTrialItemModal.client.vue",
+        "line": 85,
+        "match": "h-[12rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/machine-learning/learning-trial-item-modal/LearningTrialItemModal.client.vue",
+        "line": 111,
+        "match": "max-h-[50rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/machine-learning/log-message-list/LogMessageList.vue",
+        "line": 3,
+        "match": "max-w-[21.375rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/machine-learning/model-register-modal/ModelRegisterModal.client.vue",
+        "line": 139,
+        "match": "w-[18.5rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/machine-learning/model-remove-confirm/ModelRemoveConfirm.client.vue",
+        "line": 12,
+        "match": "min-w-[6.125rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/machine-learning/model-remove-confirm/ModelRemoveConfirm.client.vue",
+        "line": 14,
+        "match": "min-w-[6.125rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/project/annotation-tool-radio-form/AnnotationToolRadioForm.vue",
+        "line": 10,
+        "match": "w-[14.5rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/project/annotator-preview-modal/AnnotatorPreviewModal.client.vue",
+        "line": 15,
+        "match": "min-h-[39.5rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/project/annotator-preview-modal/AnnotatorPreviewModal.client.vue",
+        "line": 16,
+        "match": "min-w-[256px]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/project/annotator-preview-modal/AnnotatorPreviewModal.client.vue",
+        "line": 48,
+        "match": "w-[90%]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/project/assigned-task-cancel-confirm/AssignedTaskCancelConfirm.client.vue",
+        "line": 15,
+        "match": "min-w-[6.125rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/project/assigned-task-cancel-confirm/AssignedTaskCancelConfirm.client.vue",
+        "line": 19,
+        "match": "min-w-[6.125rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/project/assigned-task-complete-confirm/AssignedTaskCompleteConfirm.client.vue",
+        "line": 15,
+        "match": "min-w-[6.125rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/project/assigned-task-complete-confirm/AssignedTaskCompleteConfirm.client.vue",
+        "line": 19,
+        "match": "min-w-[6.125rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/project/assigned-task-list-modal/AssignedTaskListModal.client.vue",
+        "line": 15,
+        "match": "max-h-[50rem]",
+        "tokenBacked": true
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/project/assigned-task-list-modal/AssignedTaskListModal.client.vue",
+        "line": 53,
+        "match": "w-[4.75rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/project/assigned-task-list-modal/AssignedTaskListModal.client.vue",
+        "line": 53,
+        "match": "w-[10.25rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/project/assigned-task-list-modal/AssignedTaskListModal.client.vue",
+        "line": 78,
+        "match": "w-[4.75rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/project/assigned-task-list-modal/AssignedTaskListModal.client.vue",
+        "line": 78,
+        "match": "w-[10.25rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/project/assigned-task-list-modal/AssignedTaskListModal.client.vue",
+        "line": 136,
+        "match": "w-[9rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/project/assigned-task-list-modal/AssignedTaskListModal.client.vue",
+        "line": 141,
+        "match": "w-[6rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/project/assigned-task-list-modal/AssignedTaskListModal.client.vue",
+        "line": 146,
+        "match": "w-[13rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/project/assigned-task-list-modal/AssignedTaskListModal.client.vue",
+        "line": 151,
+        "match": "w-[13rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/project/assigned-task-list-modal/AssignedTaskListModal.client.vue",
+        "line": 156,
+        "match": "w-[8.5rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/project/assigned-task-list-modal/AssignedTaskListModal.client.vue",
+        "line": 161,
+        "match": "w-[8.5rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/project/assigned-task-list-modal/AssignedTaskListModal.client.vue",
+        "line": 166,
+        "match": "w-[13rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/project/assigned-task-list-modal/AssignedTaskListModal.client.vue",
+        "line": 171,
+        "match": "w-[4rem]"
+      },
+      {
+        "type": "tailwind-arbitrary-value",
+        "file": "../synapse-workspace/components/project/assigned-task-remove-modal/AssignedTaskRemoveModal.client.vue",
+        "line": 25,
+        "match": "min-w-[6.125rem]",
+        "tokenBacked": true
+      }
+    ]
+  },
+  "requiredEvidence": [
+    "DESIGN.md lint output",
+    "static token/code scan output",
+    "desktop screenshot",
+    "mobile screenshot",
+    "accessibility or contrast evidence",
+    "notes for deliberate deviations"
+  ],
+  "scoreCategories": [
+    "color",
+    "typography",
+    "spacing",
+    "components",
+    "interactionStates",
+    "responsive",
+    "accessibility",
+    "productTone"
+  ]
+}
