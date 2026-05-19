@@ -44,7 +44,8 @@ synapse-design-md check [--strict]
 synapse-design-md diff
 synapse-design-md doctor
 synapse-design-md eval --target <url-or-file>
-synapse-design-md crawl --out evidence/crawl-runs
+synapse-design-md crawl --login
+synapse-design-md crawl [--base-url <url>] [--category <name>] [--limit <n>] [--headed] [--out <dir>]
 synapse-design-md sync [--source <path>] [--write]
 synapse-design-md inventory [--source <path>] [--write]
 synapse-design-md preview [--out preview.html]
@@ -162,6 +163,43 @@ Validation has three layers:
 2. Static code validation for raw colors, arbitrary font sizes, arbitrary spacing/radius, and local component clones.
 3. `synapse-design-md eval --target <file-or-dir>` for an initial static drift scan.
 4. Rendered page evaluation using desktop/mobile screenshots, accessibility evidence, and the rubric in `eval/rubric.md`.
+
+## Authenticated Crawl
+
+`synapse-design-md crawl` drives Playwright (Chromium) against the live
+Synapse product to produce the rendered-evidence channel that layer 4 of the
+evaluation model expects. Credentials come from the environment, never the
+repo:
+
+```bash
+export EVAL_FIXTURE_STANDARD_EMAIL=…
+export EVAL_FIXTURE_STANDARD_PASSWORD=…
+
+# 1. Log in once and persist storage state to auth/storage-state.json (gitignored)
+synapse-design-md crawl --login
+
+# 2. Crawl every parameterless non-auth route from scripts/synapse-pages.json
+synapse-design-md crawl                       # default base: https://test.synapse.sh
+synapse-design-md crawl --category dashboard  # one category at a time
+synapse-design-md crawl --limit 5             # cap routes for smoke runs
+synapse-design-md crawl --headed              # run with a visible browser window
+synapse-design-md crawl --base-url https://staging.example.com
+```
+
+Each run writes `evidence/crawl-runs/<ISO-timestamp>/` containing:
+
+- `manifest.json` — per-page status, HTTP code, redirect path, page title,
+  console error count, viewport, and a computed-style sample (`body`,
+  first heading, first button — used to compare actual rendered values
+  against the DESIGN.md token contract).
+- `screenshots/<route-slug>.png` — viewport screenshot (1440×900).
+- `logs/<route-slug>.console.log` — console-error capture for any route
+  that produced errors.
+
+Routes with `:param` slots and the `auth-public` category are skipped by
+default. The whole `evidence/crawl-runs/` tree, `auth/`, and any
+`storage-state.json` are gitignored — only curated, anonymized output
+should be promoted into `golden/` or `fixtures/`.
 
 ## Repository Data Policy
 
