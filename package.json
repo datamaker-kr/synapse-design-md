@@ -19,7 +19,8 @@
   "scripts": {
     "check": "node ./bin/synapse-design-md.js check",
     "doctor": "node ./bin/synapse-design-md.js doctor",
-    "install:local": "node ./bin/synapse-design-md.js install"
+    "install:local": "node ./bin/synapse-design-md.js install",
+    "test": "node --test scripts/test.mjs"
   },
   "engines": {
     "node": ">=18"

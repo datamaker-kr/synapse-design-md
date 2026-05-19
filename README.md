@@ -201,6 +201,30 @@ default. The whole `evidence/crawl-runs/` tree, `auth/`, and any
 `storage-state.json` are gitignored — only curated, anonymized output
 should be promoted into `golden/` or `fixtures/`.
 
+## Continuous Integration
+
+`.github/workflows/check.yml` runs on every pull request and on push to
+`main`. The job is intentionally narrow — fast enough to gate every change:
+
+1. `npm ci` — installs the (dev-only) Playwright + design-md dependencies.
+2. `npm test` — node:test suite covering the contracts that the project
+   silently regressed against in the past:
+   - `semantic-aliases.json` has no `components` key (Issue #3 governance).
+   - `semantic-aliases.json#sizes` is a non-empty string map.
+   - `templates/DESIGN.md` frontmatter still contains every required block
+     (`colors`, `typography`, `spacing`, `rounded`, `sizes`, `components`).
+   - `sync` dry-run is byte-identical to the committed `templates/DESIGN.md`
+     (runs against a stub theme fixture under `fixtures/ci-source/` so the
+     test does not need the synapse-workspace checkout).
+   - `DESIGN.md` has no leftover `__PACKAGE_VERSION__` placeholder.
+3. `synapse-design-md check --strict` — Google `@google/design.md` lint plus
+   the structural checks on `DESIGN.md`, `AGENTS.md`, and the install
+   manifest. Strict mode fails the build if the lint cannot run.
+
+The crawl (M3) is intentionally not part of CI — it requires live
+credentials and a Chromium download, neither of which belong in a per-PR
+gate.
+
 ## Repository Data Policy
 
 Commit:
