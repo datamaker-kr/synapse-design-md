@@ -1,0 +1,62 @@
+{
+  "$schema-comment": "Maps Synapse DESIGN.md semantic slots to Tailwind palette references (palette.shade) and font-size scales. Edit this file to retune; sync-from-source.mjs reads it to regenerate templates/DESIGN.md.",
+  "version": 1,
+  "source": "synapse-workspace/lib/tailwind/theme + components/ui/button",
+  "colors": {
+    "ink": "slate.900",
+    "muted": "slate.500",
+    "border": "slate.300",
+    "surface": "white.950",
+    "surfaceSubtle": "slate.50",
+    "accent": "blue.600",
+    "accentHover": "blue.700",
+    "accentActive": "blue.800",
+    "success": "green.500",
+    "warning": "yellow.500",
+    "danger": "red.600"
+  },
+  "typography": {
+    "headline-lg": "3xl",
+    "headline-md": "2xl",
+    "title-sm": "base",
+    "body-md": "sm",
+    "label-sm": "xs"
+  },
+  "fontFamily": "\"Pretendard Variable\", ui-sans-serif, system-ui, sans-serif",
+  "components": {
+    "button-primary": {
+      "source": "components/ui/button (variant=solid, color=blue)",
+      "backgroundColor": "{colors.accent}",
+      "hoverBackgroundColor": "{colors.accentHover}",
+      "activeBackgroundColor": "{colors.accentActive}",
+      "textColor": "{colors.surface}",
+      "rounded": "{rounded.lg}",
+      "paddingInline": "16px",
+      "paddingBlock": "6px"
+    },
+    "button-tint": {
+      "source": "components/ui/button (variant=tint, color=blue)",
+      "backgroundColor": "blue.200",
+      "textColor": "{colors.accent}",
+      "rounded": "{rounded.lg}",
+      "paddingInline": "16px",
+      "paddingBlock": "6px"
+    },
+    "card": {
+      "source": "components/ui/card defaults",
+      "backgroundColor": "{colors.surface}",
+      "borderColor": "{colors.border}",
+      "rounded": "{rounded.lg}",
+      "padding": "{spacing.xl}"
+    },
+    "input": {
+      "source": "components/ui/* form controls",
+      "backgroundColor": "{colors.surface}",
+      "borderColor": "{colors.border}",
+      "textColor": "{colors.ink}",
+      "rounded": "{rounded.md}",
+      "paddingInline": "{spacing.md}",
+      "paddingBlock": "{spacing.sm}"
+    }
+  }
+}

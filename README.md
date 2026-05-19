@@ -45,9 +45,45 @@ synapse-design-md diff
 synapse-design-md doctor
 synapse-design-md eval --target <url-or-file>
 synapse-design-md crawl --out evidence/crawl-runs
+synapse-design-md sync [--source <path>] [--write]
 synapse-design-md examples list
 synapse-design-md examples show pages/dashboard
 ```
+
+## Syncing Tokens From Source
+
+`DESIGN.md` tokens (colors, typography, components) are derived from
+`synapse-workspace/lib/tailwind/theme/*.js` — the Tailwind theme is the single
+source of truth. Do not hand-edit the frontmatter; edit
+`scripts/semantic-aliases.json` instead and re-run `sync`.
+
+```bash
+# 1. Sync template/DESIGN.md from Synapse source (dry run prints to stdout)
+node bin/synapse-design-md.js sync --source ../synapse-workspace
+
+# 2. Write the synced frontmatter into templates/DESIGN.md
+node bin/synapse-design-md.js sync --source ../synapse-workspace --write
+
+# 3. Refresh DESIGN.md at the repo root from the updated template
+node bin/synapse-design-md.js install --force
+
+# 4. Verify nothing regressed
+node bin/synapse-design-md.js check
+```
+
+The source path can be supplied via `--source <path>` or the `SYNAPSE_SOURCE`
+environment variable (drop it in a gitignored `.env` to avoid retyping).
+
+`scripts/semantic-aliases.json` maps each semantic slot (`accent`, `ink`,
+`muted`, `success`, …) to a Tailwind palette reference like `blue.600`. To
+retune the contract:
+
+1. Edit the mapping in `semantic-aliases.json`.
+2. Re-run `sync --write` and `install --force`.
+3. Commit the regenerated `templates/DESIGN.md` and `DESIGN.md`.
+
+The sync command never touches the markdown body — prose under
+`## Overview`, `## Colors`, etc. is hand-authored and preserved across runs.
 
 ## Update Policy
 

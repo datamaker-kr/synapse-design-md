@@ -1,49 +1,51 @@
 ---
-version: alpha
+version: beta
 name: Synapse
-description: Synapse product design contract for consistent AI-assisted UI work.
+description: Synapse product design contract synced from synapse-workspace tailwind theme.
 x-synapse-design-md:
   packageVersion: __PACKAGE_VERSION__
   source: synapse-design-md
+  syncedFrom: synapse-workspace/lib/tailwind/theme
 
 colors:
-  ink: "#111827"
-  muted: "#6B7280"
+  ink: "#182134"
+  muted: "#7B8AA0"
+  border: "#D6DEE8"
   surface: "#FFFFFF"
-  surfaceSubtle: "#F8FAFC"
-  border: "#E5E7EB"
-  accent: "#2563EB"
-  accentHover: "#1D4ED8"
-  success: "#059669"
-  warning: "#D97706"
-  danger: "#DC2626"
+  surfaceSubtle: "#FBFCFD"
+  accent: "#2461E9"
+  accentHover: "#1E44BC"
+  accentActive: "#1B3174"
+  success: "#009D53"
+  warning: "#BB7C05"
+  danger: "#D02323"
 
 typography:
   headline-lg:
-    fontFamily: Inter, ui-sans-serif, system-ui, sans-serif
-    fontSize: 32px
-    fontWeight: 650
-    lineHeight: 1.2
+    fontFamily: "\"Pretendard Variable\", ui-sans-serif, system-ui, sans-serif"
+    fontSize: 30px
+    lineHeight: 36px
+    letterSpacing: -0.02em
   headline-md:
-    fontFamily: Inter, ui-sans-serif, system-ui, sans-serif
+    fontFamily: "\"Pretendard Variable\", ui-sans-serif, system-ui, sans-serif"
     fontSize: 24px
-    fontWeight: 650
-    lineHeight: 1.25
+    lineHeight: 32px
+    letterSpacing: -0.019em
   title-sm:
-    fontFamily: Inter, ui-sans-serif, system-ui, sans-serif
+    fontFamily: "\"Pretendard Variable\", ui-sans-serif, system-ui, sans-serif"
     fontSize: 16px
-    fontWeight: 600
-    lineHeight: 1.4
+    lineHeight: 24px
+    letterSpacing: -0.011em
   body-md:
-    fontFamily: Inter, ui-sans-serif, system-ui, sans-serif
+    fontFamily: "\"Pretendard Variable\", ui-sans-serif, system-ui, sans-serif"
     fontSize: 14px
-    fontWeight: 400
-    lineHeight: 1.55
+    lineHeight: 20px
+    letterSpacing: -0.006em
   label-sm:
-    fontFamily: Inter, ui-sans-serif, system-ui, sans-serif
+    fontFamily: "\"Pretendard Variable\", ui-sans-serif, system-ui, sans-serif"
     fontSize: 12px
-    fontWeight: 600
-    lineHeight: 1.35
+    lineHeight: 16px
+    letterSpacing: 0em
 
 spacing:
   xs: 4px
@@ -61,10 +63,18 @@ rounded:
 components:
   button-primary:
     backgroundColor: "{colors.accent}"
-    textColor: "#FFFFFF"
-    rounded: "{rounded.md}"
-    paddingInline: "{spacing.lg}"
-    paddingBlock: "{spacing.md}"
+    hoverBackgroundColor: "{colors.accentHover}"
+    activeBackgroundColor: "{colors.accentActive}"
+    textColor: "{colors.surface}"
+    rounded: "{rounded.lg}"
+    paddingInline: 16px
+    paddingBlock: 6px
+  button-tint:
+    backgroundColor: "#E6F0FF"
+    textColor: "{colors.accent}"
+    rounded: "{rounded.lg}"
+    paddingInline: 16px
+    paddingBlock: 6px
   card:
     backgroundColor: "{colors.surface}"
     borderColor: "{colors.border}"
@@ -83,7 +93,7 @@ components:
 
 Synapse UI is an operational product surface. It should feel precise, calm, and dense enough for repeated professional use. Prefer structured layouts, restrained visual emphasis, clear status hierarchy, and compact controls over marketing-style composition.
 
-This contract is a starting point. Replace placeholder tokens with values extracted from authenticated Synapse pages before publishing a stable release.
+Tokens in the frontmatter are synced from `synapse-workspace/lib/tailwind/theme` via `synapse-design-md sync`. Edit `scripts/semantic-aliases.json` and re-run the command to retune; do not hand-edit the frontmatter.
 
 ## Colors
 
@@ -95,7 +105,7 @@ Avoid raw hex values in implementation code. If a new color is necessary, add it
 
 Use `headline-lg` only for page-level titles. Use `headline-md` for major content regions, `title-sm` for cards and table sections, `body-md` for dense product copy, and `label-sm` for metadata, filters, badges, and field labels.
 
-Text should fit inside controls without viewport-scaled font sizes. Keep letter spacing at zero unless a source Synapse page proves otherwise.
+Text should fit inside controls without viewport-scaled font sizes. Use the letter-spacing values from the synced typography scale; do not override them per element.
 
 ## Layout
 
