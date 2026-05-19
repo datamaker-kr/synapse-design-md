@@ -18,3 +18,5 @@ evidence/crawl-runs/
 
 .synapse-design-md.local.json
 .DS_Store
+
+.claude/
