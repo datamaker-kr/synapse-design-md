@@ -54,16 +54,31 @@ synapse-design-md examples show pages/dashboard
 
 ## Syncing Tokens From Source
 
-`DESIGN.md` tokens (colors, typography, components) are derived from
-`synapse-workspace/lib/tailwind/theme/*.js` — the Tailwind theme is the single
-source of truth. Do not hand-edit the frontmatter; edit
-`scripts/semantic-aliases.json` instead and re-run `sync`.
+`DESIGN.md` is split into two governance domains (Issue #3, option C):
+
+| Block | Owner | Edit how |
+| --- | --- | --- |
+| `spacing:` | `sync` | edit values in `scripts/sync-from-source.mjs` (hardcoded today) |
+| `sizes:` | `sync` | edit `scripts/semantic-aliases.json` and re-run `sync --write` |
+| `colors:` | hand-edit | edit `templates/DESIGN.md` directly |
+| `typography:` | hand-edit | edit `templates/DESIGN.md` directly |
+| `rounded:` | hand-edit | edit `templates/DESIGN.md` directly |
+| `components:` | hand-edit | edit `templates/DESIGN.md` directly |
+| Markdown body | hand-edit | edit `templates/DESIGN.md` directly |
+
+`sync` does surgical YAML block replacement: it only rewrites the `spacing:`
+and `sizes:` blocks inside the existing frontmatter and leaves every other
+block untouched. Hand-edited tokens (state variants, semantic-subtle pairs,
+focus ring, mono typography, etc.) survive `sync --write` and
+`install --force`. Re-extending sync to own `colors`/`typography`/`rounded`
+is the long-term option A and requires a deliberate schema expansion in
+`semantic-aliases.json` first.
 
 ```bash
-# 1. Sync template/DESIGN.md from Synapse source (dry run prints to stdout)
+# 1. Dry-run sync (prints the would-be templates/DESIGN.md to stdout)
 node bin/synapse-design-md.js sync --source ../synapse-workspace
 
-# 2. Write the synced frontmatter into templates/DESIGN.md
+# 2. Apply sync to templates/DESIGN.md (only spacing + sizes blocks change)
 node bin/synapse-design-md.js sync --source ../synapse-workspace --write
 
 # 3. Refresh DESIGN.md at the repo root from the updated template
@@ -74,13 +89,15 @@ node bin/synapse-design-md.js check
 ```
 
 The source path can be supplied via `--source <path>` or the `SYNAPSE_SOURCE`
-environment variable (drop it in a gitignored `.env` to avoid retyping).
+environment variable (drop it in a gitignored `.env` to avoid retyping). The
+upstream `synapse-workspace/lib/tailwind/theme/*.js` files are still required
+on disk (sync uses their presence as a link check) even though no values are
+read from them today.
 
-`scripts/semantic-aliases.json` maps each semantic slot (`accent`, `ink`,
-`muted`, `success`, …) to a Tailwind palette reference like `blue.600`. To
-retune the contract:
+To retune the `sizes` contract:
 
-1. Edit the mapping in `semantic-aliases.json`.
+1. Edit `scripts/semantic-aliases.json` (`sizes` block only — sync refuses to
+   run if a `components` key reappears).
 2. Re-run `sync --write` and `install --force`.
 3. Commit the regenerated `templates/DESIGN.md` and `DESIGN.md`.
 
