@@ -16,6 +16,7 @@
     "danger": "red.600"
   },
   "typography": {
+    "display-lg": "4xl",
     "headline-lg": "3xl",
     "headline-md": "2xl",
     "title-sm": "base",
