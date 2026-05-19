@@ -394,6 +394,10 @@ Each semantic family has a strong foreground and a subtle background. Strong is 
 **Overlay**
 - **Overlay Scrim** — `rgba(17, 24, 39, 0.4)` — backdrop for modal and drawer surfaces. Documented in prose because alpha colors are not part of the lint-enforced palette; use this literal CSS string at call sites.
 
+**Provenance**
+- **Palette-backed (14)** — `accent`, `accent-hover`, `accent-pressed`, `on-accent`, `surface`, `surface-subtle`, `surface-elevated`, `ink`, `ink-muted`, `hairline`, `success`, `warning`, `danger`, `info` — hex values are deterministic references into `synapse-workspace/lib/tailwind/theme/colors.js` (verifiable via `node scripts/verify-colors.mjs`).
+- **Bespoke design-system extensions (11)** — `accent-focus-ring`, `ink-subtle`, `hairline-strong`, `success-subtle`, `warning-subtle`, `danger-subtle`, `info-subtle`, `selected-bg`, `hover-bg`, `disabled-bg`, `disabled-fg` — intentional non-palette values for states (focus, hover, disabled) and semantic-subtle pair backgrounds. They are not Tailwind palette pulls; treat them as canonical design tokens defined here, not as approximations of palette shades.
+
 ## Typography
 
 **Font Family**
@@ -655,7 +659,7 @@ When the upstream Synapse palette refresh lands, re-run the contrast script and 
 
 ## Known Gaps
 
-- Color hex values are placeholders cloned from the alpha contract; replace each with the value extracted from authenticated Synapse pages before the first stable release.
+- 11 bespoke design-system colors (`accent-focus-ring`, `ink-subtle`, `hairline-strong`, the four `*-subtle` semantic pairs, `selected-bg`, `hover-bg`, `disabled-bg`, `disabled-fg`) are intentional non-palette values but lack rendered-evidence confirmation — they manifest only on hover/focus/disabled states that the layer-4 crawl does not currently exercise. Extending `crawl` to trigger and sample those states is a follow-up to issue #9.
 - `Source pages` comment under Colors is empty until the first authenticated crawl run lands.
 - Dark mode is undefined; first pass is light-only because operational sessions run on managed displays.
 - Form validation visuals beyond `input-error` (helper text styling, inline error rows, multi-field error summaries) are not specified.
