@@ -1,65 +1,89 @@
 ---
 version: beta
 name: Synapse
-description: Synapse product design contract synced from synapse-workspace tailwind theme.
+description: |
+  Operational product canvas for Synapse — a dense, calm working surface
+  optimized for prolonged professional use. Built on near-white surfaces
+  with one-step subtle elevation, hairline borders for hierarchy instead
+  of shadow, and a restrained blue accent reserved for primary actions,
+  active navigation, and selected states. Type runs Pretendard Variable
+  at compact sizes (11–30px) optimized for tables and dense forms, with
+  a monospace family for IDs and tabular numbers. Shadow is reserved
+  exclusively for transient overlays (modal, popover, dropdown, drawer);
+  cards, panels, and tables separate through borders and tonal shifts.
+  Border radius stays at or below 8px on containers, with pill radius
+  limited to status pills and filter chips. Every interactive component
+  ships hover, focused, and disabled state tokens so generated code
+  references the system rather than ad-hoc CSS. Color and typography
+  values are synced from synapse-workspace/lib/tailwind/theme via
+  `synapse-design-md sync`.
 x-synapse-design-md:
   packageVersion: __PACKAGE_VERSION__
   source: synapse-design-md
   syncedFrom: synapse-workspace/lib/tailwind/theme
 
 colors:
-  ink: "#182134"
-  muted: "#7B8AA0"
-  border: "#D6DEE8"
-  surface: "#FFFFFF"
-  surfaceSubtle: "#FBFCFD"
   accent: "#2461E9"
-  accentHover: "#1E44BC"
-  accentActive: "#1B3174"
+  accent-hover: "#1E44BC"
+  accent-pressed: "#1B3174"
+  accent-focus-ring: "#93B3F0"
+  on-accent: "#FFFFFF"
+
+  surface: "#FFFFFF"
+  surface-subtle: "#FBFCFD"
+  surface-elevated: "#FFFFFF"
+
+  ink: "#182134"
+  ink-muted: "#7B8AA0"
+  ink-subtle: "#9DA9BD"
+
+  hairline: "#D6DEE8"
+  hairline-strong: "#BFCAD9"
+
   success: "#009D53"
+  success-subtle: "#E6F7EE"
   warning: "#BB7C05"
+  warning-subtle: "#FDF6E3"
   danger: "#D02323"
+  danger-subtle: "#FCEBEB"
+  info: "#2461E9"
+  info-subtle: "#E6EEFE"
+
+  selected-bg: "#E6EEFE"
+  hover-bg: "#F4F7FB"
+  disabled-bg: "#F0F3F8"
+  disabled-fg: "#9DA9BD"
 
 typography:
-  headline-lg:
-    fontFamily: "\"Pretendard Variable\", ui-sans-serif, system-ui, sans-serif"
-    fontSize: 30px
-    lineHeight: 36px
-    letterSpacing: -0.02em
-  headline-md:
-    fontFamily: "\"Pretendard Variable\", ui-sans-serif, system-ui, sans-serif"
-    fontSize: 24px
-    lineHeight: 32px
-    letterSpacing: -0.019em
-  title-sm:
-    fontFamily: "\"Pretendard Variable\", ui-sans-serif, system-ui, sans-serif"
-    fontSize: 16px
-    lineHeight: 24px
-    letterSpacing: -0.011em
-  body-md:
-    fontFamily: "\"Pretendard Variable\", ui-sans-serif, system-ui, sans-serif"
-    fontSize: 14px
-    lineHeight: 20px
-    letterSpacing: -0.006em
-  label-sm:
-    fontFamily: "\"Pretendard Variable\", ui-sans-serif, system-ui, sans-serif"
-    fontSize: 12px
-    lineHeight: 16px
-    letterSpacing: 0em
+  fontFamily:
+    sans: "\"Pretendard Variable\", ui-sans-serif, system-ui, sans-serif"
+    mono: "ui-monospace, SF Mono, Menlo, monospace"
+  scale:
+    headline-lg: { fontFamily: sans, fontSize: 30px, fontWeight: 650, lineHeight: 36px, letterSpacing: "-0.02em" }
+    headline-md: { fontFamily: sans, fontSize: 24px, fontWeight: 650, lineHeight: 32px, letterSpacing: "-0.019em" }
+    title-sm:    { fontFamily: sans, fontSize: 16px, fontWeight: 600, lineHeight: 24px, letterSpacing: "-0.011em" }
+    body-md:     { fontFamily: sans, fontSize: 14px, fontWeight: 400, lineHeight: 20px, letterSpacing: "-0.006em" }
+    body-sm:     { fontFamily: sans, fontSize: 13px, fontWeight: 400, lineHeight: 18px, letterSpacing: "-0.005em" }
+    label-sm:    { fontFamily: sans, fontSize: 12px, fontWeight: 600, lineHeight: 16px, letterSpacing: "0em" }
+    eyebrow:     { fontFamily: sans, fontSize: 11px, fontWeight: 600, lineHeight: 14px, letterSpacing: "0.4px", textTransform: uppercase }
+    button:      { fontFamily: sans, fontSize: 13px, fontWeight: 600, lineHeight: 16px, letterSpacing: "0em" }
+    mono:        { fontFamily: mono, fontSize: 13px, fontWeight: 400, lineHeight: 18px, letterSpacing: "0em" }
 
 spacing:
-  xs: 4px
-  sm: 8px
-  md: 12px
-  lg: 16px
-  xl: 24px
-  xxl: 32px
+  xs: "4px"
+  sm: "8px"
+  md: "12px"
+  lg: "16px"
+  xl: "24px"
+  xxl: "32px"
 
 rounded:
-  sm: 4px
-  md: 6px
-  lg: 8px
-  xl: 12px
+  xs: "2px"
+  sm: "4px"
+  md: "6px"
+  lg: "8px"
+  xl: "12px"
+  pill: "9999px"
 
 sizes:
   actionMin: 6.125rem
@@ -75,93 +99,365 @@ sizes:
 components:
   button-primary:
     backgroundColor: "{colors.accent}"
-    hoverBackgroundColor: "{colors.accentHover}"
-    activeBackgroundColor: "{colors.accentActive}"
-    textColor: "{colors.surface}"
-    rounded: "{rounded.lg}"
-    paddingInline: 16px
-    paddingBlock: 6px
+    textColor: "{colors.on-accent}"
+    borderColor: transparent
+    typography: button
+    rounded: lg
+    padding: "6px 16px"
+    height: "32px"
+  button-primary-hover:    { backgroundColor: "{colors.accent-hover}" }
+  button-primary-pressed:  { backgroundColor: "{colors.accent-pressed}" }
+  button-primary-focused:  { boxShadow: "0 0 0 2px {colors.accent-focus-ring}" }
+  button-primary-disabled: { backgroundColor: "{colors.disabled-bg}", textColor: "{colors.disabled-fg}" }
+
   button-tint:
-    backgroundColor: "#E6F0FF"
+    backgroundColor: "{colors.info-subtle}"
     textColor: "{colors.accent}"
-    rounded: "{rounded.lg}"
-    paddingInline: 16px
-    paddingBlock: 6px
-  card:
+    borderColor: transparent
+    typography: button
+    rounded: lg
+    padding: "6px 16px"
+    height: "32px"
+  button-tint-hover:    { backgroundColor: "{colors.selected-bg}" }
+  button-tint-disabled: { backgroundColor: "{colors.disabled-bg}", textColor: "{colors.disabled-fg}" }
+
+  button-secondary:
     backgroundColor: "{colors.surface}"
-    borderColor: "{colors.border}"
-    rounded: "{rounded.lg}"
-    padding: "{spacing.xl}"
+    textColor: "{colors.ink}"
+    borderColor: "{colors.hairline}"
+    typography: button
+    rounded: md
+    padding: "0 {spacing.md}"
+    height: "32px"
+  button-secondary-hover:    { backgroundColor: "{colors.hover-bg}", borderColor: "{colors.hairline-strong}" }
+  button-secondary-focused:  { boxShadow: "0 0 0 2px {colors.accent-focus-ring}", borderColor: "{colors.accent}" }
+  button-secondary-disabled: { backgroundColor: "{colors.disabled-bg}", textColor: "{colors.disabled-fg}", borderColor: "{colors.hairline}" }
+
+  button-ghost:
+    backgroundColor: transparent
+    textColor: "{colors.ink}"
+    borderColor: transparent
+    typography: button
+    rounded: md
+    padding: "0 {spacing.sm}"
+    height: "32px"
+  button-ghost-hover:    { backgroundColor: "{colors.hover-bg}" }
+  button-ghost-disabled: { textColor: "{colors.disabled-fg}" }
+
+  button-danger:
+    backgroundColor: "{colors.danger}"
+    textColor: "{colors.on-accent}"
+    borderColor: transparent
+    typography: button
+    rounded: md
+    padding: "0 {spacing.md}"
+    height: "32px"
+  button-danger-hover: { backgroundColor: "#B91C1C" }
+
   input:
     backgroundColor: "{colors.surface}"
-    borderColor: "{colors.border}"
     textColor: "{colors.ink}"
-    rounded: "{rounded.md}"
-    paddingInline: "{spacing.md}"
-    paddingBlock: "{spacing.sm}"
-  badge:
-    backgroundColor: "#F7F9FB"
-    textColor: "#5D6C83"
-    rounded: "{rounded.md}"
-    paddingInline: "{spacing.sm}"
-    paddingBlock: 2px
-    typography: "{typography.label-sm}"
-  alert:
-    backgroundColor: "#F7F9FB"
-    textColor: "#5D6C83"
-    paddingInline: 48px
-    paddingBlock: "{spacing.md}"
-  dialog:
+    borderColor: "{colors.hairline}"
+    typography: body-md
+    rounded: md
+    padding: "{spacing.sm} {spacing.md}"
+    height: "32px"
+  input-hover:    { borderColor: "{colors.hairline-strong}" }
+  input-focused:  { borderColor: "{colors.accent}", boxShadow: "0 0 0 2px {colors.accent-focus-ring}" }
+  input-error:    { borderColor: "{colors.danger}" }
+  input-disabled: { backgroundColor: "{colors.disabled-bg}", textColor: "{colors.disabled-fg}" }
+
+  select:
     backgroundColor: "{colors.surface}"
-    rounded: "{rounded.xl}"
-    maxWidth: 45rem
-    maxHeight: 90dvh
-    shadow: lg
+    textColor: "{colors.ink}"
+    borderColor: "{colors.hairline}"
+    typography: body-md
+    rounded: md
+    padding: "{spacing.sm} {spacing.md}"
+    height: "32px"
+  select-focused:  { borderColor: "{colors.accent}", boxShadow: "0 0 0 2px {colors.accent-focus-ring}" }
+  select-disabled: { backgroundColor: "{colors.disabled-bg}", textColor: "{colors.disabled-fg}" }
+
+  checkbox:
+    backgroundColor: "{colors.surface}"
+    borderColor: "{colors.hairline-strong}"
+    rounded: xs
+  checkbox-checked:  { backgroundColor: "{colors.accent}", borderColor: "{colors.accent}" }
+  checkbox-disabled: { backgroundColor: "{colors.disabled-bg}", borderColor: "{colors.hairline}" }
+
+  badge:
+    backgroundColor: "{colors.surface-subtle}"
+    textColor: "{colors.ink-muted}"
+    rounded: md
+    padding: "2px {spacing.sm}"
+    typography: label-sm
+  alert:
+    backgroundColor: "{colors.surface-subtle}"
+    textColor: "{colors.ink-muted}"
+    borderColor: "{colors.hairline}"
+    rounded: md
+    padding: "{spacing.md} 48px"
+    typography: body-sm
+
   table-row:
-    height: 64px
-    borderColor: "#EBF0F5"
-    selectedBackgroundColor: "#F5F9FF"
-    errorBackgroundColor: "#FEF6F6"
-    disabledBackgroundColor: "#F7F9FB"
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.ink}"
+    borderColor: "{colors.hairline}"
+    typography: body-sm
+    padding: "{spacing.sm} {spacing.md}"
+    height: "64px"
+  table-row-hover:    { backgroundColor: "{colors.hover-bg}" }
+  table-row-selected: { backgroundColor: "{colors.selected-bg}" }
+  table-row-error:    { backgroundColor: "{colors.danger-subtle}" }
+  table-row-disabled: { backgroundColor: "{colors.disabled-bg}", textColor: "{colors.disabled-fg}" }
   table-header-row:
-    backgroundColor: "{colors.surfaceSubtle}"
-    height: 40px
-    borderColor: "#D6DEE8"
-    textColor: "#5D6C83"
-    typography: "{typography.label-sm}"
+    backgroundColor: "{colors.surface-subtle}"
+    borderColor: "{colors.hairline}"
+    textColor: "{colors.ink-muted}"
+    typography: label-sm
+    height: "40px"
+  table-header-cell:
+    backgroundColor: "{colors.surface-subtle}"
+    textColor: "{colors.ink-muted}"
+    borderColor: "{colors.hairline}"
+    typography: eyebrow
+    padding: "{spacing.sm} {spacing.md}"
+  table-cell-numeric:
+    typography: mono
+    textAlign: right
+
+  app-shell-nav:
+    backgroundColor: "{colors.surface-subtle}"
+    borderColor: "{colors.hairline}"
+    padding: "{spacing.md}"
+    width: "240px"
+  nav-item:
+    backgroundColor: transparent
+    textColor: "{colors.ink-muted}"
+    typography: body-sm
+    rounded: md
+    padding: "{spacing.sm} {spacing.md}"
+    height: "32px"
+  nav-item-hover:  { backgroundColor: "{colors.hover-bg}", textColor: "{colors.ink}" }
+  nav-item-active: { backgroundColor: "{colors.selected-bg}", textColor: "{colors.accent}" }
+
+  breadcrumb:
+    backgroundColor: transparent
+    textColor: "{colors.ink-muted}"
+    typography: body-sm
+    padding: "{spacing.sm} 0"
+  breadcrumb-separator:
+    backgroundColor: transparent
+    textColor: "{colors.ink-subtle}"
+    typography: body-sm
+
+  tab:
+    backgroundColor: transparent
+    textColor: "{colors.ink-muted}"
+    borderColor: transparent
+    typography: body-sm
+    padding: "{spacing.sm} {spacing.md}"
+  tab-active:   { textColor: "{colors.ink}", borderColor: "{colors.accent}" }
+  tab-disabled: { textColor: "{colors.disabled-fg}" }
+
+  toolbar:
+    backgroundColor: "{colors.surface}"
+    borderColor: "{colors.hairline}"
+    padding: "{spacing.sm} {spacing.md}"
+
+  filter-chip:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.ink}"
+    borderColor: "{colors.hairline}"
+    typography: label-sm
+    rounded: pill
+    padding: "{spacing.xs} {spacing.md}"
+  filter-chip-active:   { backgroundColor: "{colors.selected-bg}", textColor: "{colors.accent}", borderColor: "{colors.accent}" }
+  filter-chip-disabled: { backgroundColor: "{colors.disabled-bg}", textColor: "{colors.disabled-fg}", borderColor: "{colors.hairline}" }
+
+  status-pill-success: { backgroundColor: "{colors.success-subtle}", textColor: "{colors.success}", typography: label-sm, rounded: pill, padding: "{spacing.xs} {spacing.sm}" }
+  status-pill-warning: { backgroundColor: "{colors.warning-subtle}", textColor: "{colors.warning}", typography: label-sm, rounded: pill, padding: "{spacing.xs} {spacing.sm}" }
+  status-pill-danger:  { backgroundColor: "{colors.danger-subtle}",  textColor: "{colors.danger}",  typography: label-sm, rounded: pill, padding: "{spacing.xs} {spacing.sm}" }
+  status-pill-info:    { backgroundColor: "{colors.info-subtle}",    textColor: "{colors.info}",    typography: label-sm, rounded: pill, padding: "{spacing.xs} {spacing.sm}" }
+  status-pill-neutral: { backgroundColor: "{colors.surface-subtle}", textColor: "{colors.ink-muted}", borderColor: "{colors.hairline}", typography: label-sm, rounded: pill, padding: "{spacing.xs} {spacing.sm}" }
+
+  badge-meta:
+    backgroundColor: transparent
+    textColor: "{colors.ink-muted}"
+    typography: eyebrow
+
+  card-default:
+    backgroundColor: "{colors.surface}"
+    borderColor: "{colors.hairline}"
+    rounded: lg
+    padding: "{spacing.lg}"
+  detail-panel:
+    backgroundColor: "{colors.surface}"
+    borderColor: "{colors.hairline}"
+    padding: "{spacing.lg}"
+    width: "480px"
+  empty-state:
+    backgroundColor: "{colors.surface-subtle}"
+    textColor: "{colors.ink-muted}"
+    borderColor: "{colors.hairline}"
+    typography: body-md
+    rounded: lg
+    padding: "{spacing.xxl}"
+  error-banner:
+    backgroundColor: "{colors.danger-subtle}"
+    textColor: "{colors.danger}"
+    borderColor: "{colors.danger}"
+    typography: body-sm
+    rounded: md
+    padding: "{spacing.md}"
+
+  toast-success: { backgroundColor: "{colors.surface}", textColor: "{colors.ink}", borderColor: "{colors.success}", typography: body-sm, rounded: md, padding: "{spacing.md}", boxShadow: "0 8px 24px rgba(17, 24, 39, 0.12)" }
+  toast-warning: { backgroundColor: "{colors.surface}", textColor: "{colors.ink}", borderColor: "{colors.warning}", typography: body-sm, rounded: md, padding: "{spacing.md}", boxShadow: "0 8px 24px rgba(17, 24, 39, 0.12)" }
+  toast-danger:  { backgroundColor: "{colors.surface}", textColor: "{colors.ink}", borderColor: "{colors.danger}",  typography: body-sm, rounded: md, padding: "{spacing.md}", boxShadow: "0 8px 24px rgba(17, 24, 39, 0.12)" }
+  toast-info:    { backgroundColor: "{colors.surface}", textColor: "{colors.ink}", borderColor: "{colors.info}",    typography: body-sm, rounded: md, padding: "{spacing.md}", boxShadow: "0 8px 24px rgba(17, 24, 39, 0.12)" }
+
+  dialog:
+    backgroundColor: "{colors.surface-elevated}"
+    borderColor: "{colors.hairline}"
+    rounded: xl
+    padding: "{spacing.xl}"
+    boxShadow: "0 8px 24px rgba(17, 24, 39, 0.12)"
+  modal-surface:
+    backgroundColor: "{colors.surface-elevated}"
+    borderColor: "{colors.hairline}"
+    rounded: lg
+    padding: "{spacing.xl}"
+    boxShadow: "0 8px 24px rgba(17, 24, 39, 0.12)"
+  popover-surface:
+    backgroundColor: "{colors.surface-elevated}"
+    borderColor: "{colors.hairline}"
+    rounded: md
+    padding: "{spacing.sm}"
+    boxShadow: "0 2px 8px rgba(17, 24, 39, 0.08)"
+  dropdown-surface:
+    backgroundColor: "{colors.surface-elevated}"
+    borderColor: "{colors.hairline}"
+    rounded: md
+    padding: "{spacing.xs}"
+    boxShadow: "0 2px 8px rgba(17, 24, 39, 0.08)"
 ---
 
 ## Overview
 
-Synapse UI is an operational product surface. It should feel precise, calm, and dense enough for repeated professional use. Prefer structured layouts, restrained visual emphasis, clear status hierarchy, and compact controls over marketing-style composition.
+Synapse is an operational SaaS dashboard. The surface is calm, dense, and built for repeated professional use across long working sessions. Tables, filters, detail panels, and toolbars are the dominant patterns; the visual system supports them by suppressing decoration and reserving emphasis (color, weight, contrast) for active state and meaningful data. This contract is the canonical entry point for AI-assisted UI work — every generated component must resolve its visual properties to a token defined in the YAML frontmatter above, never to an inline hex, ad-hoc px value, or raw CSS pseudo-state.
 
-Tokens in the frontmatter are synced from `synapse-workspace/lib/tailwind/theme` via `synapse-design-md sync`. Edit `scripts/semantic-aliases.json` and re-run the command to retune; do not hand-edit the frontmatter.
+Tokens in the frontmatter are synced from `synapse-workspace/lib/tailwind/theme` via `synapse-design-md sync` — edit `scripts/semantic-aliases.json` and re-run the command to retune; do not hand-edit token values directly. The extended slots that are not part of the upstream tailwind theme (state variants, semantic-subtle pairs, focus ring, mono typography, sizes namespace) are maintained in this file.
+
+> Source pages: (placeholder — populate after first authenticated crawl of the Synapse product surface)
 
 ## Colors
 
-Use neutral surfaces for most layout structure and reserve accent color for primary actions, active navigation, selected states, and important links. Status colors should communicate state only; do not use success, warning, or danger as decorative brand colors.
+Color is grouped by role. Each role has a fixed token; do not mix groups when resolving a property.
 
-Avoid raw hex values in implementation code. If a new color is necessary, add it here with a semantic name and update the evaluator thresholds.
+**Brand & Action**
+- **Accent** (`colors.accent`): primary actions, active nav, selected row indicator. The only chromatic emphasis in the system.
+- **Accent Hover** (`colors.accent-hover`): hovered state of primary buttons and accent surfaces.
+- **Accent Pressed** (`colors.accent-pressed`): the pressed/active step under accent.
+- **Accent Focus Ring** (`colors.accent-focus-ring`): light-blue ring drawn around focused interactive elements via the focus-ring shadow.
+- **On Accent** (`colors.on-accent`): text/icon color used on top of accent fills.
+
+**Surface**
+- **Surface** (`colors.surface`): default page and panel background.
+- **Surface Subtle** (`colors.surface-subtle`): one-step elevation downward — used for table headers, side nav, empty states.
+- **Surface Elevated** (`colors.surface-elevated`): the same value as Surface; elevation is communicated by hairline border and shadow, not tonal shift.
+
+**Text**
+- **Ink** (`colors.ink`): primary text, headings, table cell values.
+- **Ink Muted** (`colors.ink-muted`): secondary text, table headers, captions, inactive nav items.
+- **Ink Subtle** (`colors.ink-subtle`): tertiary text — placeholders, helper text, separators that need a label.
+
+**Border**
+- **Hairline** (`colors.hairline`): default 1px borders on cards, panels, tables, inputs.
+- **Hairline Strong** (`colors.hairline-strong`): hover/raised border state for inputs and secondary buttons.
+
+**Semantic**
+- **Success** / **Success Subtle** — completed states, healthy indicators.
+- **Warning** / **Warning Subtle** — degraded, attention-needed, throttled.
+- **Danger** / **Danger Subtle** — failed, destructive confirmation, errored runs.
+- **Info** / **Info Subtle** — neutral notice; deliberately equal to accent so info pills read as system messages.
+
+Each semantic family has a strong foreground and a subtle background. Strong is used for icons, borders, and pill text; subtle is the pill fill. Do not introduce other shades.
+
+**State**
+- **Selected Bg** (`colors.selected-bg`): table row, nav item, filter chip in active state.
+- **Hover Bg** (`colors.hover-bg`): hovered rows, ghost buttons, nav items.
+- **Disabled Bg** / **Disabled Fg**: paired fill and label for disabled controls.
+
+**Overlay**
+- **Overlay Scrim** — `rgba(17, 24, 39, 0.4)` — backdrop for modal and drawer surfaces. Documented in prose because alpha colors are not part of the lint-enforced palette; use this literal CSS string at call sites.
 
 ## Typography
 
-Use `headline-lg` only for page-level titles. Use `headline-md` for major content regions, `title-sm` for cards and table sections, `body-md` for dense product copy, and `label-sm` for metadata, filters, badges, and field labels.
+**Font Family**
+- Sans: `"Pretendard Variable", ui-sans-serif, system-ui, sans-serif` — all UI text.
+- Mono: `ui-monospace, SF Mono, Menlo, monospace` — IDs, tokens, tabular numeric cells.
 
-Text should fit inside controls without viewport-scaled font sizes. Use the letter-spacing values from the synced typography scale; do not override them per element.
+**Hierarchy**
+
+| Token | Size | Weight | Line Height | Letter Spacing | Use |
+| --- | --- | --- | --- | --- | --- |
+| `headline-lg` | 30px | 650 | 36px | -0.02em | Page title, empty-state headings |
+| `headline-md` | 24px | 650 | 32px | -0.019em | Section heading inside a page |
+| `title-sm` | 16px | 600 | 24px | -0.011em | Card title, modal title, detail-panel header |
+| `body-md` | 14px | 400 | 20px | -0.006em | Default body, form input value |
+| `body-sm` | 13px | 400 | 18px | -0.005em | Table cell, dense form, breadcrumb, tab label |
+| `label-sm` | 12px | 600 | 16px | 0em | Field labels, filter chip, status pill |
+| `eyebrow` | 11px | 600 | 14px | 0.4px | Table header cell, badge-meta, section eyebrow (uppercase) |
+| `button` | 13px | 600 | 16px | 0em | All button labels |
+| `mono` | 13px | 400 | 18px | 0em | IDs, hashes, tabular numeric cells |
+
+**Principles**
+- Compact sizes are intentional: tables and forms are the work surface, and oversized type pushes useful data below the fold.
+- Numeric columns must use `mono` so digit widths align.
+- `eyebrow` is the only uppercase style; everything else uses sentence case.
+- Sizes, line-heights, and letter-spacing values for the sans scale are synced from `synapse-workspace`. Do not override per-element; if a layout demands a missing step, propose a new token rather than a one-off value.
 
 ## Layout
 
-Use compact, predictable layouts optimized for scanning. Page templates should preserve app-shell navigation, content headers, toolbar actions, filter rows, tables, and detail panels as distinct regions.
+**Spacing System**
 
-Use spacing tokens instead of arbitrary gaps. Repeated controls should keep stable dimensions so labels, icons, and loading states do not shift the layout.
+`spacing.xs` 4px · `spacing.sm` 8px · `spacing.md` 12px · `spacing.lg` 16px · `spacing.xl` 24px · `spacing.xxl` 32px. All paddings, gaps, and margins resolve to these tokens. Negative space is part of the type system: smaller controls (chips, pills, table cells) use `xs`/`sm`; structural containers (cards, panels, modals) use `lg`/`xl`.
+
+**Grid & Container**
+- App shell: fixed `240px` left navigation (`app-shell-nav`), fluid content region with `max-width: 1440px` and `padding: spacing.xl` at `lg+` breakpoints.
+- Detail panel docks at `480px` on the right edge of the content region; collapses to a modal below `md`.
+- Forms and detail content use a two-column label/value grid at `lg+`, stacking below `md`.
+
+**Whitespace Philosophy**
+Dense by default. The operational user is scanning many rows in one viewport, not reading a marketing page. Padding inside tables is `spacing.sm` vertical / `spacing.md` horizontal so that 30+ rows fit a standard 1080p viewport without resizing.
 
 ## Elevation & Depth
 
-Prefer borders, subtle background changes, and tonal separation over heavy shadows. Use shadow only for overlays such as modal, popover, dropdown, and drawer surfaces.
+Shadow is reserved for transient overlays only. Persistent surfaces (cards, panels, tables, toolbars) separate through borders and tonal shifts.
+
+| Level | Treatment | Use |
+| --- | --- | --- |
+| 0 — Flat | No border, no shadow | Page background |
+| 1 — Hairline | 1px `colors.hairline` border | Cards, panels, tables, inputs, toolbar |
+| 2 — Tonal | `colors.surface-subtle` fill + hairline | Table headers, empty states, side nav |
+| 3 — Overlay sm | `0 2px 8px rgba(17, 24, 39, 0.08)` + hairline | Popover, dropdown |
+| 4 — Overlay md | `0 8px 24px rgba(17, 24, 39, 0.12)` + scrim | Modal, drawer, toast |
+| 5 — Overlay lg | `0 16px 40px rgba(17, 24, 39, 0.16)` + scrim | Command palette, large dialog |
+| Focus | `0 0 0 2px {colors.accent-focus-ring}` | Any keyboard-focused control |
+
+Do not stack shadows on a persistent surface to imply hierarchy — use background, border, or spacing instead.
 
 ## Shapes
 
-Use small to medium radius values. Cards and panels should remain at 8px radius or less unless a captured Synapse source page proves a larger shape.
+| Token | Value | Use |
+| --- | --- | --- |
+| `rounded.xs` | 2px | Checkbox, indicator dots inside pills |
+| `rounded.sm` | 4px | Inline chips, small badges |
+| `rounded.md` | 6px | Buttons, inputs, dropdowns, popovers, toasts, error banners |
+| `rounded.lg` | 8px | Cards, modals, detail panels, empty states |
+| `rounded.pill` | 9999px | Status pills, filter chips — only |
+
+8px is the ceiling on container radius. Pill radius is reserved for compact informational tokens; never apply it to a primary action button, an input, or a card.
 
 ## Sizes
 
@@ -171,20 +467,122 @@ Avoid expressing Tailwind default scale values via arbitrary syntax (use `w-60` 
 
 ## Components
 
-Primary buttons should be visually distinct but compact. Tables should prioritize aligned columns, readable density, sort/filter affordances, selected rows, and empty/loading/error states. Forms should group related fields with clear labels and validation messages close to the failing field.
+Every interactive component below defines hover, focused, and disabled state tokens. Tables and nav items add `selected`/`active` where appropriate.
 
-Do not create route-local clones of shared product surfaces. If a pattern recurs, document it as an organism or molecule example before reuse.
+**Buttons**
+- **button-primary** — Accent fill, `on-accent` label. States: `-hover`, `-pressed`, `-focused`, `-disabled`.
+- **button-secondary** — Surface fill, hairline border, ink label. States: `-hover`, `-focused`, `-disabled`.
+- **button-ghost** — Transparent fill, ink label, no border; used inside toolbars and table rows. States: `-hover`, `-disabled`.
+- **button-danger** — Danger fill, on-accent label; for destructive confirmation only. State: `-hover`.
+
+**Inputs**
+- **input** — Hairline border, body-md text. States: `-hover`, `-focused` (accent border + focus ring), `-error` (danger border), `-disabled`.
+- **select** — Inherits input geometry; same focus and disabled handling.
+- **checkbox** — `rounded.xs`, hairline-strong border. State: `-checked` (accent fill), `-disabled`.
+
+**Tables & Lists**
+- **table-row** — Default cell row with hairline bottom border. States: `-hover` (`hover-bg`), `-selected` (`selected-bg`).
+- **table-header-cell** — `surface-subtle` fill, `eyebrow` text, uppercase, sticky.
+- **table-cell-numeric** — Right-aligned, `mono` typography for column alignment.
+
+**Navigation**
+- **app-shell-nav** — Fixed 240px left rail on `surface-subtle`.
+- **nav-item** — Default ghost row. States: `-hover`, `-active` (`selected-bg` + accent label).
+- **breadcrumb** — body-sm in `ink-muted`, separator chevron uses `ink-subtle`.
+- **tab** — Underline indicator via `borderColor` on `-active`. State: `-disabled`.
+- **toolbar** — Surface fill, hairline bottom border, hosts filter chips and button-ghosts.
+
+**Filters & Status**
+- **filter-chip** — Pill radius, hairline border. States: `-active` (`selected-bg` + accent border), `-disabled`.
+- **status-pill-{success,warning,danger,info,neutral}** — Subtle background + strong foreground from the matching semantic family. Neutral pill uses `surface-subtle` + `ink-muted` + hairline.
+- **badge-meta** — Inline eyebrow label in `ink-muted` for metadata strips (timestamps, IDs paired with mono).
+
+**Containers & Surfaces**
+- **card-default** — Surface fill, hairline border, `rounded.lg`, `spacing.lg` padding. No shadow.
+- **detail-panel** — Right-docked 480px panel; hairline left border, no shadow when docked, gains the overlay-md shadow when promoted to a modal at small breakpoints.
+- **empty-state** — `surface-subtle` block with body-md `ink-muted` text and `spacing.xxl` padding.
+- **error-banner** — `danger-subtle` fill, danger text and border.
+- **toast-{success,warning,danger,info}** — Surface fill with a 2px left border in the matching semantic color and the overlay-md shadow.
+- **modal-surface** / **popover-surface** / **dropdown-surface** — The only surfaces permitted to draw shadow.
 
 ## Do's and Don'ts
 
-Do:
-- read this file before user-facing UI changes
-- use semantic tokens for color, type, spacing, and shape
-- preserve product density and interaction states
-- update this file before introducing a new visual pattern
+**Do**
+- Reference state tokens (`-hover`, `-focused`, `-disabled`, `-selected`) instead of writing raw `:hover` / `:focus` CSS.
+- Reserve accent color for primary action, active nav, selected row, and focus ring.
+- Use `mono` typography for any identifier, hash, or numeric column where digit alignment matters.
+- Use semantic-subtle backgrounds (status pills, banners, toasts) for non-blocking signaling.
+- Respect the 32px minimum target on every interactive control; promote to 40px below `md`.
+- Display a visible 2px focus-ring shadow in `accent-focus-ring` on every keyboard-focused control.
 
-Don't:
-- use decorative gradients, oversized hero sections, or marketing cards for app workflows
-- add raw one-off colors or arbitrary font sizes in product code
-- duplicate shared UI patterns inside route-specific files
-- commit authenticated screenshots, cookies, storage state, or customer data
+**Don't**
+- Don't apply any shadow to cards, panels, tables, toolbars, or any persistent surface — borders carry hierarchy. Shadow is overlay-only.
+- Don't use `rounded.pill` on standard buttons, inputs, or containers; reserve it for status pills and filter chips.
+- Don't introduce decorative gradients, glow, spotlight, or atmospheric effects of any kind.
+- Don't use accent for non-actionable decoration (icons in a card header, dividers, illustration tint).
+- Don't generate marketing patterns (hero, pricing card, testimonial, CTA banner, customer logo strip) — Synapse has no such surfaces.
+- Don't invent new spacing, type, or radius values outside the tokens; add a new token to this file first.
+
+## Responsive Behavior
+
+**Breakpoints**
+
+| Name | Min Width |
+| --- | --- |
+| sm | 640px |
+| md | 768px |
+| lg | 1024px |
+| xl | 1280px |
+| xxl | 1536px |
+
+**Touch Targets**
+- **Min** (32px) — desktop-dense controls (table-row action buttons, toolbar ghosts).
+- **Comfortable** (40px) — default control height on `md` and below.
+- **Large** (44px) — primary action on mobile.
+
+Breakpoints, touch-target sizes, and shadow box-shadow strings live in the markdown body rather than the YAML token map — they are convention, not enforced tokens, and remain compatible with the upstream `@google/design.md` lint schema (which scopes machine tokens to colors, typography, spacing, rounded, and components).
+
+**Collapsing Strategy**
+- `app-shell-nav` collapses from 240px rail to a top hamburger sheet below `lg`.
+- Tables convert to a stacked card list below `md`: each row becomes a `card-default` with label/value pairs, primary action moved to a trailing `button-secondary`.
+- `detail-panel` shifts from right dock to a full-height modal-surface below `md`.
+- Toolbar filters collapse into a "Filters" `button-secondary` opening a popover below `md`.
+
+**Image Behavior**
+Product screenshots keep native aspect ratio (16:10 for app shots, 4:3 for cropped panels) and sit inside a `card-default`. Never letterbox with colored bars; use `surface-subtle` to fill remaining space if the aspect must be normalized.
+
+## Agent Prompt Guide
+
+**Quick Color Reference**
+- `accent` — primary action, active state, focus
+- `ink` / `ink-muted` — text on surface
+- `surface` / `surface-subtle` — background pair
+- `hairline` — every persistent border
+- `selected-bg` / `hover-bg` — row state
+- `success` / `warning` / `danger` — semantic strong + matching `-subtle`
+
+**Ready-to-use Prompts**
+- "Generate a data table with sortable columns, selectable rows, and a sticky header using `table-header-cell`, `table-row`, `table-row-hover`, `table-row-selected`, `checkbox`, and `table-cell-numeric`."
+- "Generate a filter bar inside a `toolbar` with chip-style filters (`filter-chip`, `filter-chip-active`) and a clear-all `button-ghost`."
+- "Generate an empty state for a filtered list with no results using `empty-state`, `headline-md`, body-md text in `ink-muted`, and a `button-secondary` to clear filters."
+- "Generate a detail panel that slides in from the right using `detail-panel`, `title-sm`, body-md content rows, and a sticky footer with `button-primary` + `button-secondary`."
+- "Generate a status pill matrix showing all semantic variants (`status-pill-success`, `-warning`, `-danger`, `-info`, `-neutral`) inside a `card-default` for documentation."
+
+## Iteration Guide
+
+1. Work in component-sized increments; reference components by their `components.*` token name in every prompt and diff.
+2. When a new visual pattern appears in product work, update this file before touching code.
+3. Every interactive component must ship `-hover`, `-focused`, and `-disabled` tokens; add `-selected` / `-active` / `-pressed` / `-error` where the interaction calls for it.
+4. Run `npx synapse-design-md check` against the working branch to detect off-token colors, sizes, and shadows.
+5. Token edits must pass `synapse-design-md eval` and ship with regenerated goldens in the same commit.
+6. New components register as their own token entries; never extend an existing component with a variant flag in code instead of a token.
+7. Treat the `description` block as part of the contract — if the operational atmosphere changes (dark mode, new density mode), revise the description in the same change that introduces the new tokens.
+
+## Known Gaps
+
+- Color hex values are placeholders cloned from the alpha contract; replace each with the value extracted from authenticated Synapse pages before the first stable release.
+- `Source pages` comment under Colors is empty until the first authenticated crawl run lands.
+- Dark mode is undefined; first pass is light-only because operational sessions run on managed displays.
+- Form validation visuals beyond `input-error` (helper text styling, inline error rows, multi-field error summaries) are not specified.
+- Internationalization adjustments (RTL mirroring of `app-shell-nav` and `detail-panel`, CJK line-height correction for body-sm and label-sm) are not specified.
+- Animation and transition tokens (durations, easings, motion-reduced fallbacks) are not specified; all interactions currently rely on browser defaults.

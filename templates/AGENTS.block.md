@@ -14,5 +14,11 @@ For UI changes, run:
 npx synapse-design-md check
 ```
 
-When adding new visual patterns, update `DESIGN.md` first or explain why the existing contract is insufficient.
+To visually verify token changes against the contract, regenerate the catalog:
+
+```bash
+npx synapse-design-md preview
+```
+
+When adding new visual patterns, update `DESIGN.md` first (including the state variant tokens — `-hover`, `-focused`, `-disabled`) or explain why the existing contract is insufficient.
 <!-- synapse-design-md:end -->

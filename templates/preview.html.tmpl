@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{NAME}} — DESIGN.md preview</title>
+  <style>
+    :root {
+      --page-bg: {{PAGE_BG}};
+      --page-fg: {{PAGE_FG}};
+      --panel-bg: {{PANEL_BG}};
+      --hairline: {{HAIRLINE}};
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--page-bg);
+      color: var(--page-fg);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+    .layout {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 32px 32px 96px;
+    }
+    .doc-header {
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--hairline);
+      margin-bottom: 32px;
+    }
+    .doc-title {
+      font-size: 28px;
+      font-weight: 650;
+      line-height: 1.2;
+      margin: 0 0 8px;
+      letter-spacing: -0.01em;
+    }
+    .doc-meta {
+      font-size: 12px;
+      color: #6B7280;
+      margin: 0;
+    }
+    .doc-description {
+      margin-top: 16px;
+      max-width: 720px;
+      color: #374151;
+    }
+    section {
+      margin: 48px 0;
+    }
+    h2.section-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: #6B7280;
+      margin: 0 0 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--hairline);
+    }
+    .group-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: #374151;
+      margin: 0 0 8px;
+    }
+    .swatch-group {
+      margin-bottom: 24px;
+    }
+    .swatch-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 8px;
+    }
+    .swatch {
+      border-radius: 6px;
+      padding: 12px;
+      min-height: 64px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid var(--hairline);
+    }
+    .swatch-name {
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .swatch-value {
+      font-family: ui-monospace, SF Mono, Menlo, monospace;
+      font-size: 11px;
+      opacity: 0.85;
+    }
+    .type-row {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 24px;
+      align-items: baseline;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--hairline);
+    }
+    .type-row:last-child { border-bottom: none; }
+    .type-meta code {
+      font-family: ui-monospace, SF Mono, Menlo, monospace;
+      font-size: 12px;
+      display: block;
+      color: #111827;
+    }
+    .type-spec {
+      display: block;
+      font-size: 11px;
+      color: #6B7280;
+      margin-top: 4px;
+      font-family: ui-monospace, SF Mono, Menlo, monospace;
+    }
+    .type-sample {
+      color: #111827;
+      overflow-wrap: anywhere;
+    }
+    .scale-row {
+      display: grid;
+      grid-template-columns: 96px 1fr 96px;
+      gap: 16px;
+      align-items: center;
+      padding: 6px 0;
+    }
+    .scale-row code {
+      font-family: ui-monospace, SF Mono, Menlo, monospace;
+      font-size: 12px;
+    }
+    .scale-bar {
+      height: 16px;
+      background: #2563EB;
+      border-radius: 2px;
+    }
+    .radius-box {
+      width: 48px;
+      height: 48px;
+      background: #F8FAFC;
+      border: 1px solid var(--hairline);
+    }
+    .shadow-card {
+      width: 96px;
+      height: 48px;
+      background: #FFFFFF;
+      border-radius: 6px;
+    }
+    .scale-value {
+      font-family: ui-monospace, SF Mono, Menlo, monospace;
+      font-size: 11px;
+      color: #6B7280;
+      text-align: right;
+    }
+    .component-row {
+      padding: 16px 0;
+      border-bottom: 1px solid var(--hairline);
+    }
+    .component-row:last-child { border-bottom: none; }
+    .component-name {
+      margin: 0 0 12px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .component-name code {
+      font-family: ui-monospace, SF Mono, Menlo, monospace;
+      color: #111827;
+    }
+    .state-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+    }
+    .state-cell {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .state-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: #6B7280;
+    }
+    .state-render {
+      padding: 12px;
+      background: var(--panel-bg);
+      border: 1px dashed var(--hairline);
+      border-radius: 6px;
+      min-height: 56px;
+      display: flex;
+      align-items: center;
+    }
+    .table-render {
+      padding: 16px;
+      background: var(--panel-bg);
+      border: 1px dashed var(--hairline);
+      border-radius: 6px;
+    }
+    .table-pseudo {
+      display: table;
+      width: 100%;
+      background: #FFFFFF;
+      border: 1px solid var(--hairline);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .table-tr {
+      display: table-row;
+    }
+    .container-render {
+      padding: 16px;
+      background: var(--panel-bg);
+      border: 1px dashed var(--hairline);
+      border-radius: 6px;
+    }
+    .section-note {
+      font-size: 12px;
+      color: #6B7280;
+      margin: 0 0 12px;
+      padding: 8px 12px;
+      background: #F8FAFC;
+      border-left: 2px solid #E5E7EB;
+      border-radius: 2px;
+    }
+    .doc-footer {
+      margin-top: 64px;
+      padding-top: 16px;
+      border-top: 1px solid var(--hairline);
+      font-size: 11px;
+      color: #9CA3AF;
+      font-family: ui-monospace, SF Mono, Menlo, monospace;
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <header class="doc-header">
+      <h1 class="doc-title">{{NAME}} — DESIGN.md preview</h1>
+      <p class="doc-meta">version {{VERSION}} · generated {{GENERATED_AT}}</p>
+      <p class="doc-description">{{DESCRIPTION}}</p>
+    </header>
+
+    <section>
+      <h2 class="section-title">Colors</h2>
+{{COLOR_SWATCHES}}
+    </section>
+
+    <section>
+      <h2 class="section-title">Typography</h2>
+{{TYPE_SCALE}}
+    </section>
+
+    <section>
+      <h2 class="section-title">Spacing</h2>
+{{SPACING_SCALE}}
+    </section>
+
+    <section>
+      <h2 class="section-title">Radius</h2>
+{{RADIUS_SCALE}}
+    </section>
+
+    <section>
+      <h2 class="section-title">Shadows (overlay only)</h2>
+{{SHADOW_SCALE}}
+    </section>
+
+    <section>
+      <h2 class="section-title">Components — Buttons</h2>
+{{COMPONENT_BUTTONS}}
+    </section>
+
+    <section>
+      <h2 class="section-title">Components — Inputs</h2>
+{{COMPONENT_INPUTS}}
+    </section>
+
+    <section>
+      <h2 class="section-title">Components — Tables &amp; Lists</h2>
+{{COMPONENT_TABLES}}
+    </section>
+
+    <section>
+      <h2 class="section-title">Components — Navigation</h2>
+{{COMPONENT_NAV}}
+    </section>
+
+    <section>
+      <h2 class="section-title">Components — Filters &amp; Status</h2>
+{{COMPONENT_STATUS}}
+    </section>
+
+    <section>
+      <h2 class="section-title">Components — Containers &amp; Surfaces</h2>
+{{COMPONENT_CONTAINERS}}
+    </section>
+
+    <footer class="doc-footer">
+      Generated by <code>synapse-design-md preview</code>. Light mode only — dark mode tokens are listed as a Known Gap in DESIGN.md.
+    </footer>
+  </div>
+</body>
+</html>
