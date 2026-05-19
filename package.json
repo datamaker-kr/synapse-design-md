@@ -1,0 +1,29 @@
+{
+  "name": "synapse-design-md",
+  "version": "0.1.0",
+  "description": "Synapse DESIGN.md contract installer, updater, and evaluator.",
+  "type": "module",
+  "bin": {
+    "synapse-design-md": "./bin/synapse-design-md.js"
+  },
+  "files": [
+    "bin/",
+    "scripts/",
+    "templates/",
+    "eval/",
+    "examples/",
+    "fixtures/anonymized/",
+    "golden/",
+    "README.md"
+  ],
+  "scripts": {
+    "check": "node ./bin/synapse-design-md.js check",
+    "doctor": "node ./bin/synapse-design-md.js doctor",
+    "install:local": "node ./bin/synapse-design-md.js install"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "UNLICENSED",
+  "private": true
+}

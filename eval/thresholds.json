@@ -1,0 +1,16 @@
+{
+  "overall": {
+    "pass": 85,
+    "warn": 75
+  },
+  "categories": {
+    "color": 90,
+    "typography": 85,
+    "spacing": 80,
+    "components": 85,
+    "interactionStates": 80,
+    "responsive": 85,
+    "accessibility": 90,
+    "productTone": 80
+  }
+}
