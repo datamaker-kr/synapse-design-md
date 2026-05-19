@@ -59,6 +59,7 @@ typography:
     sans: "\"Pretendard Variable\", ui-sans-serif, system-ui, sans-serif"
     mono: "ui-monospace, SF Mono, Menlo, monospace"
   scale:
+    display-lg:  { fontFamily: sans, fontSize: 36px, fontWeight: 700, lineHeight: 40px, letterSpacing: "-0.022em" }
     headline-lg: { fontFamily: sans, fontSize: 30px, fontWeight: 650, lineHeight: 36px, letterSpacing: "-0.02em" }
     headline-md: { fontFamily: sans, fontSize: 24px, fontWeight: 650, lineHeight: 32px, letterSpacing: "-0.019em" }
     title-sm:    { fontFamily: sans, fontSize: 16px, fontWeight: 600, lineHeight: 24px, letterSpacing: "-0.011em" }
@@ -403,7 +404,8 @@ Each semantic family has a strong foreground and a subtle background. Strong is 
 
 | Token | Size | Weight | Line Height | Letter Spacing | Use |
 | --- | --- | --- | --- | --- | --- |
-| `headline-lg` | 30px | 650 | 36px | -0.02em | Page title, empty-state headings |
+| `display-lg` | 36px | 700 | 40px | -0.022em | Top-level index page hero title (projects, experiments, plugins) |
+| `headline-lg` | 30px | 650 | 36px | -0.02em | Detail-page title, empty-state headings |
 | `headline-md` | 24px | 650 | 32px | -0.019em | Section heading inside a page |
 | `title-sm` | 16px | 600 | 24px | -0.011em | Card title, modal title, detail-panel header |
 | `body-md` | 14px | 400 | 20px | -0.006em | Default body, form input value |
