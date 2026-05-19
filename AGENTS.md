@@ -1,4 +1,4 @@
-<!-- synapse-design-md:start version=0.2.0 -->
+<!-- synapse-design-md:start version=0.3.0 -->
 ## Synapse Design Contract
 
 Before changing user-facing UI, read `DESIGN.md`.
