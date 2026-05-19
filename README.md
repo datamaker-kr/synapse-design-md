@@ -47,6 +47,7 @@ synapse-design-md eval --target <url-or-file>
 synapse-design-md crawl --out evidence/crawl-runs
 synapse-design-md sync [--source <path>] [--write]
 synapse-design-md inventory [--source <path>] [--write]
+synapse-design-md preview [--out preview.html]
 synapse-design-md examples list
 synapse-design-md examples show pages/dashboard
 ```
@@ -112,6 +113,12 @@ node bin/synapse-design-md.js inventory --source ../synapse-workspace --write
 
 The inventory feeds future crawl tooling — `:param` slots can be filled
 from a local lookup table (gitignored) to produce concrete URLs.
+
+## Preview
+
+`synapse-design-md preview` reads the YAML frontmatter from `DESIGN.md` in the current directory, resolves token references, and writes a single-file HTML catalog of every color, type scale, spacing/radius/shadow step, and component (with `-hover` / `-focused` / `-pressed` / `-disabled` / `-selected` / `-active` state variants rendered as static instances).
+
+Use it as a visual sanity check after editing tokens and as the anchor for golden-screenshot regression in `golden/`. The current contract is light-only; `preview-dark.html` ships once dark-mode tokens land in `DESIGN.md` (tracked in Known Gaps).
 
 ## Update Policy
 
