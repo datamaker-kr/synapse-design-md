@@ -95,6 +95,8 @@ sizes:
   formColumn: 13.75rem
   pageColumn: 21.375rem
   guideOffset: 7.5rem
+  wideCanvas: 80rem
+  contentMax: 56rem
 
 components:
   button-primary:

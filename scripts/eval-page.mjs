@@ -94,10 +94,32 @@ async function scanTarget(target, { sizeTokenValues, tailwindLookup } = {}) {
 async function loadSizeTokens() {
   try {
     const aliases = JSON.parse(await fs.readFile(fromRoot("scripts", "semantic-aliases.json"), "utf8"));
-    return new Set(Object.values(aliases.sizes || {}));
+    const out = new Set();
+    for (const value of Object.values(aliases.sizes || {})) {
+      out.add(value);
+      const px = toPx(value);
+      if (px) out.add(px);
+      const rem = toRem(value);
+      if (rem) out.add(rem);
+    }
+    return out;
   } catch {
     return new Set();
   }
+}
+
+function toPx(value) {
+  const m = String(value).match(/^(-?\d*\.?\d+)rem$/);
+  if (!m) return null;
+  const px = Number(m[1]) * 16;
+  if (!Number.isInteger(px)) return null;
+  return `${px}px`;
+}
+
+function toRem(value) {
+  const m = String(value).match(/^(-?\d+)px$/);
+  if (!m) return null;
+  return `${Number(m[1]) / 16}rem`;
 }
 
 async function loadTailwindLookup() {
@@ -133,6 +155,7 @@ function summarize(findings) {
   const byTailwindPrefix = {};
   const byFile = new Map();
   const matchCounts = new Map();
+  const unbackedMatchCounts = new Map();
   const redundantSuggestionCounts = new Map();
   let tokenBackedCount = 0;
 
@@ -146,6 +169,9 @@ function summarize(findings) {
       byTailwindPrefix[prefix] = (byTailwindPrefix[prefix] || 0) + 1;
       const key = `${prefix}\t${f.match}`;
       matchCounts.set(key, (matchCounts.get(key) || 0) + 1);
+      if (!f.tokenBacked) {
+        unbackedMatchCounts.set(key, (unbackedMatchCounts.get(key) || 0) + 1);
+      }
     } else if (f.type === "redundant-arbitrary-value" && f.suggested) {
       const key = `${f.match}\t${f.suggested}`;
       redundantSuggestionCounts.set(key, (redundantSuggestionCounts.get(key) || 0) + 1);
@@ -167,6 +193,16 @@ function summarize(findings) {
     topMatchesByPrefix[prefix].sort((a, b) => b.count - a.count);
   }
 
+  const unbackedMatchesByPrefix = {};
+  for (const [key, count] of unbackedMatchCounts.entries()) {
+    if (count < 2) continue;
+    const [prefix, match] = key.split("\t");
+    (unbackedMatchesByPrefix[prefix] ??= []).push({ match, count });
+  }
+  for (const prefix of Object.keys(unbackedMatchesByPrefix)) {
+    unbackedMatchesByPrefix[prefix].sort((a, b) => b.count - a.count);
+  }
+
   const topRedundantSuggestions = [...redundantSuggestionCounts.entries()]
     .sort((a, b) => b[1] - a[1])
     .slice(0, 30)
@@ -182,6 +218,7 @@ function summarize(findings) {
     unbackedCount: findings.length - tokenBackedCount,
     topFiles,
     topMatchesByPrefix,
+    unbackedMatchesByPrefix,
     topRedundantSuggestions
   };
 }

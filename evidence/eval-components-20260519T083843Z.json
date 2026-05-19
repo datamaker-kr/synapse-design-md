@@ -38,8 +38,8 @@
         "bg": 1,
         "border": 1
       },
-      "tokenBackedCount": 126,
-      "unbackedCount": 192,
+      "tokenBackedCount": 138,
+      "unbackedCount": 180,
       "topFiles": [
         {
           "file": "../synapse-workspace/components/project/assigned-task-list-modal/AssignedTaskListModal.client.vue",
@@ -240,6 +240,138 @@
             "match": "max-h-[50rem]",
             "count": 5
           },
+          {
+            "match": "max-h-[280px]",
+            "count": 2
+          }
+        ]
+      },
+      "unbackedMatchesByPrefix": {
+        "h": [
+          {
+            "match": "h-[42.375rem]",
+            "count": 3
+          },
+          {
+            "match": "h-[36rem]",
+            "count": 3
+          },
+          {
+            "match": "h-[14.75rem]",
+            "count": 2
+          },
+          {
+            "match": "h-[52px]",
+            "count": 2
+          },
+          {
+            "match": "h-[21.5rem]",
+            "count": 2
+          },
+          {
+            "match": "h-[3.125rem]",
+            "count": 2
+          },
+          {
+            "match": "h-[39.5rem]",
+            "count": 2
+          },
+          {
+            "match": "h-[7.75rem]",
+            "count": 2
+          }
+        ],
+        "min-h": [
+          {
+            "match": "min-h-[52px]",
+            "count": 2
+          },
+          {
+            "match": "min-h-[14.5rem]",
+            "count": 2
+          },
+          {
+            "match": "min-h-[36rem]",
+            "count": 2
+          },
+          {
+            "match": "min-h-[3.125rem]",
+            "count": 2
+          }
+        ],
+        "max-w": [
+          {
+            "match": "max-w-[calc(100%-2rem)]",
+            "count": 3
+          },
+          {
+            "match": "max-w-[32.25rem]",
+            "count": 2
+          }
+        ],
+        "min-w": [
+          {
+            "match": "min-w-[1200px]",
+            "count": 2
+          },
+          {
+            "match": "min-w-[18.5rem]",
+            "count": 2
+          },
+          {
+            "match": "min-w-[6.25rem]",
+            "count": 2
+          }
+        ],
+        "w": [
+          {
+            "match": "w-[5.125rem]",
+            "count": 2
+          },
+          {
+            "match": "w-[4.75rem]",
+            "count": 2
+          },
+          {
+            "match": "w-[10.25rem]",
+            "count": 2
+          },
+          {
+            "match": "w-[8.5rem]",
+            "count": 2
+          },
+          {
+            "match": "w-[36rem]",
+            "count": 2
+          },
+          {
+            "match": "w-[27rem]",
+            "count": 2
+          },
+          {
+            "match": "w-[calc(20rem-1px)]",
+            "count": 2
+          },
+          {
+            "match": "w-[calc(22.5rem-1px)]",
+            "count": 2
+          },
+          {
+            "match": "w-[7.75rem]",
+            "count": 2
+          }
+        ],
+        "py": [
+          {
+            "match": "py-[1.375rem]",
+            "count": 2
+          },
+          {
+            "match": "py-[2.375rem]",
+            "count": 2
+          }
+        ],
+        "max-h": [
           {
             "match": "max-h-[280px]",
             "count": 2
@@ -518,7 +650,8 @@
         "type": "tailwind-arbitrary-value",
         "file": "../synapse-workspace/components/catalog/file-browser/FileBrowserGridItem.vue",
         "line": 13,
-        "match": "max-w-[120px]"
+        "match": "max-w-[120px]",
+        "tokenBacked": true
       },
       {
         "type": "tailwind-arbitrary-value",
@@ -536,7 +669,8 @@
         "type": "tailwind-arbitrary-value",
         "file": "../synapse-workspace/components/catalog/file-browser/FileBrowserGridItem.vue",
         "line": 32,
-        "match": "max-w-[120px]"
+        "match": "max-w-[120px]",
+        "tokenBacked": true
       },
       {
         "type": "tailwind-arbitrary-value",
