@@ -18,7 +18,8 @@ Usage:
   synapse-design-md diff
   synapse-design-md doctor
   synapse-design-md eval [--target <url-or-file>]
-  synapse-design-md crawl [--out evidence/crawl-runs]
+  synapse-design-md crawl --login
+  synapse-design-md crawl [--base-url <url>] [--category <name>] [--limit <n>] [--headed] [--out <dir>]
   synapse-design-md sync [--source <path>] [--write]
   synapse-design-md inventory [--source <path>] [--write]
   synapse-design-md preview [--out preview.html]
@@ -87,9 +88,15 @@ function parseFlags(args) {
 function parseArgs(args) {
   const parsed = parseFlags(args);
   for (let index = 0; index < args.length; index += 1) {
-    if (args[index].startsWith("--") && args[index + 1] && !args[index + 1].startsWith("--")) {
-      parsed[args[index].slice(2)] = args[index + 1];
+    const token = args[index];
+    if (!token.startsWith("--")) continue;
+    const key = token.slice(2);
+    const next = args[index + 1];
+    if (next && !next.startsWith("--")) {
+      parsed[key] = next;
       index += 1;
+    } else {
+      parsed[key] = true;
     }
   }
   return parsed;
