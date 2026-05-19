@@ -20,7 +20,8 @@
     "check": "node ./bin/synapse-design-md.js check",
     "doctor": "node ./bin/synapse-design-md.js doctor",
     "install:local": "node ./bin/synapse-design-md.js install",
-    "test": "node --test scripts/test.mjs"
+    "test": "node --test scripts/test.mjs",
+    "verify:colors": "node scripts/verify-colors.mjs"
   },
   "engines": {
     "node": ">=18"
