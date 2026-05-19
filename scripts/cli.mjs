@@ -6,6 +6,7 @@ import { examples } from "./examples.mjs";
 import { evalPage } from "./eval-page.mjs";
 import { crawlSynapse } from "./crawl-synapse.mjs";
 import { syncFromSource } from "./sync-from-source.mjs";
+import { buildPagesInventory } from "./build-pages-inventory.mjs";
 
 const HELP = `synapse-design-md
 
@@ -18,6 +19,7 @@ Usage:
   synapse-design-md eval [--target <url-or-file>]
   synapse-design-md crawl [--out evidence/crawl-runs]
   synapse-design-md sync [--source <path>] [--write]
+  synapse-design-md inventory [--source <path>] [--write]
   synapse-design-md examples list
   synapse-design-md examples show <name>
 
@@ -53,6 +55,9 @@ export async function main(argv) {
       return;
     case "sync":
       await syncFromSource({ ...parseFlags(rest), ...parseArgs(rest), write: rest.includes("--write") });
+      return;
+    case "inventory":
+      await buildPagesInventory({ ...parseFlags(rest), ...parseArgs(rest), write: rest.includes("--write") });
       return;
     case "examples":
       await examples(rest);

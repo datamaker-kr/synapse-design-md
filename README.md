@@ -46,6 +46,7 @@ synapse-design-md doctor
 synapse-design-md eval --target <url-or-file>
 synapse-design-md crawl --out evidence/crawl-runs
 synapse-design-md sync [--source <path>] [--write]
+synapse-design-md inventory [--source <path>] [--write]
 synapse-design-md examples list
 synapse-design-md examples show pages/dashboard
 ```
@@ -84,6 +85,33 @@ retune the contract:
 
 The sync command never touches the markdown body — prose under
 `## Overview`, `## Colors`, etc. is hand-authored and preserved across runs.
+
+## Page Inventory
+
+`scripts/synapse-pages.json` is a categorized inventory of every route in
+`synapse-workspace/pages`, regenerated from the file tree. Categories:
+
+- `auth-public` — `definePageMeta({ skipAuth: true })`, `/auth/*`, `/token-login`, `/request-permission`
+- `index` — list views without `:param` (e.g. `/projects`, `/catalog/collections`)
+- `detail` — routes ending in `:id` (e.g. `/projects/:project_id`)
+- `settings` — `/settings/*`, `/account/*`, `*/settings/*`
+- `form` — `*/create*`, `*/modify`, `*/learning-create`
+- `dashboard` — `*/statistics/*`
+- `workspace` — sub-views inside an entity context
+
+Each entry also captures the source file path, route `params`, the `layout`
+(from `definePageMeta`), and whether the page is `.client.vue`-only.
+
+```bash
+# Preview the inventory without writing
+node bin/synapse-design-md.js inventory --source ../synapse-workspace
+
+# Persist to scripts/synapse-pages.json
+node bin/synapse-design-md.js inventory --source ../synapse-workspace --write
+```
+
+The inventory feeds future crawl tooling — `:param` slots can be filled
+from a local lookup table (gitignored) to produce concrete URLs.
 
 ## Update Policy
 

@@ -1,0 +1,1301 @@
+{
+  "generatedAt": "2026-05-19T08:22:47.811Z",
+  "source": "../synapse-workspace/pages",
+  "totals": {
+    "files": 117,
+    "byCategory": {
+      "auth-public": 8,
+      "index": 11,
+      "detail": 21,
+      "settings": 27,
+      "form": 11,
+      "dashboard": 12,
+      "workspace": 27
+    }
+  },
+  "routes": {
+    "auth-public": [
+      {
+        "route": "/auth/find-account",
+        "file": "pages/auth/find-account.vue",
+        "category": "auth-public",
+        "params": [],
+        "skipAuth": true,
+        "layout": "auth",
+        "clientOnly": false
+      },
+      {
+        "route": "/auth/login",
+        "file": "pages/auth/login.vue",
+        "category": "auth-public",
+        "params": [],
+        "skipAuth": true,
+        "layout": "auth",
+        "clientOnly": false
+      },
+      {
+        "route": "/auth/password-reset",
+        "file": "pages/auth/password-reset/index.vue",
+        "category": "auth-public",
+        "params": [],
+        "skipAuth": true,
+        "layout": "auth",
+        "clientOnly": false
+      },
+      {
+        "route": "/auth/password-reset/:uid/:token",
+        "file": "pages/auth/password-reset/[uid]/[token].vue",
+        "category": "auth-public",
+        "params": [
+          "uid",
+          "token"
+        ],
+        "skipAuth": true,
+        "layout": "auth",
+        "clientOnly": false
+      },
+      {
+        "route": "/auth/password-reset/confirm",
+        "file": "pages/auth/password-reset/confirm.vue",
+        "category": "auth-public",
+        "params": [],
+        "skipAuth": true,
+        "layout": "auth",
+        "clientOnly": false
+      },
+      {
+        "route": "/auth/sign-up",
+        "file": "pages/auth/sign-up.vue",
+        "category": "auth-public",
+        "params": [],
+        "skipAuth": true,
+        "layout": "auth",
+        "clientOnly": false
+      },
+      {
+        "route": "/request-permission",
+        "file": "pages/request-permission.vue",
+        "category": "auth-public",
+        "params": [],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      },
+      {
+        "route": "/token-login",
+        "file": "pages/token-login.vue",
+        "category": "auth-public",
+        "params": [],
+        "skipAuth": true,
+        "layout": false,
+        "clientOnly": false
+      }
+    ],
+    "index": [
+      {
+        "route": "/",
+        "file": "pages/index.vue",
+        "category": "index",
+        "params": [],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": false
+      },
+      {
+        "route": "/catalog/collections",
+        "file": "pages/catalog/collections/index.vue",
+        "category": "index",
+        "params": [],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      },
+      {
+        "route": "/data-lab",
+        "file": "pages/data-lab/index.vue",
+        "category": "index",
+        "params": [],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": false
+      },
+      {
+        "route": "/infra",
+        "file": "pages/infra/index.vue",
+        "category": "index",
+        "params": [],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": false
+      },
+      {
+        "route": "/infra/agents",
+        "file": "pages/infra/agents/index.vue",
+        "category": "index",
+        "params": [],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      },
+      {
+        "route": "/infra/storages",
+        "file": "pages/infra/storages.vue",
+        "category": "index",
+        "params": [],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      },
+      {
+        "route": "/ml",
+        "file": "pages/ml/index.vue",
+        "category": "index",
+        "params": [],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": false
+      },
+      {
+        "route": "/ml/experiments",
+        "file": "pages/ml/experiments/index.vue",
+        "category": "index",
+        "params": [],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      },
+      {
+        "route": "/ml/models",
+        "file": "pages/ml/models/index.vue",
+        "category": "index",
+        "params": [],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      },
+      {
+        "route": "/plugins",
+        "file": "pages/plugins/index.vue",
+        "category": "index",
+        "params": [],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      },
+      {
+        "route": "/projects",
+        "file": "pages/projects/index.vue",
+        "category": "index",
+        "params": [],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      }
+    ],
+    "detail": [
+      {
+        "route": "/catalog/collections/:collection_id",
+        "file": "pages/catalog/collections/[collection_id]/index.vue",
+        "category": "detail",
+        "params": [
+          "collection_id"
+        ],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": false
+      },
+      {
+        "route": "/catalog/collections/:collection_id/imports/:import_id",
+        "file": "pages/catalog/collections/[collection_id]/imports/[import_id].vue",
+        "category": "detail",
+        "params": [
+          "collection_id",
+          "import_id"
+        ],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      },
+      {
+        "route": "/data-lab/:role",
+        "file": "pages/data-lab/[role]/index.vue",
+        "category": "detail",
+        "params": [
+          "role"
+        ],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      },
+      {
+        "route": "/data-lab/:role/:project_id",
+        "file": "pages/data-lab/[role]/[project_id]/index.vue",
+        "category": "detail",
+        "params": [
+          "role",
+          "project_id"
+        ],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": false
+      },
+      {
+        "route": "/data-lab/:role/:project_id/workshop/:workshop_id",
+        "file": "pages/data-lab/[role]/[project_id]/workshop/[workshop_id]/index.vue",
+        "category": "detail",
+        "params": [
+          "role",
+          "project_id",
+          "workshop_id"
+        ],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": false
+      },
+      {
+        "route": "/data-lab/:role/:project_id/workshop/:workshop_id/guideline/:guideline_id",
+        "file": "pages/data-lab/[role]/[project_id]/workshop/[workshop_id]/guideline/[guideline_id].vue",
+        "category": "detail",
+        "params": [
+          "role",
+          "project_id",
+          "workshop_id",
+          "guideline_id"
+        ],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": false
+      },
+      {
+        "route": "/infra/agents/:agent_id/:view_type",
+        "file": "pages/infra/agents/[agent_id]/[view_type].vue",
+        "category": "detail",
+        "params": [
+          "agent_id",
+          "view_type"
+        ],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      },
+      {
+        "route": "/ml/experiments/:experiment_id",
+        "file": "pages/ml/experiments/[experiment_id]/index.vue",
+        "category": "detail",
+        "params": [
+          "experiment_id"
+        ],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": false
+      },
+      {
+        "route": "/ml/experiments/:experiment_id/learnings/:train_id/:job_id",
+        "file": "pages/ml/experiments/[experiment_id]/learnings/[train_id]/[job_id]/index.vue",
+        "category": "detail",
+        "params": [
+          "experiment_id",
+          "train_id",
+          "job_id"
+        ],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      },
+      {
+        "route": "/ml/models/:model_id",
+        "file": "pages/ml/models/[model_id]/index.vue",
+        "category": "detail",
+        "params": [
+          "model_id"
+        ],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      },
+      {
+        "route": "/plugins/:plugin_code",
+        "file": "pages/plugins/[plugin_code]/index.vue",
+        "category": "detail",
+        "params": [
+          "plugin_code"
+        ],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": false
+      },
+      {
+        "route": "/plugins/:plugin_code",
+        "file": "pages/plugins/[plugin_code].client.vue",
+        "category": "detail",
+        "params": [
+          "plugin_code"
+        ],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": true
+      },
+      {
+        "route": "/projects/:project_id",
+        "file": "pages/projects/[project_id]/index.vue",
+        "category": "detail",
+        "params": [
+          "project_id"
+        ],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": false
+      },
+      {
+        "route": "/projects/:project_id/dataset/exports/:exports_id",
+        "file": "pages/projects/[project_id]/dataset/exports/[exports_id].vue",
+        "category": "detail",
+        "params": [
+          "project_id",
+          "exports_id"
+        ],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      },
+      {
+        "route": "/projects/:project_id/task-manage/task-data/:task_id",
+        "file": "pages/projects/[project_id]/task-manage/task-data/[task_id]/index.vue",
+        "category": "detail",
+        "params": [
+          "project_id",
+          "task_id"
+        ],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      },
+      {
+        "route": "/projects/:project_id/workforce/assignments/async/:job_id",
+        "file": "pages/projects/[project_id]/workforce/assignments/async/[job_id].vue",
+        "category": "detail",
+        "params": [
+          "project_id",
+          "job_id"
+        ],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      },
+      {
+        "route": "/projects/:project_id/workforce/guides/:guide_id",
+        "file": "pages/projects/[project_id]/workforce/guides/[guide_id]/index.vue",
+        "category": "detail",
+        "params": [
+          "project_id",
+          "guide_id"
+        ],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      },
+      {
+        "route": "/projects/:project_id/workforce/workers/:worker_id",
+        "file": "pages/projects/[project_id]/workforce/workers/[worker_id].vue",
+        "category": "detail",
+        "params": [
+          "project_id",
+          "worker_id"
+        ],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": false
+      },
+      {
+        "route": "/projects/:project_id/workforce/workshops/:workshop_id",
+        "file": "pages/projects/[project_id]/workforce/workshops/[workshop_id]/index.vue",
+        "category": "detail",
+        "params": [
+          "project_id",
+          "workshop_id"
+        ],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": false
+      },
+      {
+        "route": "/projects/:project_id/workforce/workshops/:workshop_id/assignments/:category",
+        "file": "pages/projects/[project_id]/workforce/workshops/[workshop_id]/assignments/[category].vue",
+        "category": "detail",
+        "params": [
+          "project_id",
+          "workshop_id",
+          "category"
+        ],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      },
+      {
+        "route": "/projects/:project_id/workforce/workshops/:workshop_id/worker/:role",
+        "file": "pages/projects/[project_id]/workforce/workshops/[workshop_id]/worker/[role].vue",
+        "category": "detail",
+        "params": [
+          "project_id",
+          "workshop_id",
+          "role"
+        ],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": false
+      }
+    ],
+    "settings": [
+      {
+        "route": "/account",
+        "file": "pages/account/index.vue",
+        "category": "settings",
+        "params": [],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": false
+      },
+      {
+        "route": "/account/deactivate",
+        "file": "pages/account/deactivate.vue",
+        "category": "settings",
+        "params": [],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      },
+      {
+        "route": "/account/default-setting",
+        "file": "pages/account/default-setting.vue",
+        "category": "settings",
+        "params": [],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": false
+      },
+      {
+        "route": "/account/login-as-another-user",
+        "file": "pages/account/login-as-another-user.client.vue",
+        "category": "settings",
+        "params": [],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": true
+      },
+      {
+        "route": "/account/manage",
+        "file": "pages/account/manage.vue",
+        "category": "settings",
+        "params": [],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": false
+      },
+      {
+        "route": "/account/profile",
+        "file": "pages/account/profile.vue",
+        "category": "settings",
+        "params": [],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      },
+      {
+        "route": "/account/verification",
+        "file": "pages/account/verification.vue",
+        "category": "settings",
+        "params": [],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": false
+      },
+      {
+        "route": "/catalog/collections/:collection_id/settings",
+        "file": "pages/catalog/collections/[collection_id]/settings/index.vue",
+        "category": "settings",
+        "params": [
+          "collection_id"
+        ],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": false
+      },
+      {
+        "route": "/catalog/collections/:collection_id/settings/danger",
+        "file": "pages/catalog/collections/[collection_id]/settings/danger.vue",
+        "category": "settings",
+        "params": [
+          "collection_id"
+        ],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": false
+      },
+      {
+        "route": "/catalog/collections/:collection_id/settings/default",
+        "file": "pages/catalog/collections/[collection_id]/settings/default.vue",
+        "category": "settings",
+        "params": [
+          "collection_id"
+        ],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      },
+      {
+        "route": "/catalog/collections/:collection_id/settings/members",
+        "file": "pages/catalog/collections/[collection_id]/settings/members/index.vue",
+        "category": "settings",
+        "params": [
+          "collection_id"
+        ],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": false
+      },
+      {
+        "route": "/catalog/collections/:collection_id/settings/members/guests",
+        "file": "pages/catalog/collections/[collection_id]/settings/members/guests.vue",
+        "category": "settings",
+        "params": [
+          "collection_id"
+        ],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": false
+      },
+      {
+        "route": "/catalog/collections/:collection_id/settings/schema",
+        "file": "pages/catalog/collections/[collection_id]/settings/schema.vue",
+        "category": "settings",
+        "params": [
+          "collection_id"
+        ],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      },
+      {
+        "route": "/ml/experiments/:experiment_id/settings",
+        "file": "pages/ml/experiments/[experiment_id]/settings/index.vue",
+        "category": "settings",
+        "params": [
+          "experiment_id"
+        ],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": false
+      },
+      {
+        "route": "/ml/experiments/:experiment_id/settings/danger",
+        "file": "pages/ml/experiments/[experiment_id]/settings/danger.vue",
+        "category": "settings",
+        "params": [
+          "experiment_id"
+        ],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": false
+      },
+      {
+        "route": "/ml/experiments/:experiment_id/settings/default",
+        "file": "pages/ml/experiments/[experiment_id]/settings/default.vue",
+        "category": "settings",
+        "params": [
+          "experiment_id"
+        ],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      },
+      {
+        "route": "/ml/experiments/:experiment_id/settings/members",
+        "file": "pages/ml/experiments/[experiment_id]/settings/members.vue",
+        "category": "settings",
+        "params": [
+          "experiment_id"
+        ],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": false
+      },
+      {
+        "route": "/projects/:project_id/settings",
+        "file": "pages/projects/[project_id]/settings/index.vue",
+        "category": "settings",
+        "params": [
+          "project_id"
+        ],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": false
+      },
+      {
+        "route": "/projects/:project_id/settings/annotation",
+        "file": "pages/projects/[project_id]/settings/annotation.vue",
+        "category": "settings",
+        "params": [
+          "project_id"
+        ],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      },
+      {
+        "route": "/projects/:project_id/settings/danger",
+        "file": "pages/projects/[project_id]/settings/danger.vue",
+        "category": "settings",
+        "params": [
+          "project_id"
+        ],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": false
+      },
+      {
+        "route": "/projects/:project_id/settings/default",
+        "file": "pages/projects/[project_id]/settings/default.vue",
+        "category": "settings",
+        "params": [
+          "project_id"
+        ],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      },
+      {
+        "route": "/projects/:project_id/settings/members",
+        "file": "pages/projects/[project_id]/settings/members/index.vue",
+        "category": "settings",
+        "params": [
+          "project_id"
+        ],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": false
+      },
+      {
+        "route": "/projects/:project_id/settings/tags",
+        "file": "pages/projects/[project_id]/settings/tags.vue",
+        "category": "settings",
+        "params": [
+          "project_id"
+        ],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": false
+      },
+      {
+        "route": "/projects/:project_id/settings/workflow",
+        "file": "pages/projects/[project_id]/settings/workflow.vue",
+        "category": "settings",
+        "params": [
+          "project_id"
+        ],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      },
+      {
+        "route": "/settings",
+        "file": "pages/settings/index.vue",
+        "category": "settings",
+        "params": [],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": false
+      },
+      {
+        "route": "/settings/members",
+        "file": "pages/settings/members.vue",
+        "category": "settings",
+        "params": [],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": false
+      },
+      {
+        "route": "/settings/personal",
+        "file": "pages/settings/personal.vue",
+        "category": "settings",
+        "params": [],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      }
+    ],
+    "form": [
+      {
+        "route": "/catalog/collections/:collection_id/imports/create",
+        "file": "pages/catalog/collections/[collection_id]/imports/create.vue",
+        "category": "form",
+        "params": [
+          "collection_id"
+        ],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      },
+      {
+        "route": "/catalog/collections/create-collection",
+        "file": "pages/catalog/collections/create-collection.vue",
+        "category": "form",
+        "params": [],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      },
+      {
+        "route": "/ml/experiments/:experiment_id/learning-create",
+        "file": "pages/ml/experiments/[experiment_id]/learning-create.vue",
+        "category": "form",
+        "params": [
+          "experiment_id"
+        ],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      },
+      {
+        "route": "/ml/experiments/create",
+        "file": "pages/ml/experiments/create.vue",
+        "category": "form",
+        "params": [],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      },
+      {
+        "route": "/ml/models/:model_id/modify",
+        "file": "pages/ml/models/[model_id]/modify.vue",
+        "category": "form",
+        "params": [
+          "model_id"
+        ],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      },
+      {
+        "route": "/projects/:project_id/dataset/exports/create",
+        "file": "pages/projects/[project_id]/dataset/exports/create.vue",
+        "category": "form",
+        "params": [
+          "project_id"
+        ],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      },
+      {
+        "route": "/projects/:project_id/task-manage/:task_data/create",
+        "file": "pages/projects/[project_id]/task-manage/[task_data]/create.vue",
+        "category": "form",
+        "params": [
+          "project_id",
+          "task_data"
+        ],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      },
+      {
+        "route": "/projects/:project_id/workforce/guides/:guide_id/modify",
+        "file": "pages/projects/[project_id]/workforce/guides/[guide_id]/modify.vue",
+        "category": "form",
+        "params": [
+          "project_id",
+          "guide_id"
+        ],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      },
+      {
+        "route": "/projects/:project_id/workforce/guides/create",
+        "file": "pages/projects/[project_id]/workforce/guides/create.vue",
+        "category": "form",
+        "params": [
+          "project_id"
+        ],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      },
+      {
+        "route": "/projects/:project_id/workforce/workshops/create",
+        "file": "pages/projects/[project_id]/workforce/workshops/create.vue",
+        "category": "form",
+        "params": [
+          "project_id"
+        ],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      },
+      {
+        "route": "/projects/create",
+        "file": "pages/projects/create.vue",
+        "category": "form",
+        "params": [],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      }
+    ],
+    "dashboard": [
+      {
+        "route": "/data-lab/:role/:project_id/workshop/:workshop_id/statistics",
+        "file": "pages/data-lab/[role]/[project_id]/workshop/[workshop_id]/statistics/index.vue",
+        "category": "dashboard",
+        "params": [
+          "role",
+          "project_id",
+          "workshop_id"
+        ],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": false
+      },
+      {
+        "route": "/data-lab/:role/:project_id/workshop/:workshop_id/statistics/task",
+        "file": "pages/data-lab/[role]/[project_id]/workshop/[workshop_id]/statistics/task/index.vue",
+        "category": "dashboard",
+        "params": [
+          "role",
+          "project_id",
+          "workshop_id"
+        ],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": false
+      },
+      {
+        "route": "/data-lab/:role/:project_id/workshop/:workshop_id/statistics/task/:assignments",
+        "file": "pages/data-lab/[role]/[project_id]/workshop/[workshop_id]/statistics/task/[assignments].client.vue",
+        "category": "dashboard",
+        "params": [
+          "role",
+          "project_id",
+          "workshop_id",
+          "assignments"
+        ],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": true
+      },
+      {
+        "route": "/projects/:project_id/statistics",
+        "file": "pages/projects/[project_id]/statistics/index.vue",
+        "category": "dashboard",
+        "params": [
+          "project_id"
+        ],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": false
+      },
+      {
+        "route": "/projects/:project_id/statistics/classification",
+        "file": "pages/projects/[project_id]/statistics/classification.client.vue",
+        "category": "dashboard",
+        "params": [
+          "project_id"
+        ],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": true
+      },
+      {
+        "route": "/projects/:project_id/statistics/discard",
+        "file": "pages/projects/[project_id]/statistics/discard.client.vue",
+        "category": "dashboard",
+        "params": [
+          "project_id"
+        ],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": true
+      },
+      {
+        "route": "/projects/:project_id/statistics/reject",
+        "file": "pages/projects/[project_id]/statistics/reject/index.vue",
+        "category": "dashboard",
+        "params": [
+          "project_id"
+        ],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": false
+      },
+      {
+        "route": "/projects/:project_id/statistics/reject/QC",
+        "file": "pages/projects/[project_id]/statistics/reject/QC.client.vue",
+        "category": "dashboard",
+        "params": [
+          "project_id"
+        ],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": true
+      },
+      {
+        "route": "/projects/:project_id/statistics/reject/worker",
+        "file": "pages/projects/[project_id]/statistics/reject/worker.client.vue",
+        "category": "dashboard",
+        "params": [
+          "project_id"
+        ],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": true
+      },
+      {
+        "route": "/projects/:project_id/statistics/worker",
+        "file": "pages/projects/[project_id]/statistics/worker/index.vue",
+        "category": "dashboard",
+        "params": [
+          "project_id"
+        ],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": false
+      },
+      {
+        "route": "/projects/:project_id/statistics/worker/:role",
+        "file": "pages/projects/[project_id]/statistics/worker/[role]/index.vue",
+        "category": "dashboard",
+        "params": [
+          "project_id",
+          "role"
+        ],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": false
+      },
+      {
+        "route": "/projects/:project_id/statistics/worker/:role/:assignments",
+        "file": "pages/projects/[project_id]/statistics/worker/[role]/[assignments].client.vue",
+        "category": "dashboard",
+        "params": [
+          "project_id",
+          "role",
+          "assignments"
+        ],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": true
+      }
+    ],
+    "workspace": [
+      {
+        "route": "/catalog/collections/:collection_id/data-units",
+        "file": "pages/catalog/collections/[collection_id]/data-units.vue",
+        "category": "workspace",
+        "params": [
+          "collection_id"
+        ],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      },
+      {
+        "route": "/catalog/collections/:collection_id/imports",
+        "file": "pages/catalog/collections/[collection_id]/imports/index.vue",
+        "category": "workspace",
+        "params": [
+          "collection_id"
+        ],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      },
+      {
+        "route": "/catalog/collections/:collection_id/request-permission",
+        "file": "pages/catalog/collections/[collection_id]/request-permission.vue",
+        "category": "workspace",
+        "params": [
+          "collection_id"
+        ],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      },
+      {
+        "route": "/data-lab/:role/:project_id/workshop",
+        "file": "pages/data-lab/[role]/[project_id]/workshop/index.vue",
+        "category": "workspace",
+        "params": [
+          "role",
+          "project_id"
+        ],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": false
+      },
+      {
+        "route": "/data-lab/:role/:project_id/workshop/:workshop_id/assignments",
+        "file": "pages/data-lab/[role]/[project_id]/workshop/[workshop_id]/assignments/index.vue",
+        "category": "workspace",
+        "params": [
+          "role",
+          "project_id",
+          "workshop_id"
+        ],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": false
+      },
+      {
+        "route": "/data-lab/:role/:project_id/workshop/:workshop_id/assignments/discarded-tasks",
+        "file": "pages/data-lab/[role]/[project_id]/workshop/[workshop_id]/assignments/discarded-tasks/index.vue",
+        "category": "workspace",
+        "params": [
+          "role",
+          "project_id",
+          "workshop_id"
+        ],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": false
+      },
+      {
+        "route": "/data-lab/:role/:project_id/workshop/:workshop_id/assignments/tasks",
+        "file": "pages/data-lab/[role]/[project_id]/workshop/[workshop_id]/assignments/tasks/index.vue",
+        "category": "workspace",
+        "params": [
+          "role",
+          "project_id",
+          "workshop_id"
+        ],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": false
+      },
+      {
+        "route": "/data-lab/:role/:project_id/workshop/:workshop_id/guideline",
+        "file": "pages/data-lab/[role]/[project_id]/workshop/[workshop_id]/guideline/index.vue",
+        "category": "workspace",
+        "params": [
+          "role",
+          "project_id",
+          "workshop_id"
+        ],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": false
+      },
+      {
+        "route": "/ml/experiments/:experiment_id/learnings",
+        "file": "pages/ml/experiments/[experiment_id]/learnings/index.vue",
+        "category": "workspace",
+        "params": [
+          "experiment_id"
+        ],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      },
+      {
+        "route": "/ml/experiments/:experiment_id/request-permission",
+        "file": "pages/ml/experiments/[experiment_id]/request-permission.vue",
+        "category": "workspace",
+        "params": [
+          "experiment_id"
+        ],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      },
+      {
+        "route": "/plugins/:plugin_code/playground",
+        "file": "pages/plugins/[plugin_code]/playground.client.vue",
+        "category": "workspace",
+        "params": [
+          "plugin_code"
+        ],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": true
+      },
+      {
+        "route": "/plugins/:plugin_code/readme",
+        "file": "pages/plugins/[plugin_code]/readme.client.vue",
+        "category": "workspace",
+        "params": [
+          "plugin_code"
+        ],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": true
+      },
+      {
+        "route": "/projects/:project_id/dataset",
+        "file": "pages/projects/[project_id]/dataset/index.vue",
+        "category": "workspace",
+        "params": [
+          "project_id"
+        ],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": false
+      },
+      {
+        "route": "/projects/:project_id/dataset/exports",
+        "file": "pages/projects/[project_id]/dataset/exports/index.vue",
+        "category": "workspace",
+        "params": [
+          "project_id"
+        ],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      },
+      {
+        "route": "/projects/:project_id/dataset/GT",
+        "file": "pages/projects/[project_id]/dataset/GT.vue",
+        "category": "workspace",
+        "params": [
+          "project_id"
+        ],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      },
+      {
+        "route": "/projects/:project_id/request-permission",
+        "file": "pages/projects/[project_id]/request-permission.vue",
+        "category": "workspace",
+        "params": [
+          "project_id"
+        ],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      },
+      {
+        "route": "/projects/:project_id/task-manage",
+        "file": "pages/projects/[project_id]/task-manage/index.vue",
+        "category": "workspace",
+        "params": [
+          "project_id"
+        ],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": false
+      },
+      {
+        "route": "/projects/:project_id/task-manage/task-data",
+        "file": "pages/projects/[project_id]/task-manage/task-data/index.vue",
+        "category": "workspace",
+        "params": [
+          "project_id"
+        ],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      },
+      {
+        "route": "/projects/:project_id/task-manage/tasks",
+        "file": "pages/projects/[project_id]/task-manage/tasks.vue",
+        "category": "workspace",
+        "params": [
+          "project_id"
+        ],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      },
+      {
+        "route": "/projects/:project_id/workforce",
+        "file": "pages/projects/[project_id]/workforce/index.vue",
+        "category": "workspace",
+        "params": [
+          "project_id"
+        ],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": false
+      },
+      {
+        "route": "/projects/:project_id/workforce/assignments",
+        "file": "pages/projects/[project_id]/workforce/assignments/index.vue",
+        "category": "workspace",
+        "params": [
+          "project_id"
+        ],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      },
+      {
+        "route": "/projects/:project_id/workforce/guides",
+        "file": "pages/projects/[project_id]/workforce/guides/index.vue",
+        "category": "workspace",
+        "params": [
+          "project_id"
+        ],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      },
+      {
+        "route": "/projects/:project_id/workforce/QC",
+        "file": "pages/projects/[project_id]/workforce/QC.vue",
+        "category": "workspace",
+        "params": [
+          "project_id"
+        ],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": false
+      },
+      {
+        "route": "/projects/:project_id/workforce/workers",
+        "file": "pages/projects/[project_id]/workforce/workers/index.vue",
+        "category": "workspace",
+        "params": [
+          "project_id"
+        ],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": false
+      },
+      {
+        "route": "/projects/:project_id/workforce/workshops",
+        "file": "pages/projects/[project_id]/workforce/workshops/index.vue",
+        "category": "workspace",
+        "params": [
+          "project_id"
+        ],
+        "skipAuth": false,
+        "layout": false,
+        "clientOnly": false
+      },
+      {
+        "route": "/projects/:project_id/workforce/workshops/:workshop_id/assignments",
+        "file": "pages/projects/[project_id]/workforce/workshops/[workshop_id]/assignments/index.vue",
+        "category": "workspace",
+        "params": [
+          "project_id",
+          "workshop_id"
+        ],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": false
+      },
+      {
+        "route": "/projects/:project_id/workforce/workshops/:workshop_id/worker",
+        "file": "pages/projects/[project_id]/workforce/workshops/[workshop_id]/worker/index.vue",
+        "category": "workspace",
+        "params": [
+          "project_id",
+          "workshop_id"
+        ],
+        "skipAuth": false,
+        "layout": null,
+        "clientOnly": false
+      }
+    ]
+  }
+}
