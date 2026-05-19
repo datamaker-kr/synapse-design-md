@@ -1,13 +1,18 @@
 #!/usr/bin/env bash
 # synapse-design-md installer (curl-bash). macOS + Linux.
-# This script is pinned to a single release; the matching tag is recorded in
-# VERSION below. To upgrade, fetch the install.sh from a newer tag and rerun.
+#
+# The recommended one-liner — fetched from the `main` branch — auto-resolves
+# the latest published release tag at runtime, so a single command works
+# whether the user is installing for the first time or upgrading.
+#
+# Resolution order:
+#   1. $SYNAPSE_DESIGN_MD_REF env (e.g. `v0.3.0`, or `main` for bleeding edge)
+#   2. GitHub API latest release tag
+#   3. BUNDLED_VERSION below (used only if API is unreachable)
 set -euo pipefail
 
-VERSION="0.3.0"
+BUNDLED_VERSION="0.4.0"
 REPO="datamaker-kr/synapse-design-md"
-REF="${SYNAPSE_DESIGN_MD_REF:-v${VERSION}}"
-RAW_BASE="https://raw.githubusercontent.com/${REPO}/${REF}"
 
 BLOCK_START_PREFIX="<!-- synapse-design-md:start"
 BLOCK_END="<!-- synapse-design-md:end -->"
@@ -40,18 +45,47 @@ case "${1:-}" in
   --force|-f) FORCE=1 ;;
 esac
 
-# 2. Fetch templates.
+# 2. Resolve which ref (= released tag) to install from.
+if [ -n "${SYNAPSE_DESIGN_MD_REF:-}" ]; then
+  REF="${SYNAPSE_DESIGN_MD_REF}"
+  log "Using ref from \$SYNAPSE_DESIGN_MD_REF: ${REF}"
+else
+  log "Resolving latest release..."
+  LATEST_TAG="$(curl -fsSL --max-time 5 \
+    "https://api.github.com/repos/${REPO}/releases/latest" 2>/dev/null \
+    | sed -n 's/.*"tag_name": *"\([^"]*\)".*/\1/p' \
+    | head -n1)"
+  if [ -n "${LATEST_TAG}" ]; then
+    REF="${LATEST_TAG}"
+    log "Latest release: ${REF}"
+  else
+    REF="v${BUNDLED_VERSION}"
+    log "GitHub API unreachable — falling back to bundled ${REF}"
+  fi
+fi
+
+# Derive a VERSION string from the ref. For tag refs (vX.Y.Z) strip the 'v';
+# for branch refs (e.g. main) keep the name verbatim so the manifest still
+# carries an honest source identifier.
+case "${REF}" in
+  v[0-9]*) VERSION="${REF#v}" ;;
+  *)       VERSION="${REF}" ;;
+esac
+
+RAW_BASE="https://raw.githubusercontent.com/${REPO}/${REF}"
+
+# 3. Fetch templates.
 log "Fetching templates from ${REF}..."
 DESIGN_RAW="$(curl -fsSL "${RAW_BASE}/templates/DESIGN.md")" \
   || err "could not fetch ${RAW_BASE}/templates/DESIGN.md — check the tag exists."
 AGENTS_RAW="$(curl -fsSL "${RAW_BASE}/templates/AGENTS.block.md")" \
   || err "could not fetch ${RAW_BASE}/templates/AGENTS.block.md."
 
-# 3. Substitute version placeholder.
+# 4. Substitute version placeholder.
 DESIGN_CONTENT="$(printf '%s\n' "${DESIGN_RAW}" | sed "s|__PACKAGE_VERSION__|${VERSION}|g")"
 AGENTS_BLOCK="$(printf '%s\n' "${AGENTS_RAW}" | sed "s|__PACKAGE_VERSION__|${VERSION}|g")"
 
-# 4. Write DESIGN.md with hash-based safety.
+# 5. Write DESIGN.md with hash-based safety.
 NEW_DESIGN_SHA="$(printf '%s' "${DESIGN_CONTENT}" | sha256)"
 if [ -f DESIGN.md ]; then
   CURRENT_SHA="$(sha256 < DESIGN.md)"
@@ -77,7 +111,7 @@ else
   log "DESIGN.md: created"
 fi
 
-# 5. Upsert AGENTS managed block.
+# 6. Upsert AGENTS managed block.
 TMP_AGENTS="$(mktemp)"
 trap 'rm -f "${TMP_AGENTS}" "${TMP_AGENTS}.new" "${TMP_AGENTS}.block" 2>/dev/null || true' EXIT
 
@@ -139,7 +173,7 @@ else
   log "AGENTS.md: ${ACTION}"
 fi
 
-# 6. Write manifest.
+# 7. Write manifest.
 INSTALLED_AT="$(date -u +%Y-%m-%dT%H:%M:%S.000Z)"
 FINAL_DESIGN_SHA="$(sha256 < DESIGN.md)"
 cat > .synapse-design-md.json <<JSON

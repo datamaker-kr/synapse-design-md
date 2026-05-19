@@ -1,6 +1,6 @@
 {
   "name": "synapse-design-md",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Synapse DESIGN.md contract installer, updater, and evaluator.",
   "type": "module",
   "bin": {
