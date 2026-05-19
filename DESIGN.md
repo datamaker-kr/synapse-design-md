@@ -555,6 +555,77 @@ Breakpoints, touch-target sizes, and shadow box-shadow strings live in the markd
 **Image Behavior**
 Product screenshots keep native aspect ratio (16:10 for app shots, 4:3 for cropped panels) and sit inside a `card-default`. Never letterbox with colored bars; use `surface-subtle` to fill remaining space if the aspect must be normalized.
 
+## Accessibility
+
+Synapse targets **WCAG 2.2 Level AA** on body text, primary actions, and focus indicators. AAA is preferred for headline and primary text but is not enforced. Accessibility, motion, and keyboard guidance live in the markdown body rather than the YAML token map — same convention as breakpoints and touch targets, and compatible with the `@google/design.md` lint schema (which scopes machine tokens to colors, typography, spacing, rounded, and components).
+
+**Conformance Targets**
+- Text and active controls: WCAG 2.2 AA (≥ 4.5:1 for body text < 18pt regular / < 14pt bold; ≥ 3:1 for large text).
+- UI components and graphical objects: WCAG 1.4.11 Non-text Contrast ≥ 3:1 against the adjacent color when the component is the sole means of identifying state.
+- Focus indicator: WCAG 2.4.11 Focus Appearance — visible, ≥ 2px thick, ≥ 3:1 against the adjacent color.
+- Disabled controls are exempt from contrast minimums per WCAG 1.4.3 / 1.4.11.
+
+**Contrast Matrix**
+
+Ratios are computed against the documented hex values; recompute when token values change. See `scripts/contrast.mjs` (or any axe / pa11y / Lighthouse-a11y output) for evidence.
+
+| Foreground | Background | Ratio | Level | Notes |
+| --- | --- | ---: | --- | --- |
+| `ink` | `surface` | 16.08 | AAA | Primary text |
+| `ink` | `surface-subtle` | 15.65 | AAA | Primary text on subtle |
+| `ink` | `hover-bg` | 14.97 | AAA | Hovered rows / ghost buttons |
+| `ink` | `selected-bg` | 13.80 | AAA | Selected rows |
+| `ink-muted` | `surface` | 3.51 | AA Large | Use only at ≥ 14pt bold / ≥ 18pt regular |
+| `ink-muted` | `surface-subtle` | 3.42 | AA Large | Table header (`eyebrow`, uppercase, 11/600) — accepted carve-out, see Known Risks |
+| `ink-subtle` | `surface` | 2.37 | Sub-AA | Placeholder and helper text only — not for content text |
+| `on-accent` | `accent` | 5.30 | AA | `button-primary` |
+| `on-accent` | `accent-hover` | 8.05 | AAA | Hover state |
+| `on-accent` | `accent-pressed` | 12.08 | AAA | Pressed state |
+| `on-accent` | `danger` | 5.32 | AA | `button-danger` |
+| `accent` | `info-subtle` | 4.55 | AA | `button-tint`, `status-pill-info`, `nav-item-active` |
+| `accent` | `selected-bg` | 4.55 | AA | Same swatch as `info-subtle` |
+| `success` | `success-subtle` | 3.18 | AA Large | `status-pill-success` — pair status pills with an icon, see Known Risks |
+| `warning` | `warning-subtle` | 3.25 | AA Large | `status-pill-warning` — pair status pills with an icon, see Known Risks |
+| `danger` | `danger-subtle` | 4.62 | AA | `status-pill-danger`, `error-banner` |
+| `accent` | `surface` | 5.30 | AA (non-text) | Active tab underline, focused border |
+| `hairline` | `surface` | 1.36 | Sub-AA (non-text) | Decorative, never the sole state indicator — see Known Risks |
+| `hairline-strong` | `surface` | 1.66 | Sub-AA (non-text) | Same carve-out as `hairline` |
+| `accent-focus-ring` | `surface` | 2.11 | Sub-AA (non-text) | Paired with a `2px` accent border on the focused element, see Known Risks |
+| `disabled-fg` | `disabled-bg` | 2.13 | Exempt | Disabled controls (WCAG 1.4.3) |
+
+**Motion**
+
+Motion is timed in the markdown body rather than as YAML tokens (same lint-compat reason as breakpoints). Generated code should reference these names via CSS custom properties or a local design-token map.
+
+| Token | Duration | Easing | Use |
+| --- | --- | --- | --- |
+| `motion.instant` | 0ms | linear | Color, border, and background-color transitions on hover/focus |
+| `motion.fast` | 120ms | cubic-bezier(0.2, 0, 0, 1) | Button press, chip selection, tab underline |
+| `motion.standard` | 200ms | cubic-bezier(0.2, 0, 0, 1) | Popover / dropdown reveal, toast in |
+| `motion.slow` | 280ms | cubic-bezier(0.2, 0, 0, 1) | Modal, drawer, detail-panel slide |
+| `motion.exit` | 160ms | cubic-bezier(0.4, 0, 1, 1) | Overlay dismiss, toast out |
+
+**Reduced Motion**
+Honor `prefers-reduced-motion: reduce` on every transition that moves, scales, or fades. The fallback is an instant state change (`duration: 0ms`) — never a fade-only substitute, which still implies motion. Loading indicators may keep a reduced-amplitude pulse (≤ 20% opacity delta) but must not spin.
+
+**Keyboard & Focus**
+- Every interactive control must render the `2px {colors.accent-focus-ring}` shadow on `:focus-visible`, paired with a `1px` accent border on the focused element so the combined indicator meets the 3:1 non-text contrast bar even when the ring alone does not.
+- Tab order follows DOM order; do not use positive `tabindex`. Toolbar → filters → table header → table rows → detail panel → footer actions is the canonical scan order for a list page.
+- Provide a "Skip to main content" link as the first focusable element of every page; it is visually hidden until focused, then renders as a `button-secondary` pinned to the top-left of the viewport.
+- Modal, drawer, and command-palette overlays trap focus: focus moves to the first focusable element on open, cycles within the overlay, and returns to the trigger on close. `Escape` dismisses; clicking the scrim dismisses unless the overlay is a destructive confirmation.
+- Popovers and dropdowns do not trap focus — arrow keys move within the list, `Escape` closes, `Tab` closes and continues to the next page element.
+
+**Known Accessibility Risks**
+
+These are deliberate carve-outs documented as risks until the next color/token revision. Generated pages do not need to fix them but must not make them worse.
+
+1. **Status pill text** (`success`, `warning` on their `-subtle` fills) sits at 3.18 / 3.25:1 — AA-large only. `label-sm` is 12px/600, below the 14pt-bold large-text threshold. Mitigation: status pills must include a leading status icon so identity is not carried by color alone (WCAG 1.4.1).
+2. **Focus ring** (`accent-focus-ring` on `surface`) is 2.11:1. Mitigation: the focused element also gets a `1px {colors.accent}` border, lifting the combined indicator above 3:1. Do not ship the ring on its own.
+3. **Hairline borders** are 1.36 / 1.66:1 against `surface`. Mitigation: borders are never the sole state indicator — every state additionally changes background fill, text weight, or both. Where a border alone must carry meaning (e.g., active tab underline), use `colors.accent` instead.
+4. **`ink-subtle` text** (2.37:1) is reserved for placeholders, helper text, and decorative labels. Do not use it for content the user must read to act.
+
+When the upstream Synapse palette refresh lands, re-run the contrast script and tighten the rows above so the matrix closes these risks rather than carving around them.
+
 ## Agent Prompt Guide
 
 **Quick Color Reference**
@@ -589,4 +660,3 @@ Product screenshots keep native aspect ratio (16:10 for app shots, 4:3 for cropp
 - Dark mode is undefined; first pass is light-only because operational sessions run on managed displays.
 - Form validation visuals beyond `input-error` (helper text styling, inline error rows, multi-field error summaries) are not specified.
 - Internationalization adjustments (RTL mirroring of `app-shell-nav` and `detail-panel`, CJK line-height correction for body-sm and label-sm) are not specified.
-- Animation and transition tokens (durations, easings, motion-reduced fallbacks) are not specified; all interactions currently rely on browser defaults.
