@@ -22,17 +22,18 @@
     "findingCount": 244,
     "summary": {
       "byType": {
-        "tailwind-arbitrary-value": 244
+        "tailwind-arbitrary-value": 126,
+        "redundant-arbitrary-value": 118
       },
       "byTailwindPrefix": {
-        "min-w": 69,
-        "w": 118,
+        "min-w": 42,
+        "w": 31,
         "max-w": 20,
-        "h": 22,
+        "h": 19,
         "mr": 6,
         "ml": 5,
         "py": 2,
-        "min-h": 2
+        "min-h": 1
       },
       "tokenBackedCount": 65,
       "unbackedCount": 179,
@@ -85,18 +86,6 @@
             "count": 12
           },
           {
-            "match": "min-w-[10rem]",
-            "count": 11
-          },
-          {
-            "match": "min-w-[8rem]",
-            "count": 7
-          },
-          {
-            "match": "min-w-[9rem]",
-            "count": 5
-          },
-          {
             "match": "min-w-[37.5rem]",
             "count": 5
           },
@@ -111,10 +100,6 @@
           {
             "match": "min-w-[6.125rem]",
             "count": 4
-          },
-          {
-            "match": "min-w-[20rem]",
-            "count": 3
           },
           {
             "match": "min-w-[25rem]",
@@ -135,30 +120,6 @@
         ],
         "w": [
           {
-            "match": "w-[15rem]",
-            "count": 17
-          },
-          {
-            "match": "w-[9rem]",
-            "count": 17
-          },
-          {
-            "match": "w-[16rem]",
-            "count": 15
-          },
-          {
-            "match": "w-[4rem]",
-            "count": 10
-          },
-          {
-            "match": "w-[6rem]",
-            "count": 9
-          },
-          {
-            "match": "w-[10rem]",
-            "count": 6
-          },
-          {
             "match": "w-[13.75rem]",
             "count": 5
           },
@@ -175,27 +136,11 @@
             "count": 4
           },
           {
-            "match": "w-[11rem]",
-            "count": 4
-          },
-          {
-            "match": "w-[0.125rem]",
-            "count": 3
-          },
-          {
             "match": "w-[15.25rem]",
             "count": 3
           },
           {
-            "match": "w-[18rem]",
-            "count": 2
-          },
-          {
             "match": "w-[5.125rem]",
-            "count": 2
-          },
-          {
-            "match": "w-[12rem]",
             "count": 2
           },
           {
@@ -239,10 +184,6 @@
             "count": 3
           },
           {
-            "match": "h-[0.75rem]",
-            "count": 3
-          },
-          {
             "match": "h-[calc(100vh-12rem)]",
             "count": 2
           }
@@ -265,7 +206,104 @@
             "count": 2
           }
         ]
-      }
+      },
+      "topRedundantSuggestions": [
+        {
+          "match": "w-[15rem]",
+          "suggested": "w-60",
+          "count": 17
+        },
+        {
+          "match": "w-[9rem]",
+          "suggested": "w-36",
+          "count": 17
+        },
+        {
+          "match": "w-[16rem]",
+          "suggested": "w-64",
+          "count": 15
+        },
+        {
+          "match": "min-w-[10rem]",
+          "suggested": "min-w-40",
+          "count": 11
+        },
+        {
+          "match": "w-[4rem]",
+          "suggested": "w-16",
+          "count": 10
+        },
+        {
+          "match": "w-[6rem]",
+          "suggested": "w-24",
+          "count": 9
+        },
+        {
+          "match": "min-w-[8rem]",
+          "suggested": "min-w-32",
+          "count": 7
+        },
+        {
+          "match": "w-[10rem]",
+          "suggested": "w-40",
+          "count": 6
+        },
+        {
+          "match": "min-w-[9rem]",
+          "suggested": "min-w-36",
+          "count": 5
+        },
+        {
+          "match": "w-[11rem]",
+          "suggested": "w-44",
+          "count": 4
+        },
+        {
+          "match": "min-w-[20rem]",
+          "suggested": "min-w-80",
+          "count": 3
+        },
+        {
+          "match": "h-[0.75rem]",
+          "suggested": "h-3",
+          "count": 3
+        },
+        {
+          "match": "w-[0.125rem]",
+          "suggested": "w-0.5",
+          "count": 3
+        },
+        {
+          "match": "w-[18rem]",
+          "suggested": "w-72",
+          "count": 2
+        },
+        {
+          "match": "w-[12rem]",
+          "suggested": "w-48",
+          "count": 2
+        },
+        {
+          "match": "min-h-[10rem]",
+          "suggested": "min-h-40",
+          "count": 1
+        },
+        {
+          "match": "w-[3rem]",
+          "suggested": "w-12",
+          "count": 1
+        },
+        {
+          "match": "min-w-[6rem]",
+          "suggested": "min-w-24",
+          "count": 1
+        },
+        {
+          "match": "w-[5rem]",
+          "suggested": "w-20",
+          "count": 1
+        }
+      ]
     },
     "findings": [
       {
@@ -295,10 +333,12 @@
         "tokenBacked": true
       },
       {
-        "type": "tailwind-arbitrary-value",
+        "type": "redundant-arbitrary-value",
         "file": "../synapse-workspace/pages/account/login-as-another-user.client.vue",
         "line": 13,
-        "match": "w-[18rem]"
+        "match": "w-[18rem]",
+        "suggested": "w-72",
+        "tokenBacked": false
       },
       {
         "type": "tailwind-arbitrary-value",
@@ -321,10 +361,12 @@
         "tokenBacked": true
       },
       {
-        "type": "tailwind-arbitrary-value",
+        "type": "redundant-arbitrary-value",
         "file": "../synapse-workspace/pages/catalog/collections/[collection_id]/data-units.vue",
         "line": 15,
-        "match": "w-[15rem]"
+        "match": "w-[15rem]",
+        "suggested": "w-60",
+        "tokenBacked": false
       },
       {
         "type": "tailwind-arbitrary-value",
@@ -333,16 +375,20 @@
         "match": "max-w-[56rem]"
       },
       {
-        "type": "tailwind-arbitrary-value",
+        "type": "redundant-arbitrary-value",
         "file": "../synapse-workspace/pages/catalog/collections/[collection_id]/data-units.vue",
         "line": 17,
-        "match": "w-[15rem]"
+        "match": "w-[15rem]",
+        "suggested": "w-60",
+        "tokenBacked": false
       },
       {
-        "type": "tailwind-arbitrary-value",
+        "type": "redundant-arbitrary-value",
         "file": "../synapse-workspace/pages/catalog/collections/[collection_id]/data-units.vue",
         "line": 18,
-        "match": "w-[4rem]"
+        "match": "w-[4rem]",
+        "suggested": "w-16",
+        "tokenBacked": false
       },
       {
         "type": "tailwind-arbitrary-value",
@@ -351,22 +397,28 @@
         "match": "h-[calc(100vh-12rem)]"
       },
       {
-        "type": "tailwind-arbitrary-value",
+        "type": "redundant-arbitrary-value",
         "file": "../synapse-workspace/pages/catalog/collections/[collection_id]/imports/[import_id].vue",
         "line": 5,
-        "match": "min-w-[20rem]"
+        "match": "min-w-[20rem]",
+        "suggested": "min-w-80",
+        "tokenBacked": false
       },
       {
-        "type": "tailwind-arbitrary-value",
+        "type": "redundant-arbitrary-value",
         "file": "../synapse-workspace/pages/catalog/collections/[collection_id]/imports/[import_id].vue",
         "line": 146,
-        "match": "w-[16rem]"
+        "match": "w-[16rem]",
+        "suggested": "w-64",
+        "tokenBacked": false
       },
       {
-        "type": "tailwind-arbitrary-value",
+        "type": "redundant-arbitrary-value",
         "file": "../synapse-workspace/pages/catalog/collections/[collection_id]/imports/create.vue",
         "line": 7,
-        "match": "min-w-[8rem]"
+        "match": "min-w-[8rem]",
+        "suggested": "min-w-32",
+        "tokenBacked": false
       },
       {
         "type": "tailwind-arbitrary-value",
@@ -376,16 +428,20 @@
         "tokenBacked": true
       },
       {
-        "type": "tailwind-arbitrary-value",
+        "type": "redundant-arbitrary-value",
         "file": "../synapse-workspace/pages/catalog/collections/[collection_id]/imports/index.vue",
         "line": 85,
-        "match": "w-[16rem]"
+        "match": "w-[16rem]",
+        "suggested": "w-64",
+        "tokenBacked": false
       },
       {
-        "type": "tailwind-arbitrary-value",
+        "type": "redundant-arbitrary-value",
         "file": "../synapse-workspace/pages/catalog/collections/[collection_id]/imports/index.vue",
         "line": 116,
-        "match": "w-[16rem]"
+        "match": "w-[16rem]",
+        "suggested": "w-64",
+        "tokenBacked": false
       },
       {
         "type": "tailwind-arbitrary-value",
@@ -430,10 +486,12 @@
         "tokenBacked": true
       },
       {
-        "type": "tailwind-arbitrary-value",
+        "type": "redundant-arbitrary-value",
         "file": "../synapse-workspace/pages/catalog/collections/[collection_id]/settings/members/index.vue",
         "line": 24,
-        "match": "w-[15rem]"
+        "match": "w-[15rem]",
+        "suggested": "w-60",
+        "tokenBacked": false
       },
       {
         "type": "tailwind-arbitrary-value",
@@ -442,22 +500,28 @@
         "match": "max-w-[56rem]"
       },
       {
-        "type": "tailwind-arbitrary-value",
+        "type": "redundant-arbitrary-value",
         "file": "../synapse-workspace/pages/catalog/collections/[collection_id]/settings/members/index.vue",
         "line": 26,
-        "match": "w-[15rem]"
+        "match": "w-[15rem]",
+        "suggested": "w-60",
+        "tokenBacked": false
       },
       {
-        "type": "tailwind-arbitrary-value",
+        "type": "redundant-arbitrary-value",
         "file": "../synapse-workspace/pages/catalog/collections/[collection_id]/settings/members/index.vue",
         "line": 27,
-        "match": "w-[4rem]"
+        "match": "w-[4rem]",
+        "suggested": "w-16",
+        "tokenBacked": false
       },
       {
-        "type": "tailwind-arbitrary-value",
+        "type": "redundant-arbitrary-value",
         "file": "../synapse-workspace/pages/catalog/collections/create-collection.vue",
         "line": 7,
-        "match": "min-w-[8rem]"
+        "match": "min-w-[8rem]",
+        "suggested": "min-w-32",
+        "tokenBacked": false
       },
       {
         "type": "tailwind-arbitrary-value",
@@ -505,10 +569,12 @@
         "tokenBacked": true
       },
       {
-        "type": "tailwind-arbitrary-value",
+        "type": "redundant-arbitrary-value",
         "file": "../synapse-workspace/pages/data-lab/[role]/[project_id]/workshop/[workshop_id]/assignments/discarded-tasks/index.vue",
         "line": 63,
-        "match": "w-[16rem]"
+        "match": "w-[16rem]",
+        "suggested": "w-64",
+        "tokenBacked": false
       },
       {
         "type": "tailwind-arbitrary-value",
@@ -529,10 +595,12 @@
         "match": "w-[30rem]"
       },
       {
-        "type": "tailwind-arbitrary-value",
+        "type": "redundant-arbitrary-value",
         "file": "../synapse-workspace/pages/data-lab/[role]/[project_id]/workshop/[workshop_id]/assignments/tasks/index.vue",
         "line": 478,
-        "match": "w-[16rem]"
+        "match": "w-[16rem]",
+        "suggested": "w-64",
+        "tokenBacked": false
       },
       {
         "type": "tailwind-arbitrary-value",
@@ -541,16 +609,20 @@
         "match": "w-[30rem]"
       },
       {
-        "type": "tailwind-arbitrary-value",
+        "type": "redundant-arbitrary-value",
         "file": "../synapse-workspace/pages/data-lab/[role]/index.vue",
         "line": 38,
-        "match": "w-[16rem]"
+        "match": "w-[16rem]",
+        "suggested": "w-64",
+        "tokenBacked": false
       },
       {
-        "type": "tailwind-arbitrary-value",
+        "type": "redundant-arbitrary-value",
         "file": "../synapse-workspace/pages/data-lab/[role]/index.vue",
         "line": 51,
-        "match": "w-[16rem]"
+        "match": "w-[16rem]",
+        "suggested": "w-64",
+        "tokenBacked": false
       },
       {
         "type": "tailwind-arbitrary-value",
@@ -631,10 +703,12 @@
         "match": "h-[6.25rem]"
       },
       {
-        "type": "tailwind-arbitrary-value",
+        "type": "redundant-arbitrary-value",
         "file": "../synapse-workspace/pages/infra/agents/[agent_id]/[view_type].vue",
         "line": 311,
-        "match": "min-h-[10rem]"
+        "match": "min-h-[10rem]",
+        "suggested": "min-h-40",
+        "tokenBacked": false
       },
       {
         "type": "tailwind-arbitrary-value",
@@ -649,10 +723,12 @@
         "match": "py-[1.375rem]"
       },
       {
-        "type": "tailwind-arbitrary-value",
+        "type": "redundant-arbitrary-value",
         "file": "../synapse-workspace/pages/infra/agents/[agent_id]/[view_type].vue",
         "line": 402,
-        "match": "w-[3rem]"
+        "match": "w-[3rem]",
+        "suggested": "w-12",
+        "tokenBacked": false
       },
       {
         "type": "tailwind-arbitrary-value",
@@ -669,16 +745,20 @@
         "tokenBacked": true
       },
       {
-        "type": "tailwind-arbitrary-value",
+        "type": "redundant-arbitrary-value",
         "file": "../synapse-workspace/pages/infra/storages.vue",
         "line": 12,
-        "match": "w-[15rem]"
+        "match": "w-[15rem]",
+        "suggested": "w-60",
+        "tokenBacked": false
       },
       {
-        "type": "tailwind-arbitrary-value",
+        "type": "redundant-arbitrary-value",
         "file": "../synapse-workspace/pages/infra/storages.vue",
         "line": 14,
-        "match": "w-[15rem]"
+        "match": "w-[15rem]",
+        "suggested": "w-60",
+        "tokenBacked": false
       },
       {
         "type": "tailwind-arbitrary-value",
@@ -688,10 +768,12 @@
         "tokenBacked": true
       },
       {
-        "type": "tailwind-arbitrary-value",
+        "type": "redundant-arbitrary-value",
         "file": "../synapse-workspace/pages/ml/experiments/[experiment_id]/learning-create.vue",
         "line": 10,
-        "match": "min-w-[8rem]"
+        "match": "min-w-[8rem]",
+        "suggested": "min-w-32",
+        "tokenBacked": false
       },
       {
         "type": "tailwind-arbitrary-value",
@@ -714,16 +796,20 @@
         "tokenBacked": true
       },
       {
-        "type": "tailwind-arbitrary-value",
+        "type": "redundant-arbitrary-value",
         "file": "../synapse-workspace/pages/ml/experiments/[experiment_id]/learnings/index.vue",
         "line": 21,
-        "match": "min-w-[6rem]"
+        "match": "min-w-[6rem]",
+        "suggested": "min-w-24",
+        "tokenBacked": false
       },
       {
-        "type": "tailwind-arbitrary-value",
+        "type": "redundant-arbitrary-value",
         "file": "../synapse-workspace/pages/ml/experiments/[experiment_id]/learnings/index.vue",
         "line": 49,
-        "match": "min-w-[9rem]"
+        "match": "min-w-[9rem]",
+        "suggested": "min-w-36",
+        "tokenBacked": false
       },
       {
         "type": "tailwind-arbitrary-value",
@@ -732,16 +818,20 @@
         "match": "min-w-[18.75rem]"
       },
       {
-        "type": "tailwind-arbitrary-value",
+        "type": "redundant-arbitrary-value",
         "file": "../synapse-workspace/pages/ml/experiments/[experiment_id]/learnings/index.vue",
         "line": 87,
-        "match": "min-w-[10rem]"
+        "match": "min-w-[10rem]",
+        "suggested": "min-w-40",
+        "tokenBacked": false
       },
       {
-        "type": "tailwind-arbitrary-value",
+        "type": "redundant-arbitrary-value",
         "file": "../synapse-workspace/pages/ml/experiments/[experiment_id]/learnings/index.vue",
         "line": 99,
-        "match": "min-w-[10rem]"
+        "match": "min-w-[10rem]",
+        "suggested": "min-w-40",
+        "tokenBacked": false
       },
       {
         "type": "tailwind-arbitrary-value",
@@ -793,10 +883,12 @@
         "tokenBacked": true
       },
       {
-        "type": "tailwind-arbitrary-value",
+        "type": "redundant-arbitrary-value",
         "file": "../synapse-workspace/pages/ml/experiments/[experiment_id]/settings/members.vue",
         "line": 23,
-        "match": "w-[15rem]"
+        "match": "w-[15rem]",
+        "suggested": "w-60",
+        "tokenBacked": false
       },
       {
         "type": "tailwind-arbitrary-value",
@@ -805,28 +897,36 @@
         "match": "max-w-[56rem]"
       },
       {
-        "type": "tailwind-arbitrary-value",
+        "type": "redundant-arbitrary-value",
         "file": "../synapse-workspace/pages/ml/experiments/[experiment_id]/settings/members.vue",
         "line": 25,
-        "match": "w-[15rem]"
+        "match": "w-[15rem]",
+        "suggested": "w-60",
+        "tokenBacked": false
       },
       {
-        "type": "tailwind-arbitrary-value",
+        "type": "redundant-arbitrary-value",
         "file": "../synapse-workspace/pages/ml/experiments/[experiment_id]/settings/members.vue",
         "line": 26,
-        "match": "w-[4rem]"
+        "match": "w-[4rem]",
+        "suggested": "w-16",
+        "tokenBacked": false
       },
       {
-        "type": "tailwind-arbitrary-value",
+        "type": "redundant-arbitrary-value",
         "file": "../synapse-workspace/pages/ml/experiments/[experiment_id]/settings/members.vue",
         "line": 36,
-        "match": "w-[15rem]"
+        "match": "w-[15rem]",
+        "suggested": "w-60",
+        "tokenBacked": false
       },
       {
-        "type": "tailwind-arbitrary-value",
+        "type": "redundant-arbitrary-value",
         "file": "../synapse-workspace/pages/ml/experiments/create.vue",
         "line": 7,
-        "match": "min-w-[8rem]"
+        "match": "min-w-[8rem]",
+        "suggested": "min-w-32",
+        "tokenBacked": false
       },
       {
         "type": "tailwind-arbitrary-value",
@@ -878,16 +978,20 @@
         "tokenBacked": true
       },
       {
-        "type": "tailwind-arbitrary-value",
+        "type": "redundant-arbitrary-value",
         "file": "../synapse-workspace/pages/ml/models/index.vue",
         "line": 14,
-        "match": "w-[18rem]"
+        "match": "w-[18rem]",
+        "suggested": "w-72",
+        "tokenBacked": false
       },
       {
-        "type": "tailwind-arbitrary-value",
+        "type": "redundant-arbitrary-value",
         "file": "../synapse-workspace/pages/ml/models/index.vue",
         "line": 17,
-        "match": "w-[12rem]"
+        "match": "w-[12rem]",
+        "suggested": "w-48",
+        "tokenBacked": false
       },
       {
         "type": "tailwind-arbitrary-value",

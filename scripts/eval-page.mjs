@@ -6,8 +6,9 @@ export async function evalPage(options = {}) {
   const thresholds = JSON.parse(await fs.readFile(fromRoot("eval", "thresholds.json"), "utf8"));
   const target = options.target || "(not provided)";
   const sizeTokenValues = await loadSizeTokens();
+  const tailwindLookup = await loadTailwindLookup();
   const staticScan = options.target
-    ? await scanTarget(path.resolve(process.cwd(), options.target), { sizeTokenValues })
+    ? await scanTarget(path.resolve(process.cwd(), options.target), { sizeTokenValues, tailwindLookup })
     : null;
 
   const report = {
@@ -38,7 +39,7 @@ export async function evalPage(options = {}) {
   console.log(JSON.stringify(report, null, 2));
 }
 
-async function scanTarget(target, { sizeTokenValues } = {}) {
+async function scanTarget(target, { sizeTokenValues, tailwindLookup } = {}) {
   const files = await collectFiles(target);
   const findings = [];
 
@@ -66,11 +67,19 @@ async function scanTarget(target, { sizeTokenValues } = {}) {
     });
   }
 
-  if (sizeTokenValues) {
-    for (const f of findings) {
-      if (f.type !== "tailwind-arbitrary-value") continue;
-      const inner = f.match.match(/\[(.+)\]$/)?.[1];
-      if (inner && sizeTokenValues.has(inner)) f.tokenBacked = true;
+  for (const f of findings) {
+    if (f.type !== "tailwind-arbitrary-value") continue;
+    const inner = f.match.match(/\[(.+)\]$/)?.[1];
+    if (!inner) continue;
+    if (sizeTokenValues && sizeTokenValues.has(inner)) f.tokenBacked = true;
+    if (tailwindLookup) {
+      const prefix = f.match.match(/^([a-z-]+)-\[/)?.[1];
+      const cls = tailwindLookup.suggest(prefix, inner);
+      if (cls) {
+        f.type = "redundant-arbitrary-value";
+        f.suggested = cls;
+        f.tokenBacked = false;
+      }
     }
   }
 
@@ -91,11 +100,40 @@ async function loadSizeTokens() {
   }
 }
 
+async function loadTailwindLookup() {
+  try {
+    const data = JSON.parse(
+      await fs.readFile(fromRoot("scripts", "tailwind-default-scale.json"), "utf8")
+    );
+    const spacing = data.spacing || {};
+    const valueToKey = new Map();
+    for (const [key, value] of Object.entries(spacing)) {
+      valueToKey.set(value, key);
+    }
+    const sizingPrefixes = new Set([
+      "w", "h", "min-w", "min-h", "max-w", "max-h",
+      "p", "pt", "pr", "pb", "pl", "px", "py",
+      "m", "mt", "mr", "mb", "ml", "mx", "my",
+      "gap", "gap-x", "gap-y"
+    ]);
+    return {
+      suggest(prefix, value) {
+        if (!prefix || !sizingPrefixes.has(prefix)) return null;
+        const key = valueToKey.get(value);
+        return key ? `${prefix}-${key}` : null;
+      }
+    };
+  } catch {
+    return null;
+  }
+}
+
 function summarize(findings) {
   const byType = {};
   const byTailwindPrefix = {};
   const byFile = new Map();
   const matchCounts = new Map();
+  const redundantSuggestionCounts = new Map();
   let tokenBackedCount = 0;
 
   for (const f of findings) {
@@ -106,9 +144,11 @@ function summarize(findings) {
     if (f.type === "tailwind-arbitrary-value") {
       const prefix = f.match.match(/^([a-z-]+)-\[/)?.[1] || "unknown";
       byTailwindPrefix[prefix] = (byTailwindPrefix[prefix] || 0) + 1;
-
       const key = `${prefix}\t${f.match}`;
       matchCounts.set(key, (matchCounts.get(key) || 0) + 1);
+    } else if (f.type === "redundant-arbitrary-value" && f.suggested) {
+      const key = `${f.match}\t${f.suggested}`;
+      redundantSuggestionCounts.set(key, (redundantSuggestionCounts.get(key) || 0) + 1);
     }
   }
 
@@ -127,13 +167,22 @@ function summarize(findings) {
     topMatchesByPrefix[prefix].sort((a, b) => b.count - a.count);
   }
 
+  const topRedundantSuggestions = [...redundantSuggestionCounts.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 30)
+    .map(([key, count]) => {
+      const [match, suggested] = key.split("\t");
+      return { match, suggested, count };
+    });
+
   return {
     byType,
     byTailwindPrefix,
     tokenBackedCount,
     unbackedCount: findings.length - tokenBackedCount,
     topFiles,
-    topMatchesByPrefix
+    topMatchesByPrefix,
+    topRedundantSuggestions
   };
 }
 

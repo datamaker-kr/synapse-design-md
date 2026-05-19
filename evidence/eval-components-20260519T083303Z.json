@@ -22,18 +22,18 @@
     "findingCount": 318,
     "summary": {
       "byType": {
-        "tailwind-arbitrary-value": 311,
+        "tailwind-arbitrary-value": 267,
+        "redundant-arbitrary-value": 44,
         "raw-hex-color": 7
       },
       "byTailwindPrefix": {
         "min-w": 131,
-        "min-h": 15,
-        "h": 60,
+        "h": 46,
+        "min-h": 14,
         "max-w": 21,
         "max-h": 15,
-        "w": 61,
+        "w": 33,
         "py": 4,
-        "px": 1,
         "p": 1,
         "bg": 1,
         "border": 1
@@ -111,10 +111,6 @@
         ],
         "h": [
           {
-            "match": "h-[12rem]",
-            "count": 6
-          },
-          {
             "match": "h-[32px]",
             "count": 5
           },
@@ -140,14 +136,6 @@
           },
           {
             "match": "h-[21.5rem]",
-            "count": 2
-          },
-          {
-            "match": "h-[1px]",
-            "count": 2
-          },
-          {
-            "match": "h-[2.5rem]",
             "count": 2
           },
           {
@@ -201,27 +189,7 @@
         ],
         "w": [
           {
-            "match": "w-[15rem]",
-            "count": 9
-          },
-          {
-            "match": "w-[9rem]",
-            "count": 4
-          },
-          {
-            "match": "w-[13rem]",
-            "count": 3
-          },
-          {
-            "match": "w-[12rem]",
-            "count": 3
-          },
-          {
             "match": "w-[5.125rem]",
-            "count": 2
-          },
-          {
-            "match": "w-[1px]",
             "count": 2
           },
           {
@@ -242,10 +210,6 @@
           },
           {
             "match": "w-[27rem]",
-            "count": 2
-          },
-          {
-            "match": "w-[2.5rem]",
             "count": 2
           },
           {
@@ -281,7 +245,109 @@
             "count": 2
           }
         ]
-      }
+      },
+      "topRedundantSuggestions": [
+        {
+          "match": "w-[15rem]",
+          "suggested": "w-60",
+          "count": 9
+        },
+        {
+          "match": "h-[12rem]",
+          "suggested": "h-48",
+          "count": 6
+        },
+        {
+          "match": "w-[9rem]",
+          "suggested": "w-36",
+          "count": 4
+        },
+        {
+          "match": "w-[13rem]",
+          "suggested": "w-52",
+          "count": 3
+        },
+        {
+          "match": "w-[12rem]",
+          "suggested": "w-48",
+          "count": 3
+        },
+        {
+          "match": "w-[1px]",
+          "suggested": "w-px",
+          "count": 2
+        },
+        {
+          "match": "h-[1px]",
+          "suggested": "h-px",
+          "count": 2
+        },
+        {
+          "match": "h-[2.5rem]",
+          "suggested": "h-10",
+          "count": 2
+        },
+        {
+          "match": "w-[2.5rem]",
+          "suggested": "w-10",
+          "count": 2
+        },
+        {
+          "match": "min-h-[2.75rem]",
+          "suggested": "min-h-11",
+          "count": 1
+        },
+        {
+          "match": "w-[6rem]",
+          "suggested": "w-24",
+          "count": 1
+        },
+        {
+          "match": "w-[4rem]",
+          "suggested": "w-16",
+          "count": 1
+        },
+        {
+          "match": "h-[3.5rem]",
+          "suggested": "h-14",
+          "count": 1
+        },
+        {
+          "match": "w-[3.5rem]",
+          "suggested": "w-14",
+          "count": 1
+        },
+        {
+          "match": "w-[20rem]",
+          "suggested": "w-80",
+          "count": 1
+        },
+        {
+          "match": "h-[16rem]",
+          "suggested": "h-64",
+          "count": 1
+        },
+        {
+          "match": "px-[1px]",
+          "suggested": "px-px",
+          "count": 1
+        },
+        {
+          "match": "h-[10rem]",
+          "suggested": "h-40",
+          "count": 1
+        },
+        {
+          "match": "w-[10rem]",
+          "suggested": "w-40",
+          "count": 1
+        },
+        {
+          "match": "h-[1.25rem]",
+          "suggested": "h-5",
+          "count": 1
+        }
+      ]
     },
     "findings": [
       {
@@ -292,10 +358,12 @@
         "tokenBacked": true
       },
       {
-        "type": "tailwind-arbitrary-value",
+        "type": "redundant-arbitrary-value",
         "file": "../synapse-workspace/components/account/assigned-email-list/AssignedEmailList.vue",
         "line": 33,
-        "match": "min-h-[2.75rem]"
+        "match": "min-h-[2.75rem]",
+        "suggested": "min-h-11",
+        "tokenBacked": false
       },
       {
         "type": "tailwind-arbitrary-value",
@@ -601,10 +669,12 @@
         "match": "h-[44px]"
       },
       {
-        "type": "tailwind-arbitrary-value",
+        "type": "redundant-arbitrary-value",
         "file": "../synapse-workspace/components/machine-learning/dataset-composition-ratio-card/DatasetCompositionRatioCard.vue",
         "line": 19,
-        "match": "w-[1px]"
+        "match": "w-[1px]",
+        "suggested": "w-px",
+        "tokenBacked": false
       },
       {
         "type": "tailwind-arbitrary-value",
@@ -677,16 +747,20 @@
         "tokenBacked": true
       },
       {
-        "type": "tailwind-arbitrary-value",
+        "type": "redundant-arbitrary-value",
         "file": "../synapse-workspace/components/machine-learning/learning-best-result-content/LearningBestResultContent.vue",
         "line": 35,
-        "match": "h-[12rem]"
+        "match": "h-[12rem]",
+        "suggested": "h-48",
+        "tokenBacked": false
       },
       {
-        "type": "tailwind-arbitrary-value",
+        "type": "redundant-arbitrary-value",
         "file": "../synapse-workspace/components/machine-learning/learning-best-result-content/LearningBestResultContent.vue",
         "line": 54,
-        "match": "h-[12rem]"
+        "match": "h-[12rem]",
+        "suggested": "h-48",
+        "tokenBacked": false
       },
       {
         "type": "tailwind-arbitrary-value",
@@ -709,16 +783,20 @@
         "match": "min-h-[14.5rem]"
       },
       {
-        "type": "tailwind-arbitrary-value",
+        "type": "redundant-arbitrary-value",
         "file": "../synapse-workspace/components/machine-learning/learning-overview-content/LearningOverviewContent.vue",
         "line": 88,
-        "match": "h-[12rem]"
+        "match": "h-[12rem]",
+        "suggested": "h-48",
+        "tokenBacked": false
       },
       {
-        "type": "tailwind-arbitrary-value",
+        "type": "redundant-arbitrary-value",
         "file": "../synapse-workspace/components/machine-learning/learning-overview-content/LearningOverviewContent.vue",
         "line": 98,
-        "match": "h-[12rem]"
+        "match": "h-[12rem]",
+        "suggested": "h-48",
+        "tokenBacked": false
       },
       {
         "type": "tailwind-arbitrary-value",
@@ -740,16 +818,20 @@
         "match": "h-[27.5rem]"
       },
       {
-        "type": "tailwind-arbitrary-value",
+        "type": "redundant-arbitrary-value",
         "file": "../synapse-workspace/components/machine-learning/learning-trial-item-modal/LearningTrialItemModal.client.vue",
         "line": 66,
-        "match": "h-[12rem]"
+        "match": "h-[12rem]",
+        "suggested": "h-48",
+        "tokenBacked": false
       },
       {
-        "type": "tailwind-arbitrary-value",
+        "type": "redundant-arbitrary-value",
         "file": "../synapse-workspace/components/machine-learning/learning-trial-item-modal/LearningTrialItemModal.client.vue",
         "line": 85,
-        "match": "h-[12rem]"
+        "match": "h-[12rem]",
+        "suggested": "h-48",
+        "tokenBacked": false
       },
       {
         "type": "tailwind-arbitrary-value",
@@ -869,28 +951,36 @@
         "match": "w-[10.25rem]"
       },
       {
-        "type": "tailwind-arbitrary-value",
+        "type": "redundant-arbitrary-value",
         "file": "../synapse-workspace/components/project/assigned-task-list-modal/AssignedTaskListModal.client.vue",
         "line": 136,
-        "match": "w-[9rem]"
+        "match": "w-[9rem]",
+        "suggested": "w-36",
+        "tokenBacked": false
       },
       {
-        "type": "tailwind-arbitrary-value",
+        "type": "redundant-arbitrary-value",
         "file": "../synapse-workspace/components/project/assigned-task-list-modal/AssignedTaskListModal.client.vue",
         "line": 141,
-        "match": "w-[6rem]"
+        "match": "w-[6rem]",
+        "suggested": "w-24",
+        "tokenBacked": false
       },
       {
-        "type": "tailwind-arbitrary-value",
+        "type": "redundant-arbitrary-value",
         "file": "../synapse-workspace/components/project/assigned-task-list-modal/AssignedTaskListModal.client.vue",
         "line": 146,
-        "match": "w-[13rem]"
+        "match": "w-[13rem]",
+        "suggested": "w-52",
+        "tokenBacked": false
       },
       {
-        "type": "tailwind-arbitrary-value",
+        "type": "redundant-arbitrary-value",
         "file": "../synapse-workspace/components/project/assigned-task-list-modal/AssignedTaskListModal.client.vue",
         "line": 151,
-        "match": "w-[13rem]"
+        "match": "w-[13rem]",
+        "suggested": "w-52",
+        "tokenBacked": false
       },
       {
         "type": "tailwind-arbitrary-value",
@@ -905,16 +995,20 @@
         "match": "w-[8.5rem]"
       },
       {
-        "type": "tailwind-arbitrary-value",
+        "type": "redundant-arbitrary-value",
         "file": "../synapse-workspace/components/project/assigned-task-list-modal/AssignedTaskListModal.client.vue",
         "line": 166,
-        "match": "w-[13rem]"
+        "match": "w-[13rem]",
+        "suggested": "w-52",
+        "tokenBacked": false
       },
       {
-        "type": "tailwind-arbitrary-value",
+        "type": "redundant-arbitrary-value",
         "file": "../synapse-workspace/components/project/assigned-task-list-modal/AssignedTaskListModal.client.vue",
         "line": 171,
-        "match": "w-[4rem]"
+        "match": "w-[4rem]",
+        "suggested": "w-16",
+        "tokenBacked": false
       },
       {
         "type": "tailwind-arbitrary-value",
