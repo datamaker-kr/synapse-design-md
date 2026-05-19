@@ -133,13 +133,17 @@ Do **not** commit:
 ## Releasing
 
 1. Bump `package.json#version`.
-2. Update the hardcoded `VERSION="X.Y.Z"` at the top of `install.sh` so the curl one-liner is self-consistent.
-3. `node bin/synapse-design-md.js install --force` to refresh `DESIGN.md` and `.synapse-design-md.json` with the new version stamp.
+2. Update `BUNDLED_VERSION="X.Y.Z"` at the top of `install.sh` to the same value. This constant is only used as a fallback when the GitHub API is unreachable, but keeping it aligned with the actual release prevents stale-fallback installs in restrictive networks.
+3. `node bin/synapse-design-md.js install --force` to refresh `DESIGN.md`, `AGENTS.md` (managed block), and `.synapse-design-md.json` with the new version stamp.
 4. `npm test && node bin/synapse-design-md.js check --strict`.
-5. Tag (`git tag -a vX.Y.Z -m ...`) and push; cut a GitHub release. Consumers pin to the tag via the README curl one-liner:
+5. Open a release PR, merge.
+6. Tag and push:
 
    ```bash
-   curl -fsSL https://raw.githubusercontent.com/datamaker-kr/synapse-design-md/vX.Y.Z/install.sh | bash
+   git tag -a vX.Y.Z -m "synapse-design-md X.Y.Z" <merge-sha>
+   git push origin vX.Y.Z
    ```
 
-This package is not published to npm by design — the contract distributes through tagged refs only.
+7. Create a GitHub release for the tag (`gh release create vX.Y.Z`). The moment the release is published, every consumer running the canonical one-liner (`raw.githubusercontent.com/.../main/install.sh`) picks up the new version on their next install — they do not need to bump anything.
+
+This package is not published to npm by design — the contract distributes through tagged GitHub releases only. Consumers who need reproducible builds pin via `SYNAPSE_DESIGN_MD_REF=vX.Y.Z` or by curling from a versioned ref directly.

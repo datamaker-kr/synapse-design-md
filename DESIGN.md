@@ -18,7 +18,7 @@ description: |
   values are synced from synapse-workspace/lib/tailwind/theme via
   `synapse-design-md sync`.
 x-synapse-design-md:
-  packageVersion: 0.3.0
+  packageVersion: 0.4.0
   source: synapse-design-md
   syncedFrom: synapse-workspace/lib/tailwind/theme
 
