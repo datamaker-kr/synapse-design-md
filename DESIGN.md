@@ -59,6 +59,7 @@ rounded:
   sm: 4px
   md: 6px
   lg: 8px
+  xl: 12px
 
 sizes:
   actionMin: 6.125rem
@@ -98,6 +99,36 @@ components:
     rounded: "{rounded.md}"
     paddingInline: "{spacing.md}"
     paddingBlock: "{spacing.sm}"
+  badge:
+    backgroundColor: "#F7F9FB"
+    textColor: "#5D6C83"
+    rounded: "{rounded.md}"
+    paddingInline: "{spacing.sm}"
+    paddingBlock: 2px
+    typography: "{typography.label-sm}"
+  alert:
+    backgroundColor: "#F7F9FB"
+    textColor: "#5D6C83"
+    paddingInline: 48px
+    paddingBlock: "{spacing.md}"
+  dialog:
+    backgroundColor: "{colors.surface}"
+    rounded: "{rounded.xl}"
+    maxWidth: 45rem
+    maxHeight: 90dvh
+    shadow: lg
+  table-row:
+    height: 64px
+    borderColor: "#EBF0F5"
+    selectedBackgroundColor: "#F5F9FF"
+    errorBackgroundColor: "#FEF6F6"
+    disabledBackgroundColor: "#F7F9FB"
+  table-header-row:
+    backgroundColor: "{colors.surfaceSubtle}"
+    height: 40px
+    borderColor: "#D6DEE8"
+    textColor: "#5D6C83"
+    typography: "{typography.label-sm}"
 ---
 
 ## Overview

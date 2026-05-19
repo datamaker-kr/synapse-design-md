@@ -129,7 +129,7 @@ function buildFrontmatter({ theme, aliases }) {
   }
   lines.push("");
   lines.push("rounded:");
-  for (const [key, value] of Object.entries({ sm: "4px", md: "6px", lg: "8px" })) {
+  for (const [key, value] of Object.entries({ sm: "4px", md: "6px", lg: "8px", xl: "12px" })) {
     lines.push(`  ${key}: ${value}`);
   }
   if (aliases.sizes) {
