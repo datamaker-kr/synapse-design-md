@@ -1,7 +1,7 @@
 {
-  "version": "0.1.0",
+  "version": "0.2.0",
   "source": "synapse-design-md",
-  "designMdSha256": "10d26e3f747488c187330fa725a188cf941575c7900becf8cfef7bb5974d9fc1",
-  "agentsBlockVersion": "0.1.0",
-  "installedAt": "2026-05-19T11:56:05.895Z"
+  "designMdSha256": "68a8e075e35406c9cf0bc15604dcf52d08c29448a19f553b91fa90b62e8b60fb",
+  "agentsBlockVersion": "0.2.0",
+  "installedAt": "2026-05-19T12:18:19.509Z"
 }
