@@ -1,86 +1,81 @@
 # synapse-design-md
 
-Drop the Synapse design contract into any repository so your team — and the AI agents that work in that repo — share a single source of truth for color, typography, spacing, components, and accessibility.
+Synapse 디자인 계약(`DESIGN.md`)을 어느 레포에든 떨어뜨려, 팀과 그 레포에서 일하는 AI 에이전트가 색상·타이포·간격·컴포넌트·접근성에 대해 같은 정본을 보게 합니다.
 
-## What lands in your repo
+대상 환경: **macOS / Linux**. Windows에서 쓰려면 WSL을 권장합니다.
 
-Three files at the repo root, nothing else:
+## 설치
 
-| File | Purpose |
+레포 루트(`.git/`가 있는 디렉터리)에서 한 줄:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/datamaker-kr/synapse-design-md/v0.3.0/install.sh | bash
+```
+
+스크립트는 다음 세 파일을 씁니다:
+
+| 파일 | 역할 |
 | --- | --- |
-| `DESIGN.md` | The full token contract + design prose. Read it directly, or point your AI coder at it. |
-| `AGENTS.md` (managed block) | Instructs Claude Code / Cursor / Codex to reference `DESIGN.md` whenever they generate UI. |
-| `.synapse-design-md.json` | Version stamp + integrity hash. Lets `update` know whether your `DESIGN.md` is still managed or has been hand-edited. |
+| `DESIGN.md` | 토큰 계약 + 디자인 본문. 사람이 직접 읽거나, AI 코더가 참조하는 정본. |
+| `AGENTS.md` (관리 블록) | Claude Code / Cursor / Codex 같은 AI 에이전트에게 *UI 생성 시 `DESIGN.md`를 참조하라*고 지시. |
+| `.synapse-design-md.json` | 버전 스탬프 + 해시. `update` 가 안전하게 동작하기 위한 메타데이터. |
 
-Nothing else is copied — no CLI source, no examples, no evaluation tooling, no captured screenshots.
+CLI 소스, 평가 도구, 예시, 크롤 결과 같은 내부 자산은 **들어오지 않습니다.**
 
-## Install
+다른 버전을 받으려면 URL의 태그를 바꾸면 됩니다(예: `v0.4.0`).
 
-From the repository where you want the contract:
+## 일상 사용
 
-```bash
-# After publishing to npm
-npx synapse-design-md install
+**개발자** — `DESIGN.md`는 보통의 스펙처럼 읽으면 됩니다. 모든 토큰(`colors.accent`, `typography.body-md`, `components.button-primary` 등)과 규칙이 한 파일에 정리되어 있습니다.
 
-# Or from a tagged GitHub release
-npx github:datamaker-kr/synapse-design-md#v0.1.0 install
-```
+**AI 코더** — 설치가 `AGENTS.md`에 관리 블록을 넣어두기 때문에 별도 프롬프트 엔지니어링 없이도 *"status pill 하나 만들어줘"* 같은 요청이 자동으로 `components.status-pill-success` 토큰으로 해석됩니다.
 
-The command refuses to write outside a git root. Run it once; commit the three files; you're done.
+프롬프트를 짤 때 도움이 되는 패턴:
 
-## Day-to-day
+- 토큰 이름으로 참조하기: *"`card-default` 안에 `table-header-cell` 한 줄과 `table-row` 세 줄을 그려줘."*
+- 비-자명한 디자인 결정은 `DESIGN.md` 섹션을 가리키기: *"`Known Accessibility Risks` 의 status pill 카브아웃을 따라줘."*
+- 에이전트가 토큰 밖 값을 만들면 다시 토큰으로 풀어달라고 요청 — 보통 맞는 토큰이 이미 존재합니다.
 
-**You** read `DESIGN.md` like any spec — it documents every token (e.g. `colors.accent`, `typography.body-md`, `components.button-primary`) and the rules that go with them.
+## 업데이트
 
-**Your AI coder** picks `DESIGN.md` up automatically because the install added a managed block to `AGENTS.md`. From then on, prompts like *"add a status pill"* will resolve to `components.status-pill-success` instead of inventing a one-off color. No extra prompt engineering needed.
-
-A few patterns to lean on:
-
-- Reference components by token name in your prompts: *"render a `card-default` containing a `table-header-cell` row and three `table-row` items."*
-- When a design decision is non-obvious, point at the matching section of `DESIGN.md`: *"follow the **Known Accessibility Risks** carve-out for status pills."*
-- If the agent invents an off-token value, ask it to re-resolve against `DESIGN.md` — the contract usually has a token that fits.
-
-## Update
+새 버전이 나오면 같은 한 줄을 다시 실행하면 됩니다:
 
 ```bash
-npx synapse-design-md update          # safe, non-destructive
-npx synapse-design-md update --force  # replace your DESIGN.md after manual review
+curl -fsSL https://raw.githubusercontent.com/datamaker-kr/synapse-design-md/v0.3.0/install.sh | bash
 ```
 
-The updater is conservative:
+스크립트의 안전 동작:
 
-- `DESIGN.md` is replaced only when its hash still matches what was installed. If you have local edits, the new version is written next to it as `DESIGN.md.synapse-vX.Y.Z.new` so you can diff before overwriting.
-- The `AGENTS.md` managed block (between `<!-- synapse-design-md:start -->` and `<!-- synapse-design-md:end -->`) is replaced in place. Hand-edits outside the block are preserved.
-- `--force` skips the hash check after you have reviewed the incoming changes.
+- `DESIGN.md` 해시가 설치 당시 그대로일 때만 자동 교체합니다.
+- 로컬에서 직접 편집한 흔적이 있으면 `DESIGN.md.synapse-vX.Y.Z.new` 로 새 버전을 옆에 떨궈주고, 원본은 건드리지 않습니다. 직접 diff해서 머지하세요.
+- `AGENTS.md` 의 관리 블록(`<!-- synapse-design-md:start -->` ~ `<!-- synapse-design-md:end -->`)만 교체하고, 블록 밖 사용자 편집은 그대로 둡니다.
+- 검토 후 강제로 덮어쓰려면:
 
-## Preview
+  ```bash
+  curl -fsSL https://raw.githubusercontent.com/datamaker-kr/synapse-design-md/v0.3.0/install.sh | bash -s -- --force
+  ```
+
+## 자주 발생하는 문제
+
+- **"run this from a git repository root"** — 현재 디렉터리에 `.git/` 이 없습니다. 레포 루트로 이동해서 다시 실행하세요.
+- **`DESIGN.md.synapse-vX.Y.Z.new` 가 생겼다** — 로컬 편집과 새 버전이 공존합니다. 두 파일을 diff하고, 필요한 변경만 골라 머지한 뒤 `.new` 파일을 지우거나, `--force` 로 새 버전을 채택하세요.
+- **AI 에이전트가 `DESIGN.md`를 보고 있지 않다** — `AGENTS.md` 에 관리 블록이 아직 있는지 확인하세요. 사라졌다면 설치 한 줄을 다시 실행하면 복원됩니다.
+
+## 부가 도구 (선택)
+
+대부분의 사용자는 위의 curl 설치만 있으면 충분합니다. 다음은 필요할 때만 쓰는 보조 도구입니다.
+
+레포를 로컬에 클론한 뒤 (`Node 18+` 필요):
 
 ```bash
-npx synapse-design-md preview --out preview.html
+node ./bin/synapse-design-md.js check    # 설치된 DESIGN.md 의 형식·구조 검증
+node ./bin/synapse-design-md.js diff     # 다음 업데이트가 무엇을 바꿀지 미리 보기
+node ./bin/synapse-design-md.js doctor   # 설치 상태와 버전 진단
+node ./bin/synapse-design-md.js preview  # 모든 토큰을 시각 카탈로그(HTML)로 출력
 ```
 
-Writes a single-file HTML catalog of every color, type scale, spacing/radius step, and component (including hover / focused / pressed / disabled / selected state variants). Useful as a visual sanity check after pulling a new version, and as the anchor for golden-screenshot regression.
+전체 명령은 `--help` 로 확인할 수 있습니다.
 
-## Commands you actually use
+## 메인테이너
 
-```bash
-synapse-design-md install [--force]    # initial install
-synapse-design-md update  [--force]    # pull a new contract version
-synapse-design-md check   [--strict]   # lint the installed DESIGN.md
-synapse-design-md diff                 # what the next update would change
-synapse-design-md doctor               # report install state + version
-synapse-design-md preview [--out file] # HTML token catalog
-```
-
-If you ever want to see everything the CLI can do, `synapse-design-md --help`.
-
-## Troubleshoot
-
-- **`install` refuses to run** — make sure you're at a git repo root. The CLI will not write outside one.
-- **`update` wrote a `.synapse-vX.Y.Z.new` file** — your `DESIGN.md` has local edits. Diff the two, merge what you want, then either delete the new file or run `update --force`.
-- **`check` fails on Google design.md lint** — your `DESIGN.md` was hand-edited away from the schema. Run `diff` to see what differs from the installed template; `update --force` reverts to a clean copy.
-- **AI agent ignores the contract** — confirm `AGENTS.md` still contains the managed block (`<!-- synapse-design-md:start ... -->`). Re-run `update` if it's gone.
-
-## Contributing & internals
-
-If you maintain this package — sync, governance split, authenticated crawl, CI gates, evaluation rubric — see [`CONTRIBUTING.md`](./CONTRIBUTING.md).
+이 패키지 자체를 유지보수한다면 — sync, 거버넌스, 인증 크롤, CI 게이트, 평가 루브릭 — [`CONTRIBUTING.md`](./CONTRIBUTING.md) 를 보세요.

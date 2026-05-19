@@ -133,6 +133,13 @@ Do **not** commit:
 ## Releasing
 
 1. Bump `package.json#version`.
-2. `node bin/synapse-design-md.js install --force` to refresh `DESIGN.md` and `.synapse-design-md.json` with the new version stamp.
-3. `npm test && node bin/synapse-design-md.js check --strict`.
-4. Tag and push; the GitHub release tag is what consumers pin via `npx github:datamaker-kr/synapse-design-md#vX.Y.Z install`.
+2. Update the hardcoded `VERSION="X.Y.Z"` at the top of `install.sh` so the curl one-liner is self-consistent.
+3. `node bin/synapse-design-md.js install --force` to refresh `DESIGN.md` and `.synapse-design-md.json` with the new version stamp.
+4. `npm test && node bin/synapse-design-md.js check --strict`.
+5. Tag (`git tag -a vX.Y.Z -m ...`) and push; cut a GitHub release. Consumers pin to the tag via the README curl one-liner:
+
+   ```bash
+   curl -fsSL https://raw.githubusercontent.com/datamaker-kr/synapse-design-md/vX.Y.Z/install.sh | bash
+   ```
+
+This package is not published to npm by design — the contract distributes through tagged refs only.
