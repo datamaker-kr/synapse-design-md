@@ -1,0 +1,16 @@
+{
+  "_comment": "Drop this into your project's .synapse-design-md.json. The hook (hooks/post-edit-verify.mjs) reads `contracts.consumerFor` to decide which contract(s) to verify when a given file is edited.",
+  "contracts": {
+    "consumerFor": {
+      "src/components/Header*.{tsx,vue}": [
+        "node_modules/synapse-design-md/examples/molecules/nav-item.contract.descriptive.json",
+        "node_modules/synapse-design-md/examples/molecules/nav-item.contract.aspirational.json"
+      ],
+      "src/components/Button*.{tsx,vue}": [
+        "node_modules/synapse-design-md/examples/atoms/button-primary.contract.descriptive.json",
+        "node_modules/synapse-design-md/examples/atoms/button-primary.contract.aspirational.json"
+      ]
+    },
+    "probeFrom": "evidence/contracts/{name}/latest.probe.json"
+  }
+}

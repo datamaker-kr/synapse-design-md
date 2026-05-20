@@ -1,0 +1,106 @@
+{
+  "$schema": "../contract.schema.json",
+  "intent": "descriptive",
+  "identity": {
+    "level": "atom",
+    "name": "button-primary",
+    "summary": "What the primary action button on test.synapse.sh actually does today. Captured from the '프로젝트 생성' button on /datamaker/projects. Anatomy and composition slots annotated by hand; layout/typography/states/motion are verbatim from the live crawl."
+  },
+  "source": {
+    "status": "captured",
+    "capturedAt": "2026-05-20T03:29:53.319Z",
+    "capturedFrom": "https://test.synapse.sh/datamaker/projects",
+    "selector": "button",
+    "textFilter": "프로젝트 생성",
+    "tool": "scripts/crawl-contract.mjs"
+  },
+  "anatomy": {
+    "slots": ["label"],
+    "required": ["label"],
+    "optional": ["leading-icon", "trailing-icon"]
+  },
+  "layout": {
+    "display": "flex",
+    "direction": "row",
+    "align": "center",
+    "justify": "center",
+    "gap": null,
+    "height": { "value": 40, "unit": "px" },
+    "paddingTop":    { "value": 8, "unit": "px", "token": "spacing.sm" },
+    "paddingBottom": { "value": 8, "unit": "px", "token": "spacing.sm" },
+    "paddingLeft":   { "value": 20, "unit": "px" },
+    "paddingRight":  { "value": 20, "unit": "px" },
+    "border": {
+      "width":  { "value": 0, "unit": "px" },
+      "style":  "solid",
+      "color":  { "token": "colors.on-accent", "raw": "rgb(255, 255, 255)" },
+      "radius": { "value": 8, "unit": "px", "token": "rounded.lg" }
+    }
+  },
+  "typography": {
+    "family": "\"Pretendard Variable\", ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+    "size":          { "value": 16, "unit": "px", "token": "typography.scale.title-sm.fontSize" },
+    "weight":        400,
+    "lineHeight":    { "value": 24, "unit": "px", "token": "typography.scale.headline-md.fontSize" },
+    "letterSpacing": { "value": -0.176, "unit": "px" },
+    "fontFeatureSettings": "normal",
+    "whiteSpace":    "normal",
+    "textOverflow":  "clip"
+  },
+  "iconSlot": null,
+  "hitbox": {
+    "minWidth":  { "value": 88, "unit": "px" },
+    "minHeight": { "value": 40, "unit": "px" }
+  },
+  "states": {
+    "default": {
+      "color":           { "token": "colors.on-accent" },
+      "backgroundColor": { "token": "colors.accent" },
+      "cursor":          "pointer",
+      "indicator":       "none"
+    },
+    "hover": {
+      "color":           { "token": "colors.on-accent" },
+      "backgroundColor": { "token": "colors.accent-hover" },
+      "cursor":          "pointer",
+      "indicator":       "none"
+    },
+    "focus-visible": {
+      "outlineWidth":  { "value": 2, "unit": "px" },
+      "outlineOffset": { "value": 2, "unit": "px" },
+      "outlineStyle":  "solid",
+      "outlineColor":  "transparent",
+      "boxShadow":     null,
+      "comment":       "outline is solid 2px but outlineColor is transparent and boxShadow is null in the captured state — the focus ring is likely supplied by Tailwind's `ring-*` utilities (which compile to box-shadow on focus-visible) but did not register in the default snapshot. Crawler enhancement candidate."
+    },
+    "active": {
+      "color":           { "token": "colors.on-accent" },
+      "backgroundColor": { "token": "colors.accent-pressed" },
+      "cursor":          "pointer",
+      "indicator":       "none"
+    },
+    "selected": null,
+    "disabled": null
+  },
+  "motion": {
+    "reducedMotion": {
+      "duration": { "value": 0, "unit": "ms" },
+      "property": "none"
+    }
+  },
+  "a11y": {
+    "role": null,
+    "current": { "attribute": null, "expectedValueWhenSelected": null },
+    "tabIndex": 0
+  },
+  "composition": {
+    "parent": "main",
+    "children": {
+      "label": { "allowed": ["TextNode"], "cardinality": "1" }
+    }
+  },
+  "antiPatterns": [
+    "outlineColor is 'transparent' on focus-visible — the visible ring depends on a separate box-shadow utility, making the focus treatment brittle if classes are reordered.",
+    "Captured padding/height (8/20/40) does not match DESIGN.md components.button-primary (6/16/32). Production may be using a different size variant than the design system documents."
+  ]
+}

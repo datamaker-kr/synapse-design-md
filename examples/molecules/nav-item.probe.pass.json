@@ -1,0 +1,104 @@
+{
+  "identity": { "name": "nav-item", "id": "consumer:Header.tsx (pass)" },
+  "layout": {
+    "display": "inline-flex",
+    "direction": "row",
+    "align": "center",
+    "justify": "start",
+    "gap": { "value": 8, "unit": "px", "token": "spacing.sm" },
+    "height": { "value": 36, "unit": "px", "token": "sizes.control-md" },
+    "paddingTop": { "value": 7, "unit": "px" },
+    "paddingBottom": { "value": 9, "unit": "px" },
+    "paddingLeft": { "value": 12, "unit": "px", "token": "spacing.md" },
+    "paddingRight": { "value": 12, "unit": "px", "token": "spacing.md" },
+    "border": {
+      "width": { "value": 0, "unit": "px" },
+      "radius": { "value": 6, "unit": "px", "token": "radius.sm" }
+    }
+  },
+  "typography": {
+    "family": "var(--font-sans)",
+    "size": { "value": 14, "unit": "px", "token": "typography.label-md.size" },
+    "weight": 500,
+    "lineHeight": { "value": 20, "unit": "px", "token": "typography.label-md.lh" },
+    "letterSpacing": { "value": -0.006, "unit": "em" },
+    "fontFeatureSettings": "\"tnum\"",
+    "whiteSpace": "nowrap"
+  },
+  "iconSlot": {
+    "size": { "value": 16, "unit": "px", "token": "sizes.icon-sm" },
+    "position": "leading",
+    "baselineOffsetY": { "value": -1, "unit": "px" }
+  },
+  "hitbox": {
+    "minWidth": { "value": 32, "unit": "px" },
+    "minHeight": { "value": 36, "unit": "px" }
+  },
+  "states": {
+    "default": {
+      "color": { "token": "text.muted" },
+      "backgroundColor": "transparent",
+      "indicator": "none",
+      "cursor": "pointer"
+    },
+    "hover": {
+      "color": { "token": "text.primary" },
+      "backgroundColor": { "token": "surface.hover" },
+      "indicator": "none"
+    },
+    "focus-visible": {
+      "outlineWidth": { "value": 2, "unit": "px" },
+      "outlineOffset": { "value": 2, "unit": "px" },
+      "outlineColor": { "token": "ring.focus" },
+      "outlineStyle": "solid"
+    },
+    "active": {
+      "color": { "token": "text.primary" },
+      "backgroundColor": { "token": "surface.pressed" }
+    },
+    "selected": {
+      "color": { "token": "text.primary" },
+      "backgroundColor": { "token": "surface.selected" },
+      "indicator": {
+        "geometry": "bar",
+        "thickness": { "value": 2, "unit": "px" },
+        "position": "leading",
+        "color": { "token": "accent.primary" }
+      }
+    },
+    "disabled": {
+      "color": { "token": "text.disabled" },
+      "backgroundColor": "transparent",
+      "cursor": "not-allowed",
+      "indicator": "none"
+    }
+  },
+  "motion": {
+    "default-to-hover": {
+      "property": "background-color",
+      "duration": { "value": 120, "unit": "ms" },
+      "easing": "cubic-bezier(0.2, 0, 0, 1)"
+    },
+    "default-to-selected": {
+      "property": "background-color",
+      "duration": { "value": 160, "unit": "ms" },
+      "easing": "cubic-bezier(0.2, 0, 0, 1)"
+    },
+    "reducedMotion": {
+      "duration": { "value": 0, "unit": "ms" },
+      "property": "none"
+    }
+  },
+  "a11y": {
+    "role": "link",
+    "current": { "attribute": "aria-current", "expectedValueWhenSelected": "page" }
+  },
+  "composition": {
+    "parent": "nav-group",
+    "children": {
+      "icon":      { "allowed": ["Icon"] },
+      "label":     { "allowed": ["Text"] },
+      "indicator": { "allowed": ["Bar", "Dot"] }
+    }
+  }
+}

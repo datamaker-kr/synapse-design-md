@@ -4,6 +4,8 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
+import { verifyContract } from "./verify-contract.mjs";
+import { loadTokenIndex } from "./token-index.mjs";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(here, "..");
@@ -70,4 +72,141 @@ test("DESIGN.md frontmatter has no leftover `__PACKAGE_VERSION__` placeholder", 
     !text.includes("__PACKAGE_VERSION__"),
     "DESIGN.md still has `__PACKAGE_VERSION__` — run `synapse-design-md install --force` to refresh."
   );
+});
+
+test("aspirational contract: passing probe yields zero warnings", async () => {
+  const contract = await readJson(path.join(repoRoot, "examples/molecules/nav-item.contract.aspirational.json"));
+  const probe = await readJson(path.join(repoRoot, "examples/molecules/nav-item.probe.pass.json"));
+  const { ok, intent, violations } = verifyContract({ contract, probe });
+  assert.equal(intent, "aspirational");
+  assert.equal(violations.length, 0, `expected no violations, got: ${JSON.stringify(violations, null, 2)}`);
+  assert.equal(ok, true);
+});
+
+test("aspirational contract: failing probe surfaces drifts as warnings (ok=true)", async () => {
+  const contract = await readJson(path.join(repoRoot, "examples/molecules/nav-item.contract.aspirational.json"));
+  const probe = await readJson(path.join(repoRoot, "examples/molecules/nav-item.probe.fail.json"));
+  const { ok, intent, violations } = verifyContract({ contract, probe });
+  assert.equal(intent, "aspirational");
+  // Aspirational violations are warnings — ok is true so consumers don't block CI on design backlog.
+  assert.equal(ok, true, "aspirational violations must not block (warning severity)");
+  assert.ok(violations.length > 0, "aspirational should surface gaps as warnings");
+  assert.ok(violations.every((v) => v.severity === "warning"));
+  const paths = new Set(violations.map((v) => v.path));
+  for (const expected of [
+    "layout.height",
+    "layout.paddingTop/Bottom",
+    "typography.weight",
+    "states.selected.indicator",
+    "motion.default-to-hover.easing",
+    "a11y.current.attribute",
+    "a11y.hitbox.minHeight"
+  ]) {
+    assert.ok(paths.has(expected), `expected warning at ${expected}; got: ${[...paths].join(", ")}`);
+  }
+});
+
+test("button-primary descriptive contract: round-trip identity", async () => {
+  const contract = await readJson(path.join(repoRoot, "examples/atoms/button-primary.contract.descriptive.json"));
+  const probe = JSON.parse(JSON.stringify(contract));
+  probe.identity = { name: contract.identity.name, id: "synthetic:round-trip" };
+  delete probe.intent;
+  delete probe.antiPatterns;
+  delete probe.rationale;
+  const { ok, intent, violations } = verifyContract({ contract, probe });
+  assert.equal(intent, "descriptive");
+  assert.equal(ok, true, `button-primary descriptive round-trip should pass, got: ${JSON.stringify(violations, null, 2)}`);
+});
+
+test("button-primary aspirational contract: descriptive probe surfaces design backlog gaps", async () => {
+  const aspirational = await readJson(path.join(repoRoot, "examples/atoms/button-primary.contract.aspirational.json"));
+  const descriptive = await readJson(path.join(repoRoot, "examples/atoms/button-primary.contract.descriptive.json"));
+  // Use the descriptive contract as a stand-in for what production captured.
+  const probe = JSON.parse(JSON.stringify(descriptive));
+  delete probe.intent;
+  delete probe.antiPatterns;
+  delete probe.rationale;
+  const { ok, intent, violations } = verifyContract({ contract: aspirational, probe });
+  assert.equal(intent, "aspirational");
+  assert.equal(ok, true, "aspirational warnings must not block");
+  const paths = new Set(violations.map((v) => v.path));
+  // The three documented gaps:
+  for (const expected of [
+    "layout.height",          // 40 vs 32
+    "typography.weight",      // 400 vs 600
+    "typography.size"         // 16 vs 13
+  ]) {
+    assert.ok(paths.has(expected), `expected gap at ${expected}; got: ${[...paths].join(", ")}`);
+  }
+});
+
+test("descriptive contract: captured production probe passes (round-trip identity)", async () => {
+  const contract = await readJson(path.join(repoRoot, "examples/molecules/nav-item.contract.descriptive.json"));
+  // The descriptive contract was promoted from this probe shape (manually trimmed for anatomy).
+  // A consumer build matching production verbatim should produce a violation-free verify.
+  // Build a synthetic probe from the contract itself — round-trip identity check.
+  const probe = JSON.parse(JSON.stringify(contract));
+  probe.identity = { name: contract.identity.name, id: "synthetic:round-trip" };
+  delete probe.intent;
+  delete probe.antiPatterns;
+  delete probe.rationale;
+  const { ok, intent, violations } = verifyContract({ contract, probe });
+  assert.equal(intent, "descriptive");
+  assert.equal(ok, true, `descriptive round-trip should pass, got violations: ${JSON.stringify(violations, null, 2)}`);
+  assert.equal(violations.length, 0);
+});
+
+test("token-index: reverse-maps DESIGN.md frontmatter values to token paths", async () => {
+  const idx = await loadTokenIndex();
+  assert.ok(idx.size() >= 50, `token index suspiciously small: ${idx.size()}`);
+
+  // Spacing
+  assert.equal(idx.lookup("12px"), "spacing.md");
+  assert.equal(idx.lookup("8px"), "spacing.sm");
+  assert.equal(idx.lookup("16px"), "spacing.lg");
+  // Rounded
+  assert.ok(idx.all("6px").includes("rounded.md"));
+  // Sizes (rem with integer px) — 32px matches multiple tokens, so check via all().
+  assert.ok(idx.all("32px").includes("sizes.controlHeight"));
+  // Colors — hex and rgb forms both resolve
+  assert.equal(idx.lookup("#2461E9"), "colors.accent");
+  assert.equal(idx.lookup("rgb(36, 97, 233)"), "colors.accent");
+  // Typography scale fontSize
+  assert.ok(idx.all("14px").includes("typography.scale.body-md.fontSize"));
+  // Letter-spacing
+  assert.ok(idx.all("-0.006em").includes("typography.scale.body-md.letterSpacing"));
+  // Misses are null, not undefined
+  assert.equal(idx.lookup("999px"), null);
+  assert.equal(idx.lookup(null), null);
+});
+
+test("contract verify CLI: aspirational warnings exit 0, descriptive mismatch exits 1", () => {
+  const cli = path.join(repoRoot, "bin/synapse-design-md.js");
+
+  // Aspirational + failing probe: produces warnings, CI does not block.
+  const aspirational = spawnSync(
+    process.execPath,
+    [
+      cli, "contract", "verify",
+      "--contract", "examples/molecules/nav-item.contract.aspirational.json",
+      "--probe", "examples/molecules/nav-item.probe.fail.json"
+    ],
+    { cwd: repoRoot, encoding: "utf8" }
+  );
+  assert.equal(aspirational.status, 0, `aspirational warnings must not block CI, got ${aspirational.status}\n${aspirational.stdout}`);
+  assert.match(aspirational.stdout, /\[aspirational\]/);
+  assert.match(aspirational.stdout, /warnings\)$/m);
+
+  // Descriptive + failing probe: must block.
+  const descriptive = spawnSync(
+    process.execPath,
+    [
+      cli, "contract", "verify",
+      "--contract", "examples/molecules/nav-item.contract.descriptive.json",
+      "--probe", "examples/molecules/nav-item.probe.fail.json"
+    ],
+    { cwd: repoRoot, encoding: "utf8" }
+  );
+  assert.equal(descriptive.status, 1, `descriptive divergence must exit 1, got ${descriptive.status}`);
+  assert.match(descriptive.stdout, /\[descriptive\]/);
 });

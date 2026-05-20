@@ -8,6 +8,9 @@ import { crawlSynapse } from "./crawl-synapse.mjs";
 import { syncFromSource } from "./sync-from-source.mjs";
 import { buildPagesInventory } from "./build-pages-inventory.mjs";
 import { preview } from "./preview.mjs";
+import { verifyContractCmd } from "./verify-contract.mjs";
+import { crawlContract } from "./crawl-contract.mjs";
+import { findingsToIssues } from "./findings-to-issues.mjs";
 
 const HELP = `synapse-design-md
 
@@ -20,6 +23,9 @@ Usage:
   synapse-design-md eval [--target <url-or-file>]
   synapse-design-md crawl --login
   synapse-design-md crawl [--base-url <url>] [--category <name>] [--limit <n>] [--headed] [--out <dir>]
+  synapse-design-md contract verify --contract <path[,path…]> --probe <path>
+  synapse-design-md contract crawl --url <path> --selector <css> --component <name> [--out <dir>]
+  synapse-design-md contract issues --findings <path> [--out <dir>] [--labels <a,b>]
   synapse-design-md sync [--source <path>] [--write]
   synapse-design-md inventory [--source <path>] [--write]
   synapse-design-md preview [--out preview.html]
@@ -68,6 +74,23 @@ export async function main(argv) {
     case "examples":
       await examples(rest);
       return;
+    case "contract": {
+      const [sub, ...subRest] = rest;
+      const subArgs = parseArgs(subRest);
+      if (sub === "verify") {
+        await verifyContractCmd(subArgs);
+        return;
+      }
+      if (sub === "crawl") {
+        await crawlContract(subArgs);
+        return;
+      }
+      if (sub === "issues") {
+        await findingsToIssues(subArgs);
+        return;
+      }
+      throw new Error(`Unknown contract subcommand: ${sub}\n\n${HELP}`);
+    }
     case "-h":
     case "--help":
     case undefined:

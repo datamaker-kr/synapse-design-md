@@ -1,0 +1,121 @@
+{
+  "$schema": "../contract.schema.json",
+  "intent": "descriptive",
+  "identity": {
+    "level": "molecule",
+    "name": "nav-item",
+    "summary": "What the header nav item on test.synapse.sh actually does today. Use this contract to verify that a consumer build reproduces production behavior pixel-for-pixel. Known design gaps are listed in nav-item.findings.md and tracked in nav-item.contract.aspirational.json."
+  },
+  "source": {
+    "status": "captured",
+    "comment": "Auto-promoted from evidence/contracts/nav-item/2026-05-20T03-13-12-590Z.probe.json. Layout/typography/states/motion are verbatim from the live crawl. Anatomy, composition, anti-patterns are added by hand (the crawler cannot infer slot intent).",
+    "capturedAt": "2026-05-20T03:26:04.686Z",
+    "capturedFrom": "https://test.synapse.sh/datamaker/projects",
+    "selector": "header a[href]",
+    "selectedSelector": "header a.router-link-active",
+    "disabledSelector": null,
+    "tool": "scripts/crawl-contract.mjs"
+  },
+  "anatomy": {
+    "slots": ["label"],
+    "required": ["label"],
+    "optional": ["icon", "indicator"],
+    "comment": "Icon and indicator slots exist in the schema but the production nav-item currently uses label only. Icon-only header buttons (logo, docs, settings) are a separate component."
+  },
+  "layout": {
+    "display": "flex",
+    "direction": "row",
+    "align": "center",
+    "justify": "center",
+    "gap": null,
+    "height": { "value": 64, "unit": "px" },
+    "paddingTop": { "value": 0, "unit": "px" },
+    "paddingBottom": { "value": 0, "unit": "px" },
+    "paddingLeft": { "value": 32, "unit": "px", "token": "spacing.xxl" },
+    "paddingRight": { "value": 32, "unit": "px", "token": "spacing.xxl" },
+    "border": {
+      "width": { "value": 0, "unit": "px" },
+      "style": "solid",
+      "color": "transparent",
+      "radius": { "value": 0, "unit": "px" }
+    }
+  },
+  "typography": {
+    "family": "\"Pretendard Variable\", ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+    "size": { "value": 16, "unit": "px", "token": "typography.scale.title-sm.fontSize" },
+    "weight": 400,
+    "lineHeight": { "value": 24, "unit": "px", "token": "typography.scale.headline-md.fontSize" },
+    "letterSpacing": { "value": -0.176, "unit": "px" },
+    "fontFeatureSettings": "normal",
+    "whiteSpace": "normal",
+    "textOverflow": "clip"
+  },
+  "iconSlot": null,
+  "hitbox": {
+    "minWidth": { "value": 119, "unit": "px" },
+    "minHeight": { "value": 64, "unit": "px" }
+  },
+  "states": {
+    "default": {
+      "color":           { "raw": "rgb(93, 108, 131)" },
+      "backgroundColor": "transparent",
+      "cursor":          "pointer",
+      "indicator":       "none"
+    },
+    "hover": {
+      "color":           { "token": "colors.ink", "raw": "rgb(24, 33, 52)" },
+      "backgroundColor": "transparent",
+      "cursor":          "pointer",
+      "indicator":       "none"
+    },
+    "focus-visible": {
+      "outlineWidth":  { "value": 1, "unit": "px" },
+      "outlineOffset": { "value": 1, "unit": "px" },
+      "outlineStyle":  "auto",
+      "outlineColor":  { "raw": "rgb(0, 95, 204)" },
+      "boxShadow":     null
+    },
+    "active": {
+      "color":           { "raw": "rgb(93, 108, 131)" },
+      "backgroundColor": "transparent",
+      "cursor":          "pointer",
+      "indicator":       "none"
+    },
+    "selected": {
+      "color":           { "token": "colors.ink", "raw": "rgb(24, 33, 52)" },
+      "backgroundColor": "transparent",
+      "indicator":       "none",
+      "comment":         "Production currently encodes selected state by color shift only. This is flagged in nav-item.findings.md as gap #2."
+    },
+    "disabled": null
+  },
+  "motion": {
+    "reducedMotion": {
+      "duration": { "value": 0, "unit": "ms" },
+      "property": "none"
+    }
+  },
+  "a11y": {
+    "role": "link",
+    "current": {
+      "attribute": null,
+      "expectedValueWhenSelected": null,
+      "comment": "Production uses Vue Router's .router-link-active class instead of aria-current. Gap #4 in nav-item.findings.md."
+    },
+    "tabIndex": 0
+  },
+  "composition": {
+    "parent": "header",
+    "slotInParent": { "name": "primary-nav", "cardinality": "1..n" },
+    "children": {
+      "label": { "allowed": ["TextNode"], "cardinality": "1" }
+    },
+    "forbiddenSiblings": []
+  },
+  "antiPatterns": [
+    "Encoding selected state with color alone (#5D6C83 → #182134). Color-blind users cannot distinguish the active page. See findings #2.",
+    "Browser-default focus outline (1px auto rgb(0,95,204)). Not a design-system token. See findings #5.",
+    "No transition on state change — instantaneous color flip looks abrupt. See findings #3.",
+    "No aria-current attribute — screen readers cannot announce the active page. See findings #4."
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "_comment": "Drop this fragment into your project's .claude/settings.json (merging with any existing hooks). Adjust the file_path matcher to point at where synapse-design-md is installed in your tree.",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${CLAUDE_PROJECT_DIR}/node_modules/synapse-design-md/hooks/post-edit-verify.mjs",
+            "_notes": [
+              "Reads .synapse-design-md.json to map edited paths to contracts.",
+              "Verifies the touched contract(s) against the most recent probe in evidence/contracts/<name>/.",
+              "Forwards verifier output to stderr so the editor surfaces violations inline.",
+              "Exits 2 only on descriptive contract failure — aspirational warnings exit 0 and do not block."
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

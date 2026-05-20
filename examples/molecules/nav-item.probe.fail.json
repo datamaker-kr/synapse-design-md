@@ -1,0 +1,94 @@
+{
+  "identity": { "name": "nav-item", "id": "consumer:Header.tsx (fail — typical AI-generated approximation)" },
+  "layout": {
+    "display": "inline-flex",
+    "direction": "row",
+    "align": "center",
+    "justify": "start",
+    "gap": { "value": 8, "unit": "px" },
+    "height": { "value": 40, "unit": "px" },
+    "paddingTop": { "value": 8, "unit": "px" },
+    "paddingBottom": { "value": 8, "unit": "px" },
+    "paddingLeft": { "value": 12, "unit": "px", "token": "spacing.md" },
+    "paddingRight": { "value": 12, "unit": "px", "token": "spacing.md" },
+    "border": {
+      "width": { "value": 0, "unit": "px" },
+      "radius": { "value": 4, "unit": "px" }
+    }
+  },
+  "typography": {
+    "family": "var(--font-sans)",
+    "size": { "value": 14, "unit": "px" },
+    "weight": 400,
+    "lineHeight": { "value": 20, "unit": "px" },
+    "letterSpacing": { "value": 0, "unit": "em" },
+    "whiteSpace": "nowrap"
+  },
+  "iconSlot": {
+    "size": { "value": 16, "unit": "px" },
+    "position": "leading",
+    "baselineOffsetY": { "value": 0, "unit": "px" }
+  },
+  "hitbox": {
+    "minWidth": { "value": 24, "unit": "px" },
+    "minHeight": { "value": 24, "unit": "px" }
+  },
+  "states": {
+    "default": {
+      "color": { "token": "text.muted" },
+      "backgroundColor": "transparent",
+      "indicator": "none",
+      "cursor": "pointer"
+    },
+    "hover": {
+      "color": { "token": "text.primary" },
+      "backgroundColor": { "token": "surface.hover" },
+      "indicator": "none"
+    },
+    "focus-visible": {
+      "outlineWidth": { "value": 1, "unit": "px" },
+      "outlineOffset": { "value": 0, "unit": "px" },
+      "outlineColor": { "token": "accent.primary" },
+      "outlineStyle": "solid"
+    },
+    "active": {
+      "color": { "token": "text.primary" },
+      "backgroundColor": { "token": "surface.pressed" }
+    },
+    "selected": {
+      "color": { "token": "accent.primary" },
+      "backgroundColor": "transparent",
+      "indicator": "none"
+    },
+    "disabled": {
+      "color": { "token": "text.disabled" },
+      "backgroundColor": "transparent",
+      "cursor": "default",
+      "indicator": "none"
+    }
+  },
+  "motion": {
+    "default-to-hover": {
+      "property": "background-color",
+      "duration": { "value": 200, "unit": "ms" },
+      "easing": "ease"
+    },
+    "default-to-selected": {
+      "property": "background-color",
+      "duration": { "value": 200, "unit": "ms" },
+      "easing": "ease"
+    }
+  },
+  "a11y": {
+    "role": "link",
+    "current": { "attribute": null, "expectedValueWhenSelected": null }
+  },
+  "composition": {
+    "parent": "nav-group",
+    "children": {
+      "icon":      { "allowed": ["Icon", "Emoji"] },
+      "label":     { "allowed": ["Text"] },
+      "indicator": { "allowed": ["Bar", "Dot"] }
+    }
+  }
+}
