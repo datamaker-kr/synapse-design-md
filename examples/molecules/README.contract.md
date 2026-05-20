@@ -1,13 +1,34 @@
 # Component Contracts (PoC)
 
-This directory carries **deferred contracts** for atomic-design molecules. Each contract has three companion files:
+This directory carries **deferred contracts** for atomic-design molecules. Each component has a two-tier contract:
 
 ```
-nav-item.md                       # Human-readable prose summary
-nav-item.contract.json            # Machine-readable source of truth (verifier consumes this)
-nav-item.probe.pass.json          # Sample probe that satisfies the contract
-nav-item.probe.fail.json          # Sample probe with typical AI-generated drifts
+nav-item.md                              # Human-readable prose summary
+nav-item.contract.descriptive.json       # What production actually does (captured). Violations = error.
+nav-item.contract.aspirational.json      # What the design target is. Violations = warning (gap backlog).
+nav-item.findings.md                     # The deltas between the two, with rationale and recommended fix.
+nav-item.probe.pass.json                 # Sample probe that satisfies the aspirational contract
+nav-item.probe.fail.json                 # Sample probe with typical AI-generated drifts
 ```
+
+## Why two tiers
+
+A single contract conflates two questions:
+
+1. **Did the consumer reproduce production?** — a build correctness check.
+2. **Does production reach the design target?** — a design backlog.
+
+Mixing these makes the verifier hostile: every aspirational gap becomes a CI failure
+for consumers. Splitting them lets:
+
+- Consumers verify against the **descriptive** contract → blocks merges on real drift.
+- Designers/PMs read the **aspirational** contract warnings → the backlog of gaps
+  that production itself needs to close.
+
+The descriptive contract is auto-promoted from a fresh crawl. The aspirational
+contract is hand-authored and references DESIGN.md tokens that *should* exist.
+The gap shrinks as production updates land and a re-capture refreshes
+`descriptive`.
 
 A contract has six top-level blocks. All must be present:
 
@@ -46,12 +67,13 @@ A contract has six top-level blocks. All must be present:
     → into examples/molecules/<name>.contract.json
     → flip source.status from "pending-crawl" to "captured"
 
-3.  Verify a consumer build
+3.  Verify a consumer build against both tiers
     synapse-design-md contract verify \
-      --contract examples/molecules/nav-item.contract.json \
+      --contract examples/molecules/nav-item.contract.descriptive.json,examples/molecules/nav-item.contract.aspirational.json \
       --probe   path/to/consumer.probe.json
-    → exits 0 on pass, 1 on any violation
-    → groups violations by axis: layout / optical / style / motion / a11y / composition
+    → descriptive violations  → severity=error,   counted as FAIL,  exit 1
+    → aspirational violations → severity=warning, counted as GAPS, exit 0
+    → CI exits 0 iff every descriptive contract passes
 ```
 
 ## Token reverse-mapping

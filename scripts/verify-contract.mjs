@@ -5,12 +5,17 @@ import path from "node:path";
  * verifyContract({ contract, probe })
  *
  * Property-level diff between a contract and a probe.
- * - contract: machine-readable spec produced by `contract crawl` (or hand-authored PoC).
+ * - contract: machine-readable spec produced by `contract crawl` (or hand-authored).
  * - probe:    same-shape JSON captured from a consumer build/page.
  *
- * Returns: { ok, violations: [{ axis, path, expected, actual, severity }] }
+ * Contract `intent` controls severity:
+ *   - "descriptive" (default): violations are errors — consumer must match production.
+ *   - "aspirational":          violations are warnings — gaps toward the design target.
+ *
+ * Returns: { ok, intent, violations: [{ axis, path, expected, actual, severity, hint? }] }
  */
 export function verifyContract({ contract, probe }) {
+  const intent = contract.intent || "descriptive";
   const violations = [];
   const ctx = { contract, probe, violations };
 
@@ -23,8 +28,12 @@ export function verifyContract({ contract, probe }) {
   diffA11y(ctx);
   diffComposition(ctx);
 
+  // Map severity based on intent.
+  const targetSeverity = intent === "aspirational" ? "warning" : "error";
+  for (const v of violations) v.severity = targetSeverity;
+
   const ok = violations.every((v) => v.severity !== "error");
-  return { ok, violations };
+  return { ok, intent, violations };
 }
 
 function diffLayout({ contract, probe, violations }) {
@@ -94,14 +103,15 @@ function diffHitbox({ contract, probe, violations }) {
 
 function diffStates({ contract, probe, violations }) {
   for (const [stateName, cState] of Object.entries(contract.states ?? {})) {
+    // A null contract entry means "this state is intentionally absent" — no expectation to verify.
+    if (cState === null) continue;
     const pState = probe.states?.[stateName];
     if (!pState) {
       violations.push({
         axis: "style",
         path: `states.${stateName}`,
         expected: "defined",
-        actual: "missing",
-        severity: "error"
+        actual: "missing"
       });
       continue;
     }
@@ -115,14 +125,24 @@ function diffStates({ contract, probe, violations }) {
             path: `states.${stateName}.${key}`,
             expected: `token:${cVal.token}`,
             actual: pVal == null ? "missing" : describe(pVal),
-            severity: "error",
             hint: "Raw values must be replaced by the contract token. Re-derive from DESIGN.md tokens."
           });
         }
       } else if (cVal && typeof cVal === "object" && "geometry" in cVal) {
         // Selected indicator geometry — deep compare.
         diffIndicator(violations, stateName, cVal, pVal);
-      } else if (typeof cVal === "object") {
+      } else if (cVal && typeof cVal === "object" && "raw" in cVal && !("value" in cVal)) {
+        // Untokenized color — equality on raw value.
+        const pRaw = (pVal && typeof pVal === "object") ? pVal.raw : pVal;
+        if (pRaw !== cVal.raw) {
+          violations.push({
+            axis: "style",
+            path: `states.${stateName}.${key}`,
+            expected: `raw:${cVal.raw}`,
+            actual: pVal == null ? "missing" : describe(pVal)
+          });
+        }
+      } else if (typeof cVal === "object" && cVal !== null) {
         // Dimension { value, unit, token? }
         expectDim(violations, "style", `states.${stateName}.${key}`, cVal, pVal);
       } else {
@@ -286,22 +306,29 @@ function describe(v) {
 // CLI entry ----------------------------------------------------------
 
 export async function verifyContractCmd(options = {}) {
-  const contractPath = path.resolve(process.cwd(), options.contract ?? "");
-  const probePath = path.resolve(process.cwd(), options.probe ?? "");
   if (!options.contract || !options.probe) {
     throw new Error("Usage: synapse-design-md contract verify --contract <path> --probe <path>");
   }
-  const contract = JSON.parse(await fs.readFile(contractPath, "utf8"));
+  // Multiple --contract flags accumulate; parseArgs squashes duplicates so split on comma too.
+  const contractPaths = String(options.contract).split(",").filter(Boolean);
+  const probePath = path.resolve(process.cwd(), options.probe);
   const probe = JSON.parse(await fs.readFile(probePath, "utf8"));
-  const { ok, violations } = verifyContract({ contract, probe });
-  printReport({ contract, probe, ok, violations });
-  if (!ok) process.exitCode = 1;
+
+  let anyError = false;
+  for (const c of contractPaths) {
+    const contractPath = path.resolve(process.cwd(), c);
+    const contract = JSON.parse(await fs.readFile(contractPath, "utf8"));
+    const { ok, intent, violations } = verifyContract({ contract, probe });
+    printReport({ contract, probe, ok, intent, violations });
+    if (!ok) anyError = true;
+  }
+  if (anyError) process.exitCode = 1;
 }
 
-export function printReport({ contract, probe, ok, violations }) {
+export function printReport({ contract, probe, ok, intent, violations }) {
   const name = contract?.identity?.name ?? "?";
   const probeId = probe?.identity?.name ?? probe?.identity?.id ?? path.basename(process.argv[3] || "probe");
-  console.log(`Contract: ${name}   Probe: ${probeId}`);
+  console.log(`\nContract: ${name} [${intent}]   Probe: ${probeId}`);
   if (violations.length === 0) {
     console.log("  No violations.");
   } else {
@@ -318,5 +345,8 @@ export function printReport({ contract, probe, ok, violations }) {
       }
     }
   }
-  console.log(`\nResult: ${ok ? "PASS" : "FAIL"} (${violations.length} violations)`);
+  const verdict = intent === "aspirational"
+    ? (violations.length === 0 ? "ALIGNED" : "GAPS")
+    : (ok ? "PASS" : "FAIL");
+  console.log(`\nResult: ${verdict} (${violations.length} ${intent === "aspirational" ? "warnings" : "violations"})`);
 }

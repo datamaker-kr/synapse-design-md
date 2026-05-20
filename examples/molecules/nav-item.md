@@ -21,8 +21,14 @@ Rules:
 - The icon slot baseline is offset by `-1px` for the same reason.
 - Touch target minimum is `32 × 36` on desktop, `44 × 44` on mobile.
 
-## Source of truth
+## Source of truth (two tiers)
 
-The machine-readable contract is [`nav-item.contract.json`](./nav-item.contract.json). The prose above is a human-friendly rendering of that file — do not edit the rules here without updating the contract.
+| File | What it captures | Verifier severity |
+| --- | --- | --- |
+| [`nav-item.contract.descriptive.json`](./nav-item.contract.descriptive.json) | What production on test.synapse.sh actually does today (auto-promoted from `evidence/contracts/nav-item/*.probe.json`). | error — consumer must match |
+| [`nav-item.contract.aspirational.json`](./nav-item.contract.aspirational.json) | What the design target is (the prose rules above). | warning — design backlog |
+| [`nav-item.findings.md`](./nav-item.findings.md) | The five systemic gaps between production and the design target, with rationale and fix recommendations. | — |
+
+Production's current behavior (color-only selected state, no transitions, no `aria-current`, browser-default focus outline, untokened muted color) diverges from the design target above. The findings file enumerates these as actionable backlog items rather than burying them inside the contract as quiet violations.
 
 The contract is enforced by `scripts/verify-contract.mjs`. See [`README.contract.md`](./README.contract.md) for the full pipeline.

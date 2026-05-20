@@ -1,17 +1,25 @@
 {
   "$schema": "../contract.schema.json",
+  "intent": "aspirational",
   "identity": {
     "level": "molecule",
     "name": "nav-item",
-    "summary": "A single navigation link inside the primary app-shell header nav group. Carries the active/selected indicator that tells users where they are in the product."
+    "summary": "Design target for the header nav item. Describes the *intended* behavior — accessible active indicator, tokenized colors, motion within reduced-motion budget. Violations against this contract are warnings (gaps to close), not consumer build failures. See nav-item.findings.md for the rationale behind each aspirational delta from production."
   },
   "source": {
-    "status": "pending-crawl",
-    "comment": "Values below are PLACEHOLDERS for the PoC verifier. Run `synapse-design-md contract crawl --selector \"header nav a\"` to overwrite with measured values from test.synapse.sh.",
+    "status": "design-target",
+    "comment": "Values are intended specifications. They differ deliberately from nav-item.contract.descriptive.json (the current production capture) — every deliberate delta is documented in nav-item.findings.md.",
     "capturedAt": null,
     "capturedFrom": null,
-    "tool": "scripts/crawl-contract.mjs",
-    "evidence": null
+    "tool": null,
+    "evidence": "examples/molecules/nav-item.findings.md"
+  },
+  "rationale": {
+    "states.selected.indicator": "Gap #2: production encodes selected state with color shift only — color-blind users cannot distinguish. Adding a 2px leading-edge bar gives a non-color affordance.",
+    "states.focus-visible.outlineColor": "Gap #5: production uses the browser default outline (1px auto rgb(0,95,204)). A tokenized ring lets dark/high-contrast themes inherit the focus treatment.",
+    "motion": "Gap #3: production has no transitions. Adding 120/160ms cubic-bezier keeps state changes legible without exceeding reduced-motion budget.",
+    "a11y.current": "Gap #4: production uses .router-link-active class only. aria-current=\"page\" must be added alongside so screen readers can announce the active page.",
+    "states.default.color": "Gap #1: production color rgb(93, 108, 131) does not match any DESIGN.md token. Mapping to ink-muted (or adding the color to DESIGN.md) keeps the design system the single source of truth."
   },
   "anatomy": {
     "slots": ["icon", "label", "indicator"],

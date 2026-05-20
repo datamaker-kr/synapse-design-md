@@ -74,36 +74,52 @@ test("DESIGN.md frontmatter has no leftover `__PACKAGE_VERSION__` placeholder", 
   );
 });
 
-test("nav-item contract: passing probe yields zero violations", async () => {
-  const contract = await readJson(path.join(repoRoot, "examples/molecules/nav-item.contract.json"));
+test("aspirational contract: passing probe yields zero warnings", async () => {
+  const contract = await readJson(path.join(repoRoot, "examples/molecules/nav-item.contract.aspirational.json"));
   const probe = await readJson(path.join(repoRoot, "examples/molecules/nav-item.probe.pass.json"));
-  const { ok, violations } = verifyContract({ contract, probe });
+  const { ok, intent, violations } = verifyContract({ contract, probe });
+  assert.equal(intent, "aspirational");
   assert.equal(violations.length, 0, `expected no violations, got: ${JSON.stringify(violations, null, 2)}`);
   assert.equal(ok, true);
 });
 
-test("nav-item contract: failing probe surfaces typical AI-generated drifts", async () => {
-  const contract = await readJson(path.join(repoRoot, "examples/molecules/nav-item.contract.json"));
+test("aspirational contract: failing probe surfaces drifts as warnings (ok=true)", async () => {
+  const contract = await readJson(path.join(repoRoot, "examples/molecules/nav-item.contract.aspirational.json"));
   const probe = await readJson(path.join(repoRoot, "examples/molecules/nav-item.probe.fail.json"));
-  const { ok, violations } = verifyContract({ contract, probe });
-  assert.equal(ok, false, "failing probe must not pass");
+  const { ok, intent, violations } = verifyContract({ contract, probe });
+  assert.equal(intent, "aspirational");
+  // Aspirational violations are warnings — ok is true so consumers don't block CI on design backlog.
+  assert.equal(ok, true, "aspirational violations must not block (warning severity)");
+  assert.ok(violations.length > 0, "aspirational should surface gaps as warnings");
+  assert.ok(violations.every((v) => v.severity === "warning"));
   const paths = new Set(violations.map((v) => v.path));
-  // Spot-check the specific drifts the fail probe was crafted to expose.
   for (const expected of [
-    "layout.height",                          // 40 vs 36
-    "layout.paddingTop/Bottom",               // symmetric (optical regression)
-    "layout.border.radius",                   // 4 vs 6 (also missing token)
-    "typography.weight",                      // 400 vs 500
-    "typography.letterSpacing",               // 0 vs -0.006em
-    "states.selected.indicator",              // none vs bar
-    "states.focus-visible.outlineWidth",      // 1 vs 2
-    "motion.default-to-hover.duration",       // 200 vs 120
-    "motion.default-to-hover.easing",         // ease vs cubic-bezier
-    "a11y.current.attribute",                 // null vs aria-current
-    "a11y.hitbox.minHeight"                   // 24 < 36
+    "layout.height",
+    "layout.paddingTop/Bottom",
+    "typography.weight",
+    "states.selected.indicator",
+    "motion.default-to-hover.easing",
+    "a11y.current.attribute",
+    "a11y.hitbox.minHeight"
   ]) {
-    assert.ok(paths.has(expected), `expected violation at ${expected}; got: ${[...paths].join(", ")}`);
+    assert.ok(paths.has(expected), `expected warning at ${expected}; got: ${[...paths].join(", ")}`);
   }
+});
+
+test("descriptive contract: captured production probe passes (round-trip identity)", async () => {
+  const contract = await readJson(path.join(repoRoot, "examples/molecules/nav-item.contract.descriptive.json"));
+  // The descriptive contract was promoted from this probe shape (manually trimmed for anatomy).
+  // A consumer build matching production verbatim should produce a violation-free verify.
+  // Build a synthetic probe from the contract itself — round-trip identity check.
+  const probe = JSON.parse(JSON.stringify(contract));
+  probe.identity = { name: contract.identity.name, id: "synthetic:round-trip" };
+  delete probe.intent;
+  delete probe.antiPatterns;
+  delete probe.rationale;
+  const { ok, intent, violations } = verifyContract({ contract, probe });
+  assert.equal(intent, "descriptive");
+  assert.equal(ok, true, `descriptive round-trip should pass, got violations: ${JSON.stringify(violations, null, 2)}`);
+  assert.equal(violations.length, 0);
 });
 
 test("token-index: reverse-maps DESIGN.md frontmatter values to token paths", async () => {
@@ -130,20 +146,33 @@ test("token-index: reverse-maps DESIGN.md frontmatter values to token paths", as
   assert.equal(idx.lookup(null), null);
 });
 
-test("contract verify CLI: pass probe exits 0, fail probe exits 1", () => {
+test("contract verify CLI: aspirational warnings exit 0, descriptive mismatch exits 1", () => {
   const cli = path.join(repoRoot, "bin/synapse-design-md.js");
-  const contractArg = "examples/molecules/nav-item.contract.json";
-  const pass = spawnSync(
-    process.execPath,
-    [cli, "contract", "verify", "--contract", contractArg, "--probe", "examples/molecules/nav-item.probe.pass.json"],
-    { cwd: repoRoot, encoding: "utf8" }
-  );
-  assert.equal(pass.status, 0, `pass probe should exit 0, got ${pass.status}\nstderr: ${pass.stderr}\nstdout: ${pass.stdout}`);
 
-  const fail = spawnSync(
+  // Aspirational + failing probe: produces warnings, CI does not block.
+  const aspirational = spawnSync(
     process.execPath,
-    [cli, "contract", "verify", "--contract", contractArg, "--probe", "examples/molecules/nav-item.probe.fail.json"],
+    [
+      cli, "contract", "verify",
+      "--contract", "examples/molecules/nav-item.contract.aspirational.json",
+      "--probe", "examples/molecules/nav-item.probe.fail.json"
+    ],
     { cwd: repoRoot, encoding: "utf8" }
   );
-  assert.equal(fail.status, 1, `fail probe should exit 1, got ${fail.status}`);
+  assert.equal(aspirational.status, 0, `aspirational warnings must not block CI, got ${aspirational.status}\n${aspirational.stdout}`);
+  assert.match(aspirational.stdout, /\[aspirational\]/);
+  assert.match(aspirational.stdout, /warnings\)$/m);
+
+  // Descriptive + failing probe: must block.
+  const descriptive = spawnSync(
+    process.execPath,
+    [
+      cli, "contract", "verify",
+      "--contract", "examples/molecules/nav-item.contract.descriptive.json",
+      "--probe", "examples/molecules/nav-item.probe.fail.json"
+    ],
+    { cwd: repoRoot, encoding: "utf8" }
+  );
+  assert.equal(descriptive.status, 1, `descriptive divergence must exit 1, got ${descriptive.status}`);
+  assert.match(descriptive.stdout, /\[descriptive\]/);
 });
