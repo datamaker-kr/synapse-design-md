@@ -15,6 +15,7 @@ cookies.json
 evidence/raw/
 evidence/screenshots/
 evidence/crawl-runs/
+evidence/contracts/
 
 .synapse-design-md.local.json
 .DS_Store

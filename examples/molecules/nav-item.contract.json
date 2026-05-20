@@ -1,0 +1,161 @@
+{
+  "$schema": "../contract.schema.json",
+  "identity": {
+    "level": "molecule",
+    "name": "nav-item",
+    "summary": "A single navigation link inside the primary app-shell header nav group. Carries the active/selected indicator that tells users where they are in the product."
+  },
+  "source": {
+    "status": "pending-crawl",
+    "comment": "Values below are PLACEHOLDERS for the PoC verifier. Run `synapse-design-md contract crawl --selector \"header nav a\"` to overwrite with measured values from test.synapse.sh.",
+    "capturedAt": null,
+    "capturedFrom": null,
+    "tool": "scripts/crawl-contract.mjs",
+    "evidence": null
+  },
+  "anatomy": {
+    "slots": ["icon", "label", "indicator"],
+    "required": ["label"],
+    "optional": ["icon", "indicator"]
+  },
+  "layout": {
+    "display": "inline-flex",
+    "direction": "row",
+    "align": "center",
+    "justify": "start",
+    "gap": { "value": 8, "unit": "px", "token": "spacing.sm" },
+    "height": { "value": 36, "unit": "px", "token": "sizes.control-md" },
+    "paddingTop": { "value": 7, "unit": "px" },
+    "paddingBottom": { "value": 9, "unit": "px" },
+    "paddingLeft": { "value": 12, "unit": "px", "token": "spacing.md" },
+    "paddingRight": { "value": 12, "unit": "px", "token": "spacing.md" },
+    "border": {
+      "width": { "value": 0, "unit": "px" },
+      "style": "none",
+      "radius": { "value": 6, "unit": "px", "token": "radius.sm" }
+    }
+  },
+  "typography": {
+    "family": "var(--font-sans)",
+    "size": { "value": 14, "unit": "px", "token": "typography.label-md.size" },
+    "weight": 500,
+    "lineHeight": { "value": 20, "unit": "px", "token": "typography.label-md.lh" },
+    "letterSpacing": { "value": -0.006, "unit": "em" },
+    "fontFeatureSettings": "\"tnum\"",
+    "whiteSpace": "nowrap",
+    "textOverflow": "ellipsis",
+    "maxLines": 1
+  },
+  "iconSlot": {
+    "size": { "value": 16, "unit": "px", "token": "sizes.icon-sm" },
+    "align": "center",
+    "position": "leading",
+    "baselineOffsetY": { "value": -1, "unit": "px" }
+  },
+  "hitbox": {
+    "minWidth": { "value": 32, "unit": "px" },
+    "minHeight": { "value": 36, "unit": "px" }
+  },
+  "states": {
+    "default": {
+      "color": { "token": "text.muted" },
+      "backgroundColor": "transparent",
+      "indicator": "none",
+      "cursor": "pointer"
+    },
+    "hover": {
+      "color": { "token": "text.primary" },
+      "backgroundColor": { "token": "surface.hover" },
+      "indicator": "none"
+    },
+    "focus-visible": {
+      "outlineWidth": { "value": 2, "unit": "px" },
+      "outlineOffset": { "value": 2, "unit": "px" },
+      "outlineColor": { "token": "ring.focus" },
+      "outlineStyle": "solid",
+      "composesWith": ["default", "hover", "selected", "active", "disabled"]
+    },
+    "active": {
+      "comment": "pressed — momentary while pointer/key is held",
+      "color": { "token": "text.primary" },
+      "backgroundColor": { "token": "surface.pressed" }
+    },
+    "selected": {
+      "comment": "represents aria-current=page; this is the 'active menu' visual",
+      "color": { "token": "text.primary" },
+      "backgroundColor": { "token": "surface.selected" },
+      "indicator": {
+        "geometry": "bar",
+        "thickness": { "value": 2, "unit": "px" },
+        "length": "full-height",
+        "inset": { "value": 0, "unit": "px" },
+        "edgeRadius": { "value": 0, "unit": "px" },
+        "position": "leading",
+        "color": { "token": "accent.primary" }
+      }
+    },
+    "disabled": {
+      "color": { "token": "text.disabled" },
+      "backgroundColor": "transparent",
+      "cursor": "not-allowed",
+      "indicator": "none"
+    }
+  },
+  "motion": {
+    "default-to-hover": {
+      "property": "background-color",
+      "duration": { "value": 120, "unit": "ms" },
+      "easing": "cubic-bezier(0.2, 0, 0, 1)",
+      "delay": { "value": 0, "unit": "ms" }
+    },
+    "default-to-selected": {
+      "property": "background-color",
+      "duration": { "value": 160, "unit": "ms" },
+      "easing": "cubic-bezier(0.2, 0, 0, 1)",
+      "delay": { "value": 0, "unit": "ms" }
+    },
+    "reducedMotion": {
+      "comment": "prefers-reduced-motion: reduce",
+      "duration": { "value": 0, "unit": "ms" },
+      "property": "none"
+    }
+  },
+  "a11y": {
+    "role": "link",
+    "name": "required",
+    "current": {
+      "attribute": "aria-current",
+      "expectedValueWhenSelected": "page"
+    },
+    "keyboard": {
+      "Enter": "activate",
+      "Space": "activate"
+    },
+    "focusOrder": "DOM order",
+    "forcedColors": "border: 1px solid CanvasText when selected"
+  },
+  "composition": {
+    "parent": "nav-group",
+    "slotInParent": { "name": "items", "cardinality": "1..n" },
+    "children": {
+      "icon":      { "allowed": ["Icon"], "cardinality": "0..1", "position": "leading" },
+      "label":     { "allowed": ["Text"], "cardinality": "1",    "truncate": true },
+      "indicator": { "allowed": ["Bar", "Dot"], "cardinality": "0..1", "visibleWhen": "selected" }
+    },
+    "forbiddenSiblings": ["primary-action-button"],
+    "responsive": {
+      "mobile": {
+        "breakpoint": "<= 640px",
+        "label": "hidden",
+        "tooltip": "required",
+        "hitbox": { "minWidth": 44, "minHeight": 44 }
+      }
+    }
+  },
+  "antiPatterns": [
+    "Encoding selected state with color alone (color-blind users cannot distinguish).",
+    "Showing the selected indicator on hover (confuses navigation context).",
+    "Using a transition on `opacity` without honoring prefers-reduced-motion.",
+    "Symmetric paddingTop/paddingBottom — breaks optical centering of label baseline."
+  ]
+}
