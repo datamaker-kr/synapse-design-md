@@ -11,7 +11,7 @@
 #   3. BUNDLED_VERSION below (used only if API is unreachable)
 set -euo pipefail
 
-BUNDLED_VERSION="0.4.0"
+BUNDLED_VERSION="0.5.0"
 REPO="datamaker-kr/synapse-design-md"
 
 BLOCK_START_PREFIX="<!-- synapse-design-md:start"
