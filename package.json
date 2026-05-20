@@ -1,6 +1,6 @@
 {
   "name": "synapse-design-md",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Synapse DESIGN.md contract installer, updater, and evaluator.",
   "type": "module",
   "bin": {
@@ -21,7 +21,10 @@
     "doctor": "node ./bin/synapse-design-md.js doctor",
     "install:local": "node ./bin/synapse-design-md.js install",
     "test": "node --test scripts/test.mjs",
-    "verify:colors": "node scripts/verify-colors.mjs"
+    "verify:colors": "node scripts/verify-colors.mjs",
+    "release:patch": "node scripts/release.mjs patch",
+    "release:minor": "node scripts/release.mjs minor",
+    "release:major": "node scripts/release.mjs major"
   },
   "engines": {
     "node": ">=18"
