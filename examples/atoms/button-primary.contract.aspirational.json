@@ -1,0 +1,121 @@
+{
+  "$schema": "../contract.schema.json",
+  "intent": "aspirational",
+  "identity": {
+    "level": "atom",
+    "name": "button-primary",
+    "summary": "Design target for the primary action button, derived from templates/DESIGN.md `components: button-primary` block. Captures the intended dimensions, typography slot, and state-token mapping."
+  },
+  "source": {
+    "status": "design-target",
+    "comment": "Values come from templates/DESIGN.md frontmatter — components: button-primary, button-primary-hover, button-primary-pressed, button-primary-focused, button-primary-disabled. Deltas from descriptive capture are documented in button-primary.findings.md.",
+    "evidence": "templates/DESIGN.md#components:button-primary"
+  },
+  "rationale": {
+    "layout.height":  "DESIGN.md says 32px (control-sized). Production uses 40px. Either DESIGN.md needs a `button-primary-lg` variant or production needs to align to 32px.",
+    "layout.paddingX": "DESIGN.md says 16px (spacing.lg). Production uses 20px.",
+    "typography":     "DESIGN.md `typography.button` is 13px/600/16px lh. Production uses 16px/400/24px lh — title-sm scale, not button scale.",
+    "states.focus-visible": "DESIGN.md specifies boxShadow: '0 0 0 2px {colors.accent-focus-ring}'. Production uses a transparent solid outline + likely Tailwind ring — should canonicalize on the boxShadow form so the focus treatment is portable across themes.",
+    "states.disabled": "DESIGN.md defines disabled bg + fg tokens. Production crawl did not capture the disabled state on this page; needs a disabled-button-bearing route or a `--disabled-selector` flag."
+  },
+  "anatomy": {
+    "slots": ["label", "leading-icon", "trailing-icon"],
+    "required": ["label"],
+    "optional": ["leading-icon", "trailing-icon"]
+  },
+  "layout": {
+    "display": "inline-flex",
+    "direction": "row",
+    "align": "center",
+    "justify": "center",
+    "gap": { "value": 8, "unit": "px", "token": "spacing.sm" },
+    "height": { "value": 32, "unit": "px", "token": "sizes.controlHeight" },
+    "paddingTop":    { "value": 6, "unit": "px" },
+    "paddingBottom": { "value": 6, "unit": "px" },
+    "paddingLeft":   { "value": 16, "unit": "px", "token": "spacing.lg" },
+    "paddingRight":  { "value": 16, "unit": "px", "token": "spacing.lg" },
+    "border": {
+      "width":  { "value": 0, "unit": "px" },
+      "style":  "none",
+      "color":  "transparent",
+      "radius": { "value": 8, "unit": "px", "token": "rounded.lg" }
+    }
+  },
+  "typography": {
+    "family": "var(--font-sans)",
+    "size":          { "value": 13, "unit": "px", "token": "typography.scale.button.fontSize" },
+    "weight":        600,
+    "lineHeight":    { "value": 16, "unit": "px", "token": "typography.scale.button.lineHeight" },
+    "letterSpacing": { "value": 0, "unit": "em", "token": "typography.scale.button.letterSpacing" },
+    "whiteSpace":    "nowrap"
+  },
+  "hitbox": {
+    "minWidth":  { "value": 98, "unit": "px", "token": "sizes.actionMin" },
+    "minHeight": { "value": 32, "unit": "px", "token": "sizes.controlHeight" }
+  },
+  "states": {
+    "default": {
+      "color":           { "token": "colors.on-accent" },
+      "backgroundColor": { "token": "colors.accent" },
+      "cursor":          "pointer",
+      "indicator":       "none"
+    },
+    "hover": {
+      "color":           { "token": "colors.on-accent" },
+      "backgroundColor": { "token": "colors.accent-hover" }
+    },
+    "focus-visible": {
+      "outlineWidth":  { "value": 0, "unit": "px" },
+      "outlineOffset": { "value": 0, "unit": "px" },
+      "outlineStyle":  "none",
+      "outlineColor":  "transparent",
+      "boxShadow":     "0 0 0 2px var(--colors-accent-focus-ring)"
+    },
+    "active": {
+      "color":           { "token": "colors.on-accent" },
+      "backgroundColor": { "token": "colors.accent-pressed" }
+    },
+    "selected": null,
+    "disabled": {
+      "color":           { "token": "colors.disabled-fg" },
+      "backgroundColor": { "token": "colors.disabled-bg" },
+      "cursor":          "not-allowed",
+      "indicator":       "none"
+    }
+  },
+  "motion": {
+    "default-to-hover": {
+      "property": "background-color",
+      "duration": { "value": 120, "unit": "ms" },
+      "easing":   "cubic-bezier(0.2, 0, 0, 1)"
+    },
+    "default-to-active": {
+      "property": "background-color",
+      "duration": { "value": 80, "unit": "ms" },
+      "easing":   "cubic-bezier(0.2, 0, 0, 1)"
+    },
+    "reducedMotion": {
+      "duration": { "value": 0, "unit": "ms" },
+      "property": "none"
+    }
+  },
+  "a11y": {
+    "role": "button",
+    "current": { "attribute": null, "expectedValueWhenSelected": null },
+    "tabIndex": 0,
+    "comment": "Native <button> needs no explicit role attribute. If using <a> for navigation-button hybrids, role='button' is required + Enter+Space activation."
+  },
+  "composition": {
+    "parent": null,
+    "children": {
+      "label":         { "allowed": ["TextNode"], "cardinality": "1" },
+      "leading-icon":  { "allowed": ["Icon"], "cardinality": "0..1", "position": "leading" },
+      "trailing-icon": { "allowed": ["Icon"], "cardinality": "0..1", "position": "trailing" }
+    }
+  },
+  "antiPatterns": [
+    "Stretching the button to fit a wider container by adding padding instead of using w-full — breaks the 32px-tall control rhythm.",
+    "Using `colors.accent` directly as the hover background — must use `colors.accent-hover` to differentiate the state.",
+    "Omitting the focus ring on `:focus-visible` (only :focus) — keyboard navigation invisible to sighted keyboard users."
+  ]
+}

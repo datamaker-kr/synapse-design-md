@@ -16,6 +16,7 @@ evidence/raw/
 evidence/screenshots/
 evidence/crawl-runs/
 evidence/contracts/
+evidence/issues/
 
 .synapse-design-md.local.json
 .DS_Store

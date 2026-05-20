@@ -77,6 +77,22 @@ export async function crawlContract(options = {}) {
   await page.waitForLoadState("networkidle", { timeout: 10_000 }).catch(() => {});
   await page.waitForSelector(selector, { timeout: 10_000 }).catch(() => {});
 
+  // Disambiguate-by-text: if --text is provided, find the first element whose
+  // textContent matches and tag it with data-synapse-target so CDP can locate
+  // it via a standard CSS selector (CDP does not support Playwright's
+  // :has-text pseudo).
+  if (options.text) {
+    const tagged = await page.evaluate(({ sel, text }) => {
+      const els = Array.from(document.querySelectorAll(sel));
+      const hit = els.find((el) => el.textContent.trim().includes(text));
+      if (!hit) return false;
+      hit.setAttribute("data-synapse-target", "1");
+      return true;
+    }, { sel: selector, text: options.text });
+    if (!tagged) throw new Error(`No element matching selector ${selector} with text "${options.text}".`);
+  }
+  const effectiveSelector = options.text ? `[data-synapse-target]` : selector;
+
   const cdp = await context.newCDPSession(page);
   await cdp.send("DOM.enable");
   await cdp.send("CSS.enable");
@@ -97,7 +113,7 @@ export async function crawlContract(options = {}) {
     return snap;
   };
 
-  const baseSnap = await captureState(selector, []);
+  const baseSnap = await captureState(effectiveSelector, []);
   if (!baseSnap) throw new Error(`Selector did not match any element: ${selector}`);
 
   const probe = {
@@ -118,9 +134,9 @@ export async function crawlContract(options = {}) {
     hitbox: snapToHitbox(baseSnap),
     states: {
       default:         snapToState(baseSnap, tokenIndex),
-      hover:           snapToState(await captureState(selector, ["hover"]), tokenIndex),
-      "focus-visible": snapToFocusVisible(await captureState(selector, ["focus", "focus-visible"]), tokenIndex),
-      active:          snapToState(await captureState(selector, ["active"]), tokenIndex),
+      hover:           snapToState(await captureState(effectiveSelector, ["hover"]), tokenIndex),
+      "focus-visible": snapToFocusVisible(await captureState(effectiveSelector, ["focus", "focus-visible"]), tokenIndex),
+      active:          snapToState(await captureState(effectiveSelector, ["active"]), tokenIndex),
       selected:        snapToSelected(selectedSelector ? await captureState(selectedSelector, []) : null, tokenIndex),
       disabled:        snapToState(disabledSelector ? await captureState(disabledSelector, []) : null, tokenIndex)
     },
@@ -173,10 +189,27 @@ async function sampleElement(page, selector) {
       });
     }
 
+    const parent = el.parentElement;
     return {
       tag: el.tagName.toLowerCase(),
       text: (el.textContent || "").trim().slice(0, 80),
       rect: { width: rect.width, height: rect.height, x: rect.x, y: rect.y },
+      parent: parent ? {
+        tag: parent.tagName.toLowerCase(),
+        role: parent.getAttribute("role"),
+        dataComponent: parent.getAttribute("data-component"),
+        ariaLabel: parent.getAttribute("aria-label"),
+        // Find the nearest semantically-meaningful ancestor for slot context.
+        ancestor: (() => {
+          for (let p = parent; p; p = p.parentElement) {
+            const tag = p.tagName.toLowerCase();
+            if (["header", "nav", "main", "aside", "footer", "form", "dialog"].includes(tag)) return tag;
+            if (p.getAttribute("data-component")) return `data-component=${p.getAttribute("data-component")}`;
+            if (p.getAttribute("role")) return `role=${p.getAttribute("role")}`;
+          }
+          return null;
+        })()
+      } : null,
       aria: {
         role: el.getAttribute("role") || el.tagName.toLowerCase() === "a" ? (el.getAttribute("role") || "link") : null,
         current: el.getAttribute("aria-current"),
@@ -418,8 +451,11 @@ function snapToA11y(snap) {
 }
 
 function snapToComposition(snap) {
+  // Prefer the semantically meaningful ancestor (header/nav/main/...) over the literal parent tag.
+  const parent = snap.parent?.ancestor || snap.parent?.dataComponent || snap.parent?.tag || null;
   return {
-    parent: null,
+    parent,
+    parentRaw: snap.parent || null,
     children: {
       icon:  { allowed: snap.children.filter((c) => c.tag === "svg" || c.tag === "i").map(() => "Icon") },
       label: { allowed: snap.children.filter((c) => c.tag === "span" || c.tag === "p").map(() => "Text") },

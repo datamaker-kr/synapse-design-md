@@ -103,8 +103,29 @@ drift the contracts exist to catch.
 The verifier is a pure Node module — call it from any of:
 
 - **Pre-commit / CI** — `synapse-design-md contract verify ...` in `package.json` scripts.
-- **Editor / agent hook** — Claude Code `PostToolUse` (Edit/Write) re-runs verification on the touched contract and surfaces violations inline.
+- **Editor / agent hook** — Claude Code `PostToolUse` (Edit/Write/MultiEdit) re-runs verification on the touched contract and surfaces violations inline. Ship with [`hooks/post-edit-verify.mjs`](../../hooks/post-edit-verify.mjs); wire via the [`claude-settings.fragment.json`](../claude-settings.fragment.json) fragment plus a [`.synapse-design-md.fragment.json`](../.synapse-design-md.fragment.json) glob → contract map.
 - **Golden screenshots** — pair the verifier with `golden/<component>/<state>.png` for pixel diff (out of scope for this PoC).
+
+### Issue generation
+
+Each component's `findings.md` can be split into one issue-ready markdown per
+gap:
+
+```
+synapse-design-md contract issues \
+  --findings examples/molecules/nav-item.findings.md \
+  --labels design-debt,a11y
+```
+
+Generates `evidence/issues/nav-item/*.md`. Push to GitHub with:
+
+```
+for f in evidence/issues/nav-item/*.md; do gh issue create -F "$f"; done
+```
+
+The generator does not create issues itself — visible shared-state actions
+need explicit user authorization. The output files are ready for either
+`gh issue create -F` or pasting into Linear.
 
 ## Why JSON, why not Markdown only
 

@@ -9,7 +9,7 @@
   "source": {
     "status": "captured",
     "comment": "Auto-promoted from evidence/contracts/nav-item/2026-05-20T03-13-12-590Z.probe.json. Layout/typography/states/motion are verbatim from the live crawl. Anatomy, composition, anti-patterns are added by hand (the crawler cannot infer slot intent).",
-    "capturedAt": "2026-05-20T03:13:12.524Z",
+    "capturedAt": "2026-05-20T03:26:04.686Z",
     "capturedFrom": "https://test.synapse.sh/datamaker/projects",
     "selector": "header a[href]",
     "selectedSelector": "header a.router-link-active",
@@ -105,13 +105,12 @@
     "tabIndex": 0
   },
   "composition": {
-    "parent": null,
+    "parent": "header",
     "slotInParent": { "name": "primary-nav", "cardinality": "1..n" },
     "children": {
       "label": { "allowed": ["TextNode"], "cardinality": "1" }
     },
-    "forbiddenSiblings": [],
-    "comment": "parent is null because the crawler does not yet capture parent tag/data-component. Production parent is <header>. Re-promote after extending crawl-contract.mjs to record parent context."
+    "forbiddenSiblings": []
   },
   "antiPatterns": [
     "Encoding selected state with color alone (#5D6C83 → #182134). Color-blind users cannot distinguish the active page. See findings #2.",

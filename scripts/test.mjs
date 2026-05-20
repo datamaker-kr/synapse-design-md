@@ -106,6 +106,40 @@ test("aspirational contract: failing probe surfaces drifts as warnings (ok=true)
   }
 });
 
+test("button-primary descriptive contract: round-trip identity", async () => {
+  const contract = await readJson(path.join(repoRoot, "examples/atoms/button-primary.contract.descriptive.json"));
+  const probe = JSON.parse(JSON.stringify(contract));
+  probe.identity = { name: contract.identity.name, id: "synthetic:round-trip" };
+  delete probe.intent;
+  delete probe.antiPatterns;
+  delete probe.rationale;
+  const { ok, intent, violations } = verifyContract({ contract, probe });
+  assert.equal(intent, "descriptive");
+  assert.equal(ok, true, `button-primary descriptive round-trip should pass, got: ${JSON.stringify(violations, null, 2)}`);
+});
+
+test("button-primary aspirational contract: descriptive probe surfaces design backlog gaps", async () => {
+  const aspirational = await readJson(path.join(repoRoot, "examples/atoms/button-primary.contract.aspirational.json"));
+  const descriptive = await readJson(path.join(repoRoot, "examples/atoms/button-primary.contract.descriptive.json"));
+  // Use the descriptive contract as a stand-in for what production captured.
+  const probe = JSON.parse(JSON.stringify(descriptive));
+  delete probe.intent;
+  delete probe.antiPatterns;
+  delete probe.rationale;
+  const { ok, intent, violations } = verifyContract({ contract: aspirational, probe });
+  assert.equal(intent, "aspirational");
+  assert.equal(ok, true, "aspirational warnings must not block");
+  const paths = new Set(violations.map((v) => v.path));
+  // The three documented gaps:
+  for (const expected of [
+    "layout.height",          // 40 vs 32
+    "typography.weight",      // 400 vs 600
+    "typography.size"         // 16 vs 13
+  ]) {
+    assert.ok(paths.has(expected), `expected gap at ${expected}; got: ${[...paths].join(", ")}`);
+  }
+});
+
 test("descriptive contract: captured production probe passes (round-trip identity)", async () => {
   const contract = await readJson(path.join(repoRoot, "examples/molecules/nav-item.contract.descriptive.json"));
   // The descriptive contract was promoted from this probe shape (manually trimmed for anatomy).
